@@ -1,0 +1,1 @@
+O sistema deverá apresentar, de forma precisa, informações úteis aos alunos, dar suporte ao professor na hora de divulgar notas e calcular média, além de fornecer formas fácies e ágeis de cadastro e manipulação de alguns recursos ao administrador. Um Sistema Facilitador, Ágil e Seguro.
