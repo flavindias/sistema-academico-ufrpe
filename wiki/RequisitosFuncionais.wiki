@@ -1,7 +1,20 @@
-- Cadastro de alunos;
-- Cadastro de professores;
-- Cadastro de disciplinas;
-- Acompanhamento de grade de horário, notas e avaliações por parte dos alunos;
-- Edição de notas, freqüência do aluno e data de avaliações por parte do professor;
-- Cadastro de alunos, professores e disciplinas por parte do administrador;
-- Guardar dados pessoais de professores e alunos.
+Lista de Requisitos Funcionais: descrevem as funcionalidades do sistema desejadas pelos clientes, ou seja, O QUE se espera que o software faça.
+
+•RF001: Gerenciamento de Contas de Usuários;
+-Permite a uma conta administrador adicionar, Editar e Excluir Contas de Usuários.
+•RF002: Gerenciamento de Dados dos Professores;
+-Permite a uma conta administrador armazenar, visualizar alterar informações úteis sobre os Professores.
+•RF003: Gerenciamento de Dados dos Alunos;
+-Permite a uma conta administrador armazenar, visualizar e alterar informações úteis sobre os Alunos.
+•RF004: Gerenciamento das Disciplinas;
+-Permite a uma conta administrador armazenar, visualizar e alterar informações sobre as Disciplinas além de permitir a criação de grade de horários.
+•RF005: Registro de Notas;
+-Permite a uma conta administrador armazenar, visualizar e alterar informações sobre notas.
+•RF006: Visualização de Dados Pessoais;
+-Permite ao aluno visualizar seus dados pessoais, tais como CPF, RG, Número de Matrícula e Etc.
+•RF007: Visualização de Disciplinas;
+-Permite ao aluno visualizar as Disciplinas de sua turma em uma grade de Horário.
+•RF008: Visualização de Notas;
+-Permite ao aluno visualizar suas Notas.
+•RF009: Situação do aluno;
+-Informa se o aluno está aprovado, em recuperação, em recuperação final ou reprovado.
