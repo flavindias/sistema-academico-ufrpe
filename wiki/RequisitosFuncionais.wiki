@@ -1,0 +1,7 @@
+- Cadastro de alunos;
+- Cadastro de professores;
+- Cadastro de disciplinas;
+- Acompanhamento de grade de horário, notas e avaliações por parte dos alunos;
+- Edição de notas, freqüência do aluno e data de avaliações por parte do professor;
+- Cadastro de alunos, professores e disciplinas por parte do administrador;
+- Guardar dados pessoais de professores e alunos.
