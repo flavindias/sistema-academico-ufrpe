@@ -1,1 +1,9 @@
-São as qualidades e restrições globais do sistema relacionados com manutenção, uso, desempenho, custo, interface, etc.
+Lista de Requisitos Não Funcionais: São as qualidades e restrições globais do sistema relacionados com manutenção, uso, desempenho, custo, interface, etc.
+
+•RNF001: Software deve ser operacionalizado no sistema Windows;
+
+•RNF002: O banco de dados usado deverá ser em .Txt;
+
+•RNF003: Tempo de resposta do sistema não deve ultrapassar 10 segundos;
+
+•RNF004: O sistema deve ser de fácil manejo para os usuários;
