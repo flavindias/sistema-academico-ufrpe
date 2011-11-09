@@ -1,1 +1,4 @@
+UC0001 - Gerenciamento de Alunos
+UC0002 - Gerenciamento de Professores
+
 Detalhamento dos casos de uso, disponíveis no link:
