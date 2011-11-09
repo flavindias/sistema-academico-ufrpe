@@ -692,3 +692,5 @@ class Main:
                     continue
                 
 NewMain = Main()
+
+print 'the end'
