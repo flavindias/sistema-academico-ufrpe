@@ -11,4 +11,4 @@ Para representar casos de uso, utilizamos uma elipse, com o nome do caso de uso 
 
 Um relacionamento de comunicação é representado por um segmento de reta ligando ator e caso de uso, sendo que um ator pode estar relacionado à vários casos de uso em um mesmo diagrama.
 
-Imagem do Diagrama de Casos de Uso disponível no link:
+Imagem do Diagrama de Casos de Uso pode ser encontrado no [link=http://code.google.com/p/sistema-academico-ufrpe/downloads/list]link[/link]
