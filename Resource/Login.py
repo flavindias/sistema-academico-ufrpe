@@ -3,29 +3,29 @@ import base64
 class Log:
     """Classe que gerencia os usuarios"""
 
-    def __init__(self, user, password, tipo):
+    def __init__(self, usuario, senha, tipo = 'aluno'):
         """Inicia um novo Usuario"""
-        self.__user = user
-        self.__password = base64.b64encode(password)
-        self.__level = tipo
+        self.__usuario = usuario
+        self.__senha = base64.b64encode(senha)
+        self.__nivel = tipo
 
-    def getUser(self):
+    def getUsuario(self):
         """Retorna o Usuario"""
-        return self.__user
-    def setUser(self, newUser):
+        return self.__usuario
+    def setUsuario(self, novoUsuario):
         """Edita o nome do usuario"""
-        self.__user = newUser
+        self.__usuario = novoUsuario
 
-    def getPassword(self):
+    def getSenha(self):
         """Retorna a Senha"""
-        return self.__password
-    def setPassword(self, newWord):
+        return base64.b64decode(self.__senha)
+    def setSenha(self, novaSenha):
         """Edita a senha"""
-        self.__password = newWord
+        self.__senha = base64.b64encode(novaSenha)
 
-    def getLevel(self):
+    def getNivel(self):
         """Retorna o nivel de acesso"""
-        return self.__level
-    def setLevel(self, newLevel):
+        return self.__nivel
+    def setLevel(self, novoNivel):
         """Edita o nivel de acesso"""
-        self.__level = newLevel
+        self.__nivel = novoNivel
