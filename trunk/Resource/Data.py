@@ -58,4 +58,3 @@ class Data:
     def getHoraComp
         """Retorna a hora completa"""
         return self.__hora + ":" + self.__minut + ":" + self.__seg
-    pass
