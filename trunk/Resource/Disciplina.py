@@ -21,7 +21,7 @@ class Disciplina:
             return True
 
     def excTurma(self, turma):
-        if nome in self.listaTurma:
+        if turma in self.listaTurma:
             del self.listaTurma[self.listaTurma.index(turma)]
             return True
         else:
@@ -45,48 +45,58 @@ class Disciplina:
             return False
 
     def getProfs(self):
-        return self.listProf
+        return self.listaProf
 
 
 class Grade:
     """Gerencia as disciplinas"""
     def __init__(self):
-        self.grade = []
-
-    def __carregar(self):
         try:
-            arquivo = open('disc.txt', 'rb')
-            self.grade = pickle.load(arquivo)
-            arquivo.close()
+            self.grade = carregar()
         except:
-            pass
+            self.grade = []
+        
             
     def add(self, disciplina):
-        self.__carregar()
+        try:
+            self.grade = carregar()
+        except:
+            self.grade = []
+            
         if disciplina in self.grade:
             return False
         else:
             self.grade.append(disciplina)
-            self.__salvar()
+            salvar(self.grade)
             return True
 
     def exc(self, disciplina):
-        self.__carregar()
+        try:
+            self.grade = carregar()
+        except:
+            self.grade = []
+            
         if disciplina in self.grade:
             del self.grade[self.grade.index(disciplina)]
-            self.__salvar()
+            salvar(self.grade)
             return True
         else:
             return False
         
     def getGrade(self):
-        self.__carregar()
+        try:
+            self.grade = carregar()
+        except:
+            self.grade = []
         return self.grade
 
-    def __salvar(self):
-        try:
-            arquivo = open('dados.txt', 'wb')
-            pickle.dump(self.grade, arquivo)
-            arquivo.close()
-        except:
-            pass
+def salvar(grade):
+    arquivo = open('disc.txt', 'wb')
+    pickle.dump(grade, arquivo)
+    arquivo.close()
+
+def carregar():
+    arquivo = open('disc.txt', 'rb')
+    grade = pickle.load(arquivo)
+    arquivo.close()
+    return grade
