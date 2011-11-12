@@ -1,0 +1,6 @@
+Database Name: academicsis
+Username: ufrpeacademic
+password: acesso
+Email: igor_matteus_1@hotmail.com
+Port: 3306
+Host: www.freesql.org
