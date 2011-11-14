@@ -14,24 +14,24 @@ class Disciplina:
     '''Retorna o  Id da Disciplina'''
     def getId(self):
         return self.__id
-    '''Editar Id da Disciplina'''
+    '''Edita Id da Disciplina'''
     def setId(self, novoId):
         return 0
     '''Retorna Nome da Disciplina'''
     def getNome(self):
         return self.__nome
-    '''Editar Nome da Disciplina'''
+    '''Edita Nome da Disciplina'''
     def setNome(self, novoNome):
         return 0
     '''Retorna Id do Professor da Disciplina'''
     def getProfessorId(self):
         return self.__professorId
-    '''Editar Id do Professor da Disciplina'''
+    '''Edita Id do Professor da Disciplina'''
     def setProfessorId(self, novoProfessorId):
         return 0
-    '''Salvar alterações'''
+    '''Salva alterações no Banco de Dados'''
     def salvarEdit(self, id):
         return True #Retorna True ou False
-    '''Carregar Informações da Disciplina'''
+    '''Carrega Informações da Disciplina atraves do Banco de Dados'''
     def carregar(self, id):
         return True #Retorna True ou False
