@@ -16,18 +16,21 @@ class Professor:
         return self.__id
     '''Edita Id do Professor'''
     def setId(self, novoId):
+        self.__id = novoId
         return 0
     '''Retorna Dados do Professor'''
     def getDadosId(self):
         return self.__dadosId
     '''Edita Dados do Professor'''
     def setDadosId(self, novoDadosId):
+        self.__dadosId = novoDadosId
         return 0
     '''Retorna Login Id do Professor'''
     def getLoginId(self):
         return self.__loginId
     '''Edita Login Id do Professor'''
     def setLoginId(self, novoLoginId):
+        self.__loginId = novoLoginId
         return 0
     '''Salva alterações no Banco de Dados'''
     def salvarEdit(self, id):
