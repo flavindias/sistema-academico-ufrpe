@@ -16,18 +16,21 @@ class Disciplina:
         return self.__id
     '''Edita Id da Disciplina'''
     def setId(self, novoId):
+        self.__id = novoId
         return 0
     '''Retorna Nome da Disciplina'''
     def getNome(self):
         return self.__nome
     '''Edita Nome da Disciplina'''
     def setNome(self, novoNome):
+        self.__nome = novoNome
         return 0
     '''Retorna Id do Professor da Disciplina'''
     def getProfessorId(self):
         return self.__professorId
     '''Edita Id do Professor da Disciplina'''
     def setProfessorId(self, novoProfessorId):
+        self.__professorId = novoProfessorId
         return 0
     '''Salva alterações no Banco de Dados'''
     def salvarEdit(self, id):
