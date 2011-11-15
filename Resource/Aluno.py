@@ -5,52 +5,57 @@ Created on 15/11/2011
 
 @author: Grupo Sistema Academico
 '''
+
+import db
+
 class Aluno:
     '''Classe de Gerenciamento de Aluno'''
     def __init__(self):
-        self.__matricula = None # STR
+        """Classe para gerenciar alunos"""
+        self.__matricula = None # INT LEN(6)
         self.__dadosId = None # STR
-        self.__situacao = None # STR
+        self.__situacao = None # STR LEN(3) *apr = aprovado, rep = reprovado, ndf = nao definido, rec = recuperacao*
         self.__loginId = None # STR
         self.__turmaId = None # INT
-    '''Retorna Número de Matricula do Aluno'''
+        
     def getMatricula(self):
+        '''Retorna Número de Matricula do Aluno'''
         return self.__matricula
-    '''Edita Número de Matricula do Aluno'''
     def setMatricula(self, novaMatricula):
+        '''Ajusta DadosId do Aluno'''
         self.__matricula = novaMatricula
-        return 0
-    '''Retorna DadosId do Aluno'''
+    
     def getDadosId(self):
+        '''Retorna Situação do Aluno'''
         return self.__dadosId
-    '''Edita DadosId do Aluno'''
     def setDadosId(self, novoDadosId):
+        '''Edita DadosId do Aluno'''
         self.__dadosId = novoDadosId
-        return 0
-    '''Retorna Situação do Aluno'''
+
     def getSituacao(self):
+        '''Retorna Situação do Aluno'''
         return self.__situacao
-    '''Edita Situação do Aluno'''
     def setSituacao(self, novaSituacao):
+        '''Retorna LoginId do Aluno'''
         self.__situacao = novaSituacao
-        return 0
-    '''Retorna LoginId do Aluno'''
+
     def getLoginId(self):
+        '''Retorna LoginId do Aluno'''
         return self.__loginId
-    '''Edita LoginId do Aluno'''
     def setLoginId(self, novoLoginId):
+        '''Ajusta TurmaId do Aluno'''
         self.__loginId = novoLoginId
-        return 0
-    '''Retorna TurmaId do Aluno'''
+    
     def getTurmaId(self):
+        '''Retorna turmaId do Aluno'''
         return self.__turmaId
-    '''Edita TurmaId do Aluno'''
     def setTurmaId(self, novoTurmaId):
+        '''Edita TurmaId do Aluno'''
         self.__turmaId = novoTurmaId
-        return 0
-    '''Salva alterações no banco de dados'''
-    def salvarEdit(self, id):
+        
+    def salvarEdit(self):
+        '''Altera informacoes atuais do Banco de dados'''
         return True #Retorna True ou False
-    '''Carrega Informações atraves do Banco de dados'''
-    def carregar(self, id):
+    def carregar(self, matricula):
+        '''Carrega informacoes do Banco de Dados'''
         return True #Retorna True ou False
