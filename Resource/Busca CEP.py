@@ -1,5 +1,6 @@
-#! /usr/bin/env python  
-# -*- coding: iso-8859-1 -*-    
+#! /usr/bin/env python
+#-*-coding: latin1-*-
+#-*-coding: iso-8859-1-*-    
 import urllib  
 import cgi  
   
