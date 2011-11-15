@@ -4,3 +4,11 @@ password: acesso
 Email: igor_matteus_1@hotmail.com
 Port: 3306
 Host: www.freesql.org
+
+host: db4free.net
+Database: academicsys
+Username: desenvolvedores
+senha: acesso
+Allowed IPs: %
+Collation: utf8_general_ci
+Email: igor_matteus@yahoo.com.br
