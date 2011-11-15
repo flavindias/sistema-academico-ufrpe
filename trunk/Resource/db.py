@@ -78,3 +78,11 @@ class db:
             if self.__temp is not None and self.__temp[0] is senha:
                 return True
         return False
+
+    def addLogin(self, usuario, senha, tipo):
+        """Cria um novo usuario"""
+        try:
+            self.cursor.execute("INSERT INTO LOGIN(USUARIO, SENHA, TIPO) VALUES (%s, %s, %s);" %(usuario, senha, tipo))
+            return True
+        except:
+            return False
