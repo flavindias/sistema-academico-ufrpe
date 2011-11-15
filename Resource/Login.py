@@ -63,6 +63,12 @@ class Login:
     def salvarEdit(self, usuarioId):
         """Salva uma edicao"""
         return DataBase.editarLogin(usuarioID, usuario = self.getUsuario(), senha = self.cript(self.getSenha()), tipo = self.getTipo())
+
+    def addNovo(self):
+        """Adiciona um novo usuario ao banco de dados"""
+        if self.getUsuario() in not None and self.getSenha() is not None and self.getTipo() is not None:
+            return DataBase.addLogin(self.getUsuario(), self.cript(self.getSenha()), self.getTipo())
+        return False
         
     def valida(self, usuario, senha):
         """Valida usuario e senha pelo Banco de dados"""
