@@ -9,7 +9,7 @@ class db:
 
     #***AREA DE COMUNICACAO COM A CLASSE DATA***
     def carregarData(self, ide):
-        """Carrega uma data apardir da ID"""
+        """Carrega uma data a partir da ID"""
         self.__id = str(ide)
         self.cursor.execute("SELECT * FROM DATAS WHERE ID = %s;", (self.__id))
         if self.cursor.rowcount == 1:
@@ -216,3 +216,63 @@ class db:
                 return True
         except:
             return False
+
+    #***AREA DE COMUNICACAO COM A CLASSE DISCIPLINAS***
+    def carregarDisciplina(self, ide):
+        """Carrega uma disciplina a partir da ID"""
+        self.__id = str(ide)
+        self.cursor.execute("SELECT * FROM DISCIPLINA WHERE ID = %s;", (self.__id))
+        if self.cursor.rowcount == 1:
+            return self.cursor.fetchone()
+        else:
+            return None
+
+    def editarDisciplina(self, ide, nome, professorId):
+        """Salva um ajuste efetuado na disciplina"""
+        try:
+            if ide == None:
+                return False
+            else:
+                if nome != None:
+                    self.cursor.execute("UPDATE DISCIPLINA SET NOME = '%s' WHERE ID = %s;" %(nome, ide))
+                if professorId != None:
+                    self.cursor.execute("UPDATE DISCIPLINA SET PROFESSOR = %s WHER ID = %s" %(professorId, ide))
+                return True
+        except:
+            return False
+
+    def addDisciplina(self, nome, professorId):
+        """Cria uma nova disciplina"""
+        try:
+            if nome is not None and professorId is not None:
+                self.cursor.execute("INSERT INTO DISCIPLINA(ID, NOME, PROFESSOR) VALUES (NULL, '%s', %s);" %(nome, professorId))
+                return True
+            else:
+                return False
+        except:
+            return False
+
+    #SOLICITACOES DE EMESON AINDA SEM CLASSE DEFINIDA
+    def listIdDisciplinas(self):
+        """retorna uma lista de todas as disciplinas"""
+        self.cursor.execute("SELECT ID FROM DISCIPLINA USE INDEX (INDEX_NOME);")
+        self.__result = self.cursor.fetchall()
+        self.__lista = []
+        try:
+            for self.__i in self.__result:
+                self.__lista.append(self.i[0])
+            return self.__lista
+        except:
+            return []
+
+    def listIdProfessor(self):
+        """Retorna todas as ID de professores em lista"""
+        self.cursor.execute("SELECT ID FROM PROFESSOR;")
+        self.__result = self.cursor.fetchall()
+        self.__lista = []
+        try:
+            for self.__i in self.__result:
+                self.__lista.append(self.i[0])
+            return self.__lista
+        except:
+            return []

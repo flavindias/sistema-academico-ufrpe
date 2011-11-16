@@ -11,30 +11,42 @@ class Disciplina:
         self.__id = None # INT
         self.__nome = None # STR
         self.__professorId = None # STR
-    '''Retorna o  Id da Disciplina'''
+    
     def getId(self):
+        '''Retorna o  Id da Disciplina'''
         return self.__id
-    '''Edita Id da Disciplina'''
     def setId(self, novoId):
+        '''Edita Id da Disciplina'''
         self.__id = novoId
-        return 0
-    '''Retorna Nome da Disciplina'''
+    
     def getNome(self):
+        '''Retorna Nome da Disciplina'''
         return self.__nome
-    '''Edita Nome da Disciplina'''
     def setNome(self, novoNome):
+        '''Edita Nome da Disciplina'''
         self.__nome = novoNome
-        return 0
-    '''Retorna Id do Professor da Disciplina'''
+    
     def getProfessorId(self):
+        '''Retorna Id do Professor da Disciplina'''
         return self.__professorId
-    '''Edita Id do Professor da Disciplina'''
     def setProfessorId(self, novoProfessorId):
+        '''Edita Id do Professor da Disciplina'''
         self.__professorId = novoProfessorId
-        return 0
-    '''Salva alterações no Banco de Dados'''
-    def salvarEdit(self, id):
-        return True #Retorna True ou False
-    '''Carrega Informações da Disciplina atraves do Banco de Dados'''
-    def carregar(self, id):
-        return True #Retorna True ou False
+
+    def addNova(self):
+        """Cria uma nova linha no BD"""
+        return DataBase.addDisciplina(self.getNome(), self.getProfessorId())
+    
+    def salvarEdit(self, ide):
+        """Salva alterações no Banco de Dados"""
+        return DataBase.editarDisciplina(ide, self.getNome(), self.getProfessorId())
+    
+    def carregar(self, ide):
+        """Carrega Informações da Disciplina atraves do Banco de Dados"""
+        self.__dados = DataBase.carregarDisciplina(ide)
+        if self.__dados == None:
+            return False
+        else:
+            self.setId(ide)
+            self.setNome(self.__dados[1])
+            self.setProfessorId(self.__dados[2])
