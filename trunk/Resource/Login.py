@@ -25,14 +25,14 @@ class Login:
         return self.__usuario
     def setUsuario(self, novoUsuario):
         """Ajusta o usuario"""
-        self.__usuario = str(novoUsuario)
+        self.__usuario = novoUsuario
         
     def getTipo(self):
         """Retorna o tipo do usuario"""
         return self.__tipo
     def setTipo(self, novoTipo):
         """Ajusta o tipo de um usuario"""
-        self.__tipo = str(novoTipo)
+        self.__tipo = novoTipo
         
     def getSenha(self):
         """Retorna a senha"""
@@ -44,10 +44,16 @@ class Login:
 
     def cript(self, senha):
         """Criptografa uma senha"""
-        return base64.b64encode(str(senha))
+        try:
+            return base64.b64encode(senha)
+        except:
+            return None
     def decript(self, senha):
         """Descriptografa uma senha"""
-        return base64.b64decode(str(senha))
+        try:
+            return base64.b64decode(senha)
+        except:
+            return None
 
     def carregar(self, usuarioId):
         """Carrega informacoes a partir de uma id"""

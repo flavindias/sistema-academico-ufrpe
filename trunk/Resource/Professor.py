@@ -7,34 +7,52 @@ Created on 14/11/2011
 '''
 class Professor:
     '''Classe de Gerenciamento de Professor'''
-    def __init__(self):
-        self.__id = None # INT
-        self.__dadosId = None # STR
-        self.__loginId = None # STR
-    '''Retorna Id do Professor'''
+    def __init__(self, ide = None):
+        '''Retorna Id do Professor'''
+        if ide is None:
+            self.__id = None # INT
+            self.__dadosId = None # STR
+            self.__loginId = None # STR
+        else:
+            self.carregar(ide)
+            self.setId(ide)
+    
     def getId(self):
+        '''Retorna Dados do Professor'''
         return self.__id
-    '''Edita Id do Professor'''
     def setId(self, novoId):
+        '''Edita Id do Professor'''
         self.__id = novoId
-        return 0
-    '''Retorna Dados do Professor'''
+    
     def getDadosId(self):
+        '''Retorna Login Id do Professor'''
         return self.__dadosId
-    '''Edita Dados do Professor'''
     def setDadosId(self, novoDadosId):
+        '''Edita Dados do Professor'''
         self.__dadosId = novoDadosId
-        return 0
-    '''Retorna Login Id do Professor'''
+    
     def getLoginId(self):
+        '''Salva alterações no Banco de Dados'''
         return self.__loginId
-    '''Edita Login Id do Professor'''
     def setLoginId(self, novoLoginId):
+        '''Edita Login Id do Professor'''
         self.__loginId = novoLoginId
-        return 0
-    '''Salva alterações no Banco de Dados'''
-    def salvarEdit(self, id):
-        return True #Retorna True ou False
-    '''Carrega Informações do professor atraves do Banco de Dados'''
-    def carregar(self, id):
-        return True #Retorna True ou False
+    
+    def addNovo(self):
+        """Cria um novo endereco no BD"""
+        return DataBase.addProfessor(self.getDadosId(), self.getLoginId())
+    
+    def salvarEdit(self, ide):
+        """Salva ajuste de hora no BD"""
+        return DataBase.editarProfessor(ide, self.getDadosId(), self.getLoginId())
+
+    def carregar(self, ide):
+        """Carrega professor a partir de id no BD"""
+        self.__dados = DataBase.carregarProfessor(ide)
+        if self.__dados == None:
+            return False
+        else:
+            self.setId(self.__dados[0])
+            self.setDadosId(self.__dados[1])
+            self.setLoginId(self.__dados[2])
+            return True
