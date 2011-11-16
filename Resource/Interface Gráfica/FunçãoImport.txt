@@ -1,0 +1,8 @@
+def altDir(self):
+    self.__lista = sys.path[0].split('/')
+    self.__temp = ''
+    for self.__i range(len(lista)-1):
+        self.__temp += self.__i
+        if self.__i != len(lista)-1:
+            self.__temp += '/'
+    sys.path[0] = self.__temp

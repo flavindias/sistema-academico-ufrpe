@@ -72,7 +72,7 @@ class Login:
 
     def addNovo(self):
         """Adiciona um novo usuario ao banco de dados"""
-        if self.getUsuario() in not None and self.getSenha() is not None and self.getTipo() is not None:
+        if self.getUsuario() is not None and self.getSenha() is not None and self.getTipo() is not None:
             return DataBase.addLogin(self.getUsuario(), self.cript(self.getSenha()), self.getTipo())
         return False
         
