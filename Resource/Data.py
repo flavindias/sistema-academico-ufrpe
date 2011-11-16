@@ -14,37 +14,42 @@ class Data:
     def __init__(self, ide = None):
         """inicia uma Instancia Data carregando ou nao do BD"""
         if ide == None:
-            pass
+            self.setId(None)
+            self.setAno(None)
+            self.setMes(None)
+            self.setDia(None)
+            self.setHora(None)
         else:
             self.carregar(int(ide))
+            self.setId(None)
 
     def getId(self):
         """Retorna ID da data da instancia"""
         return self.__id
     def setId(self, novoId):
         """Ajusta o ID da data da instancia"""
-        self.__id = int(novoId)
+        self.__id = novoId
     
     def getAno(self):
         """Retorna Ano da data da instancia"""
         return self.__ano
     def setAno(self, novoAno):
         """Ajusta o Ano da instancia"""
-        self.__ano = str(novoAno)
+        self.__ano = novoAno
     
     def getMes(self):
         """Retorna o Mes da data da instancia"""
         return self.__mes
     def setMes(self, novoMes):
         """Ajusta o Mes da instancia"""
-        self.__mes = str(novoMes)
+        self.__mes = novoMes
     
     def getDia(self):
         """Retorna o Dia da data da instancia"""
         return self.__dia
     def setDia(self, novoDia):
         """Ajusta o Dia da instancia"""
-        self.__dia = str(novoDia)
+        self.__dia = novoDia
     
     def getHora(self):
         """Retorna a Hora da instancia"""
@@ -79,7 +84,6 @@ class Data:
             self.setDia(self.__dados[1].day)
             if self.__dados[2] == None:
                 self.setHora(None)
-                return True
             else:
                 self.setHora(str(self.__dados[2]))
-                return True
+            return True
