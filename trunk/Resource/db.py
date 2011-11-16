@@ -44,7 +44,7 @@ class db:
         except:
             return False
 
-    #***AREA DE COMUNICACAO COM A CLASSE ENDERECO***
+    #***AREA DE COMUNICACAO COM A CLASSE LOGIN***
     def carregarLogin(self, loginId):
         """Carrega uma usuario apardir da ID"""
         self.__id = str(loginId)
@@ -84,5 +84,42 @@ class db:
         try:
             self.cursor.execute("INSERT INTO LOGIN(USUARIO, SENHA, TIPO) VALUES (%s, %s, %s);" %(usuario, senha, tipo))
             return True
+        except:
+            return False
+
+    #***AREA DE COMUNICACAO COM A CLASSE ENDERECO***
+    def addEndereco(self, rua, num, bairro, cidade, uf, cep, complemento = None):
+        """Cria um novo endereco no banco de dados"""
+        try:
+            if complemento is None:
+                self.cursor.execute("INSERT INTO ENDERECO(ID, RUA, NUM, BAIRRO, CIDADE, UF, CEP, COMPLEMENTO) VALUES (NULL, %s, %d, %s, %s, %s, %s, NULL);" %(rua, num, bairro, cidade, uf, cep))
+                return True
+            else:
+                self.cursor.execute("INSERT INTO ENDERECO(ID, RUA, NUM, BAIRRO, CIDADE, UF, CEP, COMPLEMENTO) VALUES (NULL, %s, %d, %s, %s, %s, %s, %s);" %(rua, num, bairro, cidade, uf, cep, complemento))
+                return True
+        except:
+            return False
+
+    def editarEndereco(self, ide, rua, num, bairro, cidade, uf, cep, complemento):
+        """Salva um ajuste efetuado na data"""
+        try:
+            if ide is None:
+                return False
+            else:
+                if rua != None:
+                    self.cursor.execute("UPDATE ENDERECO SET RUA = '%s' WHERE ID = %d;" %(rua, ide))
+                if num != None:
+                    self.cursor.execute("UPDATE ENDERECO SET NUM = '%d' WHERE ID = %d;" %(num, ide))
+                if bairro != None:
+                    self.cursor.execute("UPDATE ENDERECO SET BAIRRO = '%s' WHERE ID = %d;" %(bairro, ide))
+                if cidade != None:
+                    self.cursor.execute("UPDATE ENDERECO SET CIDADE = '%s' WHERE ID = %d;" %(cidade, ide))
+                if uf != None:
+                    self.cursor.execute("UPDATE ENDERECO SET UF = '%s' WHERE ID = %d;" %(uf, ide))
+                if cep != None:
+                    self.cursor.execute("UPDATE ENDERECO SET CEP = '%s' WHERE ID = %d;" %(cep, ide))
+                if complemento != None:
+                    self.cursor.execute("UPDATE ENDERECO SET COMPLEMENTO = '%s' WHERE ID = %d;" %(complemento, ide))
+                return True
         except:
             return False
