@@ -17,14 +17,14 @@ class frameLogin(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMELOGIN, name=u'frameLogin',
-              parent=prnt, pos=wx.Point(346, 172), size=wx.Size(1382, 744),
-              style=wx.MAXIMIZE | wx.DEFAULT_FRAME_STYLE,
+              parent=prnt, pos=wx.Point(531, 210), size=wx.Size(1378, 740),
+              style=wx.MAXIMIZE_BOX | wx.MAXIMIZE | wx.DEFAULT_FRAME_STYLE,
               title=u'AcademicSYS - Gerenciamento Escolar')
         self.SetClientSize(wx.Size(1366, 706))
         self.Center(wx.BOTH)
         self.SetIcon(wx.Icon(u'../Interface Gr\xe1fica/Imagens/Icone.ico',
               wx.BITMAP_TYPE_ICO))
-        self.SetAutoLayout(False)
+        self.SetAutoLayout(True)
 
         self.telaLogin = wx.Window(id=wxID_FRAMELOGINTELALOGIN,
               name=u'telaLogin', parent=self, pos=wx.Point(0, 0),
