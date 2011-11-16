@@ -9,7 +9,7 @@ from db import db
 DataBase = db()
 
 class Endereco:
-    """Classe que gerencia os Enderecoes"""
+    """Classe que gerencia os Enderecos"""
     def __init__(self, ide = None):
         """Inicia uma instancia Endereco"""
         if ide is None:
@@ -86,11 +86,11 @@ class Endereco:
         return DataBase.addEndereco(self.getRua(), self.getNum(), self.getBairro(), self.getCidade(), self.getUf(), self.getCep(), self.getComp())
     
     def salvarEdit(self, ide):
-        """Salva ajuste de hora no BD"""
-        if DataBase.editarEndereco(int(ide), self.getRua(), self.getNum(), self.getBairro(), self.getCidade(), self.getUf(), self.getCep(), self.getComp())
+        """Salva ajuste no endereco no BD"""
+        return DataBase.editarEndereco(int(ide), self.getRua(), self.getNum(), self.getBairro(), self.getCidade(), self.getUf(), self.getCep(), self.getComp())
         
     def carregar(self, ide):
-        """Carrega data a partir de id no BD"""
+        """Carrega endereco a partir de id no BD"""
         self.__dados = DataBase.carregarEndereco(ide)
         if self.__dados == None:
             return False
@@ -106,5 +106,3 @@ class Endereco:
             else:
                 self.setComp(self.__dados[7])
             return True
-
-    
