@@ -45,7 +45,7 @@ class DadosPessoais:
         """Ajusta o documento"""
         self.__documento = novoDocumento
 
-    def getsexo(self):
+    def getSexo(self):
         """Retorna o sexo: 1 HOMEM, 0 MULHER"""
         return self.__sexo
     def setSexo(self, novoSexo):
