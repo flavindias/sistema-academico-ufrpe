@@ -19,7 +19,7 @@ class DadosPessoais:
             self.setSexo(None)
             self.setCelular(None)
             self.setFixo(None)
-            self.getEnderecoId(None)
+            self.setEnderecoId(None)
         else:
             self.carregar(documento)
             self.setDocumento(documento)
@@ -46,14 +46,10 @@ class DadosPessoais:
         self.__documento = novoDocumento
 
     def getsexo(self):
-        """Retorna o sexo em bool"""
+        """Retorna o sexo: 1 HOMEM, 0 MULHER"""
         return self.__sexo
     def setSexo(self, novoSexo):
-        """Ajusta o sexo em bool"""
-        if novoSexo == 1:
-            novoSexo = True
-        if novoSexo == 0:
-            novoSexo = False
+        """Ajusta o sexo: 1 HOMEM, 0 MULHER"""
         self.__sexo = novoSexo
 
     def getCelular(self):
@@ -79,11 +75,11 @@ class DadosPessoais:
 
     def addNova(self):
         """Cria um novo endereco no BD"""
-        return DataBase.addDadosPessoais(self.getDocumento(), self.getNome(), self.getSexo(), self.getNascId(), self.enderecoId(), celular = self.getCelular, fixo = self.getFixo)
+        return DataBase.addDadosPessoais(self.getDocumento(), self.getNome(), self.getSexo(), self.getNascId(), self.enderecoId(), celular = self.getCelular(), fixo = self.getFixo())
     
     def salvarEdit(self, documento):
         """Salva ajuste de endereco no BD"""
-        return DataBase.editarDadosPessoais(documento, nome=self.getNome(), sexo = self.getSexo(), dataNascId=self.getDataNascId(), enderecoId = self.getEnderecoId(), celular = self.getCelular(), fixo=self.getFixo())
+        return DataBase.editarDadosPessoais(documento, nome=self.getNome(), sexo=self.getSexo(), dataNascId=self.getDataNascId(), enderecoId = self.getEnderecoId(), celular=self.getCelular(), fixo=self.getFixo())
         
     def carregar(self, documento):
         """Carrega data a partir de id no BD"""
