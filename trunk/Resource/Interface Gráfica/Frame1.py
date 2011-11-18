@@ -1,7 +1,7 @@
 #Boa:Frame:frameLogin
 
 import wx
-
+from Login import Login
 
 def create(parent):
     return frameLogin(parent)
@@ -88,14 +88,12 @@ class frameLogin(wx.Frame):
     def __init__(self, parent):
         self._init_ctrls(parent)
 
-    def bottonAccess(self, event):
-        self.valorLogin = self.digiteLogin.GetValue()
-        self.valorSenha = self.digiteSenha.GetValue()
-        self.nomeErro.SetLabel('Login ou Senha Invalido!')
-        event.Skip()
-
     def OnBotaoLogarButton(self, event):
+        self.Logar = Login()
         self.valorLogin = self.digiteLogin.GetValue()
         self.valorSenha = self.digiteSenha.GetValue()
-        self.nomeErro.SetLabel('Login ou Senha Invalido!')
+        if self.Logar.valida(self.valorLogin, self.valorSenha):
+            self.nomeErro.SetLabel('Ok!')
+        else:
+            self.nomeErro.SetLabel('Login ou Senha Invalido!')
         event.Skip()
