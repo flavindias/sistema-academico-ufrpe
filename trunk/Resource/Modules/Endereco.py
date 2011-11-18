@@ -5,6 +5,8 @@ Created on 15/11/2011
 '''
 
 from db import db
+import urllib
+import cgi
 
 class Endereco:
     """Classe que gerencia os Enderecos"""
@@ -79,6 +81,27 @@ class Endereco:
     def setComp(self, novoComp):
         """Ajusta o complemento"""
         self.__comp = novoComp
+
+    def getEnderecoNet(self, cep):
+        """Retorna um endereco a partir de um CEP"""
+        self.__url = "http://cep.republicavirtual.com.br/web_cep.php?cep="+str(cep)+"&formato=query_string"
+        self.__pag = urllib.urlopen(self.__url)
+        self.__conteudo = self.__pag.read()
+        self.__result = cgi.parse_qs(self.__conteudo)
+        if self.__result['resultado'][0] == '1':
+            self.setRua(self.__result['logradouro'][0])
+            self.setBairro(self.__result['bairro'][0])
+            self.setCidade(self.__result['cidade'][0])
+            self.setUf(self.__result['uf'][0])
+            self.setCep(str(cep))
+            return True
+        elif self.__result['resultado'][0] == '2':
+            self.setCidade(self.__result['cidade'][0])
+            self.setUf(self.__result['uf'][0])
+            self.setCep(str(cep))
+            return True
+        else:
+            return False
 
     def carregar(self, ide):
         """Carrega endereco a partir de id no BD"""
