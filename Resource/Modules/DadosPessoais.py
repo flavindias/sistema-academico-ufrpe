@@ -6,12 +6,11 @@ Created on 15/11/2011
 
 from db import db
 
-DataBase = db()
-
 class DadosPessoais:
     """Classe que gerencia os dados Pessoais"""
     def __init__(self, documento = None):
         """Inicia uma nova instancia"""
+        self.__DataBase = db()
         if documento is None:
             self.setNome(None)
             self.setDataNascId(None)
@@ -73,17 +72,9 @@ class DadosPessoais:
         """Ajusta o ID de endereco"""
         self.__enderecoId = novoEnderecoId
 
-    def addNova(self):
-        """Cria um novo endereco no BD"""
-        return DataBase.addDadosPessoais(self.getDocumento(), self.getNome(), self.getSexo(), self.getNascId(), self.enderecoId(), celular = self.getCelular(), fixo = self.getFixo())
-    
-    def salvarEdit(self, documento):
-        """Salva ajuste de endereco no BD"""
-        return DataBase.editarDadosPessoais(documento, nome=self.getNome(), sexo=self.getSexo(), dataNascId=self.getDataNascId(), enderecoId = self.getEnderecoId(), celular=self.getCelular(), fixo=self.getFixo())
-        
     def carregar(self, documento):
         """Carrega data a partir de id no BD"""
-        self.__dados = DataBase.carregarDadosPessoais(documento)
+        self.__dados = self.__DataBase.carregarDadosPessoais(documento)
         if self.__dados == None:
             return False
         else:
@@ -95,3 +86,19 @@ class DadosPessoais:
             self.setDataNascId(self.__dados[5])
             self.setEnderecoId(self.__dados[6])
             return True
+
+    def salvarEdit(self, documento):
+        """Salva ajuste de endereco no BD"""
+        return self.__DataBase.editarDadosPessoais(documento, nome=self.getNome(), sexo=self.getSexo(), dataNascId=self.getDataNascId(), enderecoId = self.getEnderecoId(), celular=self.getCelular(), fixo=self.getFixo())
+
+    def addNova(self):
+        """Cria um novo endereco no BD"""
+        return self.__DataBase.addDadosPessoais(self.getDocumento(), self.getNome(), self.getSexo(), self.getNascId(), self.enderecoId(), celular = self.getCelular(), fixo = self.getFixo())
+    
+    def delete(self, documento):
+        """Deleta um dadoPessoal a partir de seu documento"""
+        return self.__DataBase.delDadosPessoais(documento)
+
+    def pegarId(self):
+        """Retorna uma lista com todos os Documentos"""
+        return self.__DataBase.returnIdDadosPessoais()
