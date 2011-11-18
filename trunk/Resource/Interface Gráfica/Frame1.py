@@ -32,7 +32,7 @@ class frameLogin(wx.Frame):
               title=u'AcademicSYS - Gerenciamento Escolar')
         self.SetClientSize(wx.Size(1366, 706))
         self.Center(wx.BOTH)
-        self.SetIcon(wx.Icon(u'../Interface Gr\xe1fica/Imagens/Icone.ico',
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',
               wx.BITMAP_TYPE_ICO))
         self.SetAutoLayout(True)
 
@@ -82,7 +82,7 @@ class frameLogin(wx.Frame):
               352), size=wx.Size(623, 2), style=0)
         self.linhaDivisoria.Center(wx.HORIZONTAL)
 
-        self.logoSys = wx.StaticBitmap(bitmap=wx.Bitmap(u'../Interface Gr\xe1fica/Imagens/logo.png',
+        self.logoSys = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logo.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMELOGINLOGOSYS, name=u'logoSys',
               parent=self.telaLogin, pos=wx.Point(343, 40), size=wx.Size(680,
               278), style=0)
