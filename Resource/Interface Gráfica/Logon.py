@@ -2,9 +2,7 @@
 #Boa:App:BoaApp
 
 import wx
-
 import Frame1
-
 modules ={'Frame1': [1,
             'Main frame of Application',
             u'Frame1.py']}

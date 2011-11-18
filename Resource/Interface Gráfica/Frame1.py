@@ -1,6 +1,16 @@
 #Boa:Frame:frameLogin
 
 import wx
+import sys
+
+lista = sys.path[0].split('\\')
+temp = ''
+for i in range(len(lista)-1):
+    temp += lista[i]
+    if i != len(lista)-1:
+        temp += '\\'
+sys.path[0] = temp
+
 from Login import Login
 
 def create(parent):
