@@ -6,13 +6,12 @@ Created on 15/11/2011
 
 from db import db
 
-DataBase = db()
-
 class Data:
     """Classe para gerenciar entradas de datas"""
 
     def __init__(self, ide = None):
         """inicia uma Instancia Data carregando ou nao do BD"""
+        self.__DataBase = db()
         if ide == None:
             self.setId(None)
             self.setAno(None)
@@ -58,23 +57,9 @@ class Data:
         """Ajusta a Hora da instancia"""
         self.__hora = novoHora
 
-    def addNova(self):
-        """Cria uma nova data no BD"""
-        if DataBase.addData(self.getAno(), self.getMes(), self.getDia(), self.getHora()):
-            return True
-        else:
-            return False
-    
-    def salvarEdit(self, ide):
-        """Salva ajuste de hora no BD"""
-        if DataBase.editarData(int(ide), self.getAno(), self.getMes, self.getDia, self.getHora()):
-            return True
-        else:
-            return False
-        
     def carregar(self, ide):
         """Carrega data a partir de id no BD"""
-        self.__dados = DataBase.carregarData(int(ide))
+        self.__dados = self.__DataBase.carregarData(int(ide))
         if self.__dados == None:
             return False
         else:
@@ -87,3 +72,24 @@ class Data:
             else:
                 self.setHora(str(self.__dados[2]))
             return True
+
+    def salvarEdit(self, ide):
+        """Salva ajuste de hora no BD"""
+        if self.__DataBase.editarData(int(ide), self.getAno(), self.getMes, self.getDia, self.getHora()):
+            return True
+        else:
+            return False
+
+    def addNova(self):
+        """Cria uma nova data no BD"""
+        if self.__DataBase.addData(self.getAno(), self.getMes(), self.getDia(), self.getHora()):
+            return True
+        else:
+            return False
+
+    def deletar(self, ide):
+        """Deleta uma data do banco de dados"""
+        return self.__DataBase.delData(ide)
+
+    def PegarIds(self):
+        return self.__DataBase.returnIdData()
