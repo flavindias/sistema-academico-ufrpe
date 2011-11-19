@@ -82,10 +82,7 @@ class Data:
 
     def addNova(self):
         """Cria uma nova data no BD"""
-        if self.__DataBase.addData(self.getAno(), self.getMes(), self.getDia(), self.getHora()):
-            return True
-        else:
-            return False
+        return self.__DataBase.addData(self.getAno(), self.getMes(), self.getDia(), self.getHora())
 
     def deletar(self, ide):
         """Deleta uma data do banco de dados"""
