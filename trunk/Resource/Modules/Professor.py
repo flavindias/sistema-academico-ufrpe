@@ -42,7 +42,7 @@ class Professor:
 
     def carregar(self, ide):
         """Carrega professor a partir de id no BD"""
-        self.__dados = DataBase.carregarProfessor(ide)
+        self.__dados = self.__DataBase.carregarProfessor(ide)
         if self.__dados == None:
             return False
         else:
