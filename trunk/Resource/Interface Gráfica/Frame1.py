@@ -100,6 +100,7 @@ class frameLogin(wx.Frame):
         self._init_ctrls(parent)
 
     def OnBotaoLogarButton(self, event):
+        self.nomeErro.SetLabel('Aguarde, carregando BD')
         self.Logar = Login()
         self.valorLogin = self.digiteLogin.GetValue()
         self.valorSenha = self.digiteSenha.GetValue()
