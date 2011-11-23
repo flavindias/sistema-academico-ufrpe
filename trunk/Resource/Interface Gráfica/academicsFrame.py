@@ -23,31 +23,31 @@ class Sistema_Academico(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_SISTEMA_ACADEMICO,
-              name=u'Sistema_Academico', parent=prnt, pos=wx.Point(468, 129),
-              size=wx.Size(800, 600), style=wx.BORDER_RAISED,
+              name=u'Sistema_Academico', parent=prnt, pos=wx.Point(40, 2),
+              size=wx.Size(1326, 726),
+              style=wx.DEFAULT_FRAME_STYLE | wx.BORDER_RAISED,
               title=u'Sistema Academico')
-        self.SetClientSize(wx.Size(792, 566))
+        self.SetClientSize(wx.Size(1310, 688))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.SetForegroundColour(wx.Colour(0, 0, 0))
         self.SetToolTipString(u'Frame')
         self.Center(wx.BOTH)
-        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',
-              wx.BITMAP_TYPE_ICO))
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
         self.Gerenciar_Aluno = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Man-128.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOGERENCIAR_ALUNO,
-              name=u'Gerenciar_Aluno', parent=self, pos=wx.Point(72, 160),
+              name=u'Gerenciar_Aluno', parent=self, pos=wx.Point(137, 290),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
 
         self.Gerenciar_Professor = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Supervisor-128.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOGERENCIAR_PROFESSOR,
-              name=u'Gerenciar_Professor', parent=self, pos=wx.Point(312, 160),
+              name=u'Gerenciar_Professor', parent=self, pos=wx.Point(377, 290),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
 
         self.Gerenciar_Disciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Graphite-doc-128.png',
               wx.BITMAP_TYPE_PNG),
               id=wxID_SISTEMA_ACADEMICOGERENCIAR_DISCIPLINA,
-              name=u'Gerenciar_Disciplina', parent=self, pos=wx.Point(552, 160),
+              name=u'Gerenciar_Disciplina', parent=self, pos=wx.Point(617, 290),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
         self.Gerenciar_Disciplina.Bind(wx.EVT_BUTTON,
               self.Gerenciar_DisciplinaButton,
@@ -55,27 +55,27 @@ class Sistema_Academico(wx.Frame):
 
         self.LogoMarca = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logo pqueno.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOLOGOMARCA,
-              name=u'LogoMarca', parent=self, pos=wx.Point(184, 16),
-              size=wx.Size(424, 112), style=0)
+              name=u'LogoMarca', parent=self, pos=wx.Point(408, 26),
+              size=wx.Size(493, 158), style=0)
         self.LogoMarca.Center(wx.HORIZONTAL)
 
         self.LogOff = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Ball-shutdown-48.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOLOGOFF,
-              name=u'LogOff', parent=self, pos=wx.Point(696, 488),
+              name=u'LogOff', parent=self, pos=wx.Point(988, 498),
               size=wx.Size(64, 56), style=wx.BU_AUTODRAW)
         self.LogOff.Bind(wx.EVT_BUTTON, self.LogOffButton,
               id=wxID_SISTEMA_ACADEMICOLOGOFF)
 
         self.gerAlunoStaticText = wx.StaticText(id=wxID_SISTEMA_ACADEMICOGERALUNOSTATICTEXT,
               label=u'Gerenciar Aluno', name=u'gerAlunoStaticText', parent=self,
-              pos=wx.Point(88, 312), size=wx.Size(107, 19), style=0)
+              pos=wx.Point(153, 442), size=wx.Size(107, 19), style=0)
         self.gerAlunoStaticText.SetFont(wx.Font(12, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
         self.gerAlunoStaticText.SetForegroundColour(wx.Colour(145, 145, 145))
 
         self.gerProfStaticText = wx.StaticText(id=wxID_SISTEMA_ACADEMICOGERPROFSTATICTEXT,
               label=u'Gerenciar Professor', name=u'gerProfStaticText',
-              parent=self, pos=wx.Point(328, 312), size=wx.Size(131, 19),
+              parent=self, pos=wx.Point(393, 442), size=wx.Size(132, 19),
               style=0)
         self.gerProfStaticText.SetFont(wx.Font(12, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
@@ -83,7 +83,7 @@ class Sistema_Academico(wx.Frame):
 
         self.gerDiscStaticText = wx.StaticText(id=wxID_SISTEMA_ACADEMICOGERDISCSTATICTEXT,
               label=u'Gerenciar Disciplina', name=u'gerDiscStaticText',
-              parent=self, pos=wx.Point(568, 312), size=wx.Size(133, 19),
+              parent=self, pos=wx.Point(633, 442), size=wx.Size(133, 19),
               style=0)
         self.gerDiscStaticText.SetFont(wx.Font(12, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
@@ -92,12 +92,12 @@ class Sistema_Academico(wx.Frame):
         self.Gerenciar_Funcionario = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Boss-128.png',
               wx.BITMAP_TYPE_PNG),
               id=wxID_SISTEMA_ACADEMICOGERENCIAR_FUNCIONARIO,
-              name=u'Gerenciar_Funcionario', parent=self, pos=wx.Point(432,
-              344), size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
+              name=u'Gerenciar_Funcionario', parent=self, pos=wx.Point(1087,
+              290), size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
 
         self.gerFunStaticText = wx.StaticText(id=wxID_SISTEMA_ACADEMICOGERFUNSTATICTEXT,
               label=u'Gerenciar Funcion\xe1rio', name=u'gerFunStaticText',
-              parent=self, pos=wx.Point(440, 496), size=wx.Size(148, 19),
+              parent=self, pos=wx.Point(1095, 442), size=wx.Size(148, 19),
               style=0)
         self.gerFunStaticText.SetFont(wx.Font(12, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
@@ -105,7 +105,7 @@ class Sistema_Academico(wx.Frame):
 
         self.vindoStaticText1 = wx.StaticText(id=wxID_SISTEMA_ACADEMICOVINDOSTATICTEXT1,
               label=u'Bem-Vindo:', name=u'vindoStaticText1', parent=self,
-              pos=wx.Point(40, 528), size=wx.Size(92, 21), style=0)
+              pos=wx.Point(231, 511), size=wx.Size(93, 21), style=0)
         self.vindoStaticText1.SetFont(wx.Font(14, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
         self.vindoStaticText1.SetForegroundColour(wx.Colour(145, 145, 145))
@@ -118,20 +118,20 @@ class Sistema_Academico(wx.Frame):
 
         self.bitmapButton1 = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/User-group-128.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOBITMAPBUTTON1,
-              name='bitmapButton1', parent=self, pos=wx.Point(192, 344),
+              name='bitmapButton1', parent=self, pos=wx.Point(847, 290),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
 
         self.gerTurmaStaticText1 = wx.StaticText(id=wxID_SISTEMA_ACADEMICOGERTURMASTATICTEXT1,
               label=u'Gerenciar Turma', name=u'gerTurmaStaticText1',
-              parent=self, pos=wx.Point(224, 496), size=wx.Size(112, 19),
+              parent=self, pos=wx.Point(879, 442), size=wx.Size(112, 19),
               style=0)
         self.gerTurmaStaticText1.SetFont(wx.Font(12, wx.SWISS, wx.ITALIC,
               wx.NORMAL, False, u'Times New Roman'))
         self.gerTurmaStaticText1.SetForegroundColour(wx.Colour(145, 145, 145))
 
         self.staticLine2 = wx.StaticLine(id=wxID_SISTEMA_ACADEMICOSTATICLINE2,
-              name='staticLine2', parent=self, pos=wx.Point(152, 136),
-              size=wx.Size(488, 1), style=0)
+              name='staticLine2', parent=self, pos=wx.Point(205, 217),
+              size=wx.Size(899, 1), style=0)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
