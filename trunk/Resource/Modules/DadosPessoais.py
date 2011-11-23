@@ -89,11 +89,16 @@ class DadosPessoais:
 
     def salvarEdit(self, documento):
         """Salva ajuste de endereco no BD"""
-        return self.__DataBase.editarDadosPessoais(documento, nome=self.getNome(), sexo=self.getSexo(), dataNascId=self.getDataNascId(), enderecoId = self.getEnderecoId(), celular=self.getCelular(), fixo=self.getFixo())
+        return self.__DataBase.editarDadosPessoais(documento, nome=self.getNome(),
+                                                   sexo=self.getSexo(), dataNascId=self.getDataNascId(),
+                                                   enderecoId = self.getEnderecoId(), celular=self.getCelular(),
+                                                   fixo=self.getFixo())
 
     def addNova(self):
         """Cria um novo endereco no BD"""
-        return self.__DataBase.addDadosPessoais(self.getDocumento(), self.getNome(), self.getSexo(), self.getNascId(), self.enderecoId(), celular = self.getCelular(), fixo = self.getFixo())
+        return self.__DataBase.addDadosPessoais(self.getDocumento(), self.getNome(),
+                                                self.getSexo(), self.getDataNascId(), self.getEnderecoId(),
+                                                celular = self.getCelular(), fixo = self.getFixo())
     
     def delete(self, documento):
         """Deleta um dadoPessoal a partir de seu documento"""

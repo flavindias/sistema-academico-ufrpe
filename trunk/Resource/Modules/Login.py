@@ -39,7 +39,7 @@ class Login:
     def setSenha(self, novoSenha):
         """Ajusta a senha"""
         if novoSenha is not None:
-            self.__senha = novoSenha
+            self.__senha = self.cript(novoSenha)
 
     def cript(self, senha):
         """Criptografa uma senha"""
@@ -69,7 +69,7 @@ class Login:
         """Salva uma edicao"""
         return self.__DataBase.editarLogin(usuarioID, usuario = self.getUsuario(), senha = self.cript(self.getSenha()), tipo = self.getTipo())
 
-    def addNovo(self):
+    def addNova(self):
         """Adiciona um novo usuario ao banco de dados"""
         if self.getUsuario() is not None and self.getSenha() is not None and self.getTipo() is not None:
             return self.__DataBase.addLogin(self.getUsuario(), self.cript(self.getSenha()), self.getTipo())
