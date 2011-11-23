@@ -50,7 +50,7 @@ class Sistema_Academico(wx.Frame):
               name=u'Gerenciar_Disciplina', parent=self, pos=wx.Point(617, 290),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
         self.Gerenciar_Disciplina.Bind(wx.EVT_BUTTON,
-              self.Gerenciar_DisciplinaButton,
+              self.OnGerenciar_DisciplinaButton,
               id=wxID_SISTEMA_ACADEMICOGERENCIAR_DISCIPLINA)
 
         self.LogoMarca = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logo pqueno.png',
@@ -141,4 +141,8 @@ class Sistema_Academico(wx.Frame):
         event.Skip()
 
     def Gerenciar_DisciplinaButton(self, event):
+        
+        event.Skip()
+
+    def OnGerenciar_DisciplinaButton(self, event):
         event.Skip()
