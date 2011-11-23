@@ -20,5 +20,5 @@ def main():
     application = BoaApp(0)
     application.MainLoop()
 
-if __name__ == '__main__':
+def comeca():
     main()
