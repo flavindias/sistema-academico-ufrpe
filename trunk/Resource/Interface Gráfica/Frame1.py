@@ -2,6 +2,7 @@
 
 import wx
 import sys
+import academics
 
 lista = sys.path[0].split('\\')
 temp = ''
@@ -105,7 +106,8 @@ class frameLogin(wx.Frame):
         self.valorLogin = self.digiteLogin.GetValue()
         self.valorSenha = self.digiteSenha.GetValue()
         if self.Logar.valida(self.valorLogin, self.valorSenha):
-            self.nomeErro.SetLabel('Ok!')
+            self.Close()
+            return academics.comeca()
         else:
             self.nomeErro.SetLabel('Login ou Senha Invalido!')
         event.Skip()
