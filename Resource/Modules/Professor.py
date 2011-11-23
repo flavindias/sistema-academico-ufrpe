@@ -5,7 +5,7 @@ Created on 14/11/2011
 
 @author: Grupo Sistema Academico
 '''
-from bd import bd
+from db import db
 class Professor:
     '''Classe de Gerenciamento de Professor'''
     def __init__(self, ide = None):
