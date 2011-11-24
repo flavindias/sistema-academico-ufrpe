@@ -1,4 +1,15 @@
 #Boa:Frame:frameGerDisciplina
+import sys
+
+lista = sys.path[0].split('\\')
+temp = ''
+for i in range(len(lista)):
+    if i != len(lista)-1:
+        temp += lista[i]
+        temp += '\\'
+    else:
+        temp += 'Modules'
+sys.path[0] = temp
 
 import wx
 from Disciplina import Disciplina
