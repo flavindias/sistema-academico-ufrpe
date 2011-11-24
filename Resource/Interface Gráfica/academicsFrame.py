@@ -23,8 +23,8 @@ class Sistema_Academico(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_SISTEMA_ACADEMICO,
-              name=u'Sistema_Academico', parent=prnt, pos=wx.Point(559, 219),
-              size=wx.Size(1322, 722),
+              name=u'Sistema_Academico', parent=prnt, pos=wx.Point(40, 2),
+              size=wx.Size(1326, 726),
               style=wx.DEFAULT_FRAME_STYLE | wx.BORDER_RAISED,
               title=u'Sistema Academico')
         self.SetClientSize(wx.Size(1310, 688))
@@ -43,6 +43,9 @@ class Sistema_Academico(wx.Frame):
               wx.BITMAP_TYPE_PNG), id=wxID_SISTEMA_ACADEMICOGERENCIAR_PROFESSOR,
               name=u'Gerenciar_Professor', parent=self, pos=wx.Point(381, 277),
               size=wx.Size(160, 136), style=wx.BU_AUTODRAW)
+        self.Gerenciar_Professor.Bind(wx.EVT_BUTTON,
+              self.OnGerenciar_ProfessorButton,
+              id=wxID_SISTEMA_ACADEMICOGERENCIAR_PROFESSOR)
 
         self.Gerenciar_Disciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Graphite-doc-128.png',
               wx.BITMAP_TYPE_PNG),
@@ -147,4 +150,7 @@ class Sistema_Academico(wx.Frame):
         event.Skip()
 
     def OnGerenciar_DisciplinaButton(self, event):
+        event.Skip()
+
+    def OnGerenciar_ProfessorButton(self, event):
         event.Skip()
