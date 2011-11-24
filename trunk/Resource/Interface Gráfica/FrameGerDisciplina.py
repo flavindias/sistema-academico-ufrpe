@@ -1,29 +1,30 @@
 #Boa:Frame:frameGerDisciplina
 
 import wx
-import Disciplina
-import Professor
-import DadosPessoais
+from Disciplina import Disciplina
+from Professor import Professor
+from DadosPessoais import DadosPessoais
 
 def create(parent):
     return frameGerDisciplina(parent)
 
 [wxID_FRAMEGERDISCIPLINA, wxID_FRAMEGERDISCIPLINAAPLICARBUTTON, 
  wxID_FRAMEGERDISCIPLINADISCLISTBOX, wxID_FRAMEGERDISCIPLINADISCSTATICBOX, 
- wxID_FRAMEGERDISCIPLINAEDITARBUTTON, wxID_FRAMEGERDISCIPLINAEXCLUIRBUTTON, 
+ wxID_FRAMEGERDISCIPLINAEDITARBUTTON, wxID_FRAMEGERDISCIPLINAERROTEXTCTRL, 
+ wxID_FRAMEGERDISCIPLINAEXCLUIRBUTTON, 
  wxID_FRAMEGERDISCIPLINANOMEDISCSTATICTEXT, 
  wxID_FRAMEGERDISCIPLINANOMETEXTCTRL, wxID_FRAMEGERDISCIPLINAOKBITMAPBUTTON1, 
  wxID_FRAMEGERDISCIPLINAPROFCHOICE, 
  wxID_FRAMEGERDISCIPLINAPROFDISCSTATICTEXT1, 
  wxID_FRAMEGERDISCIPLINASTATICBITMAP1, wxID_FRAMEGERDISCIPLINASTATICTEXT1, 
  wxID_FRAMEGERDISCIPLINATESTE, 
-] = [wx.NewId() for _init_ctrls in range(14)]
+] = [wx.NewId() for _init_ctrls in range(15)]
 
 class frameGerDisciplina(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERDISCIPLINA,
-              name=u'frameGerDisciplina', parent=prnt, pos=wx.Point(516, 98),
+              name=u'frameGerDisciplina', parent=prnt, pos=wx.Point(517, 98),
               size=wx.Size(703, 640),
               style=wx.DEFAULT_FRAME_STYLE | wx.RAISED_BORDER | wx.CLOSE_BOX | wx.MAXIMIZE_BOX,
               title=u'Gerenciar Disciplina')
@@ -95,7 +96,7 @@ class frameGerDisciplina(wx.Frame):
         self.okBitmapButton1.Bind(wx.EVT_BUTTON, self.DiscReturnMenu,
               id=wxID_FRAMEGERDISCIPLINAOKBITMAPBUTTON1)
 
-        self.profChoice = wx.Choice(choices=[],
+        self.profChoice = wx.Choice(choices=self.listProf,
               id=wxID_FRAMEGERDISCIPLINAPROFCHOICE, name=u'profChoice',
               parent=self, pos=wx.Point(104, 128), size=wx.Size(232, 21),
               style=0)
@@ -111,8 +112,18 @@ class frameGerDisciplina(wx.Frame):
               parent=self, pos=wx.Point(496, 456), size=wx.Size(100, 21),
               style=wx.NO_BORDER, value=u'')
 
+        self.erroTextCtrl = wx.TextCtrl(id=wxID_FRAMEGERDISCIPLINAERROTEXTCTRL,
+              name=u'erroTextCtrl', parent=self, pos=wx.Point(32, 544),
+              size=wx.Size(488, 21), style=wx.NO_BORDER, value=u'')
+        self.erroTextCtrl.SetForegroundColour(wx.Colour(255, 0, 0))
+        self.erroTextCtrl.SetFont(wx.Font(10, wx.SWISS, wx.ITALIC, wx.NORMAL,
+              False, u'Times New Roman'))
+
     def __init__(self, parent):
+        self.verificador = 0
+        self.carregarProf()
         self._init_ctrls(parent)
+        self.carregarDisc()
         
     def DiscReturnMenu(self, event):
         self.Close(True)
@@ -122,7 +133,14 @@ class frameGerDisciplina(wx.Frame):
         event.Skip()
         
     def carregarProf(self):
-        
+        prof = Professor()
+        dados = DadosPessoais()
+        self.listProfId = prof.pegarId()
+        self.listProf = []
+        for i in self.listProfId:
+            prof.carregar(i)
+            dados.carregar(prof.getDadosId())
+            self.listProf += [str(dados.getNome())]
     
     def carregarDisc(self):
         disc = Disciplina()
@@ -130,7 +148,9 @@ class frameGerDisciplina(wx.Frame):
         dados = DadosPessoais()
         listDisc = disc.pegarId()
         listDiscBox = []
+        self.listDiscId = []
         for i in listDisc:
+            self.listDiscId += [i]
             disc.carregar(i)
             prof.carregar(disc.getProfessorId())
             dados.carregar(prof.getDadosId())
@@ -138,24 +158,57 @@ class frameGerDisciplina(wx.Frame):
         self.discListBox.Set(listDiscBox)
         
     def delDisc(self):
-        disc = Disciplina()
-        disc.delete(self.discListBox.GetSelections())
-        self.carregarDisc()
+        if self.discListBox.GetSelections() == ():
+            self.erroTextCtrl.SetValue('Selecione uma Disciplina para deletar!')
+        else:
+            self.erroTextCtrl.SetValue('')
+            disc = Disciplina()
+            disc.delete(self.listDiscId[self.discListBox.GetSelections()[-1]])
         
     def editDisc(self):
-        disc = Disciplina()
-        prof = Professor()
-        listDiscId = disc.pegarId()
-        editDisc = self.discListBox.GetSelections()
-        disc.carregar(editDisc[0])
-        
+        self.discEdit = Disciplina()
+        self.discEdit.carregar(self.listDiscId[self.discListBox.GetSelections()[-1]])
+        self.nomeTextCtrl.SetValue(self.discEdit.getNome())
+    
+    def addDisc(self):
+        if (self.nomeTextCtrl.GetValue() == '') or (self.profChoice.GetSelection() == -1):
+            self.erroTextCtrl.SetValue('Insira um Nome e um Professor para adicionar uma nova Disciplina!')
+        else:
+            self.erroTextCtrl.SetValue('')
+            disc = Disciplina()
+            disc.setNome(self.nomeTextCtrl.GetValue())
+            select = self.profChoice.GetSelection()
+            disc.setProfessorId(self.listProfId[select])
+            disc.addNova()
+            self.nomeTextCtrl.SetValue('')
 
     def OnEditarButtonButton(self, event):
+        self.verificador = 1
+        self.editDisc()
         event.Skip()
 
     def OnExcluirButtonButton(self, event):
+        self.delDisc()
+        self.carregarDisc()
         event.Skip()
 
     def OnAplicarButtonButton(self, event):
-        self.carregarDisc()
+        if self.verificador == 1:
+            if (self.nomeTextCtrl.GetValue() == ''):
+                self.erroTextCtrl.SetValue('Insira um Nome para Editar a Disciplina!')
+            else:
+                self.discEdit.setNome(self.nomeTextCtrl.GetValue())
+                if self.profChoice.GetSelection() == -1:
+                    None
+                else:
+                    select = self.profChoice.GetSelection()
+                    self.discEdit.setProfessorId(self.listProfId[select])
+                self.discEdit.salvarEdit(self.discEdit.getId())
+                self.verificador = 0
+                self.discEdit = None
+                self.nomeTextCtrl.SetValue('')
+                self.carregarDisc()
+        else:
+            self.addDisc()
+            self.carregarDisc()
         event.Skip()
