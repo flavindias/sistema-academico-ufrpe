@@ -30,16 +30,16 @@ class frameLogin(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMELOGIN, name=u'frameLogin',
-              parent=prnt, pos=wx.Point(-6, -6), size=wx.Size(1292, 692),
-              style=wx.MAXIMIZE_BOX | wx.MAXIMIZE | wx.DEFAULT_FRAME_STYLE,
+              parent=prnt, pos=wx.Point(574, 234), size=wx.Size(1322, 722),
+              style=wx.DEFAULT_FRAME_STYLE | wx.BORDER_RAISED,
               title=u'AcademicSYS - Gerenciamento Escolar')
-        self.SetClientSize(wx.Size(1280, 658))
+        self.SetClientSize(wx.Size(1310, 688))
         self.Center(wx.BOTH)
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
         self.SetAutoLayout(True)
 
         self.telaLogin = wx.Window(id=wxID_FRAMELOGINTELALOGIN,
-              name=u'telaLogin', parent=self, pos=wx.Point(-43, -4),
+              name=u'telaLogin', parent=self, pos=wx.Point(-43, -24),
               size=wx.Size(1366, 706), style=0)
         self.telaLogin.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.telaLogin.Center(wx.BOTH)
