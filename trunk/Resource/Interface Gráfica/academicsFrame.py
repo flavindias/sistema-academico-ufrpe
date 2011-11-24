@@ -146,7 +146,6 @@ class Sistema_Academico(wx.Frame):
         event.Skip()
 
     def Gerenciar_DisciplinaButton(self, event):
-        
         event.Skip()
 
     def OnGerenciar_DisciplinaButton(self, event):
