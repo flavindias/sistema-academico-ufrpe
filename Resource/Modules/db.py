@@ -367,7 +367,7 @@ class db:
                 if nome != None:
                     self.cursor.execute("UPDATE DISCIPLINA SET NOME = '%s' WHERE ID = %s;" %(nome, ide))
                 if professorId != None:
-                    self.cursor.execute("UPDATE DISCIPLINA SET PROFESSOR = %s WHER ID = %s" %(professorId, ide))
+                    self.cursor.execute("UPDATE DISCIPLINA SET PROFESSOR = %s WHERE ID = %s" %(professorId, ide))
                 return True
         except:
             return False
