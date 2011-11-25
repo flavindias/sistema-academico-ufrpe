@@ -15,7 +15,8 @@ class Dialog1(wx.Dialog):
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_DIALOG1, name='', parent=prnt,
               pos=wx.Point(825, 409), size=wx.Size(400, 250),
-              style=wx.DEFAULT_DIALOG_STYLE, title='Dialog1')
+              style=wx.DEFAULT_DIALOG_STYLE,
+              title=u'Excluir Professor - AcademicSys')
         self.SetClientSize(wx.Size(388, 216))
 
         self.textoAviso = wx.StaticText(id=wxID_DIALOG1TEXTOAVISO,
