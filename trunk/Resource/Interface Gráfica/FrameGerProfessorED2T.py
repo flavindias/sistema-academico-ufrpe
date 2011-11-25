@@ -31,7 +31,7 @@ class FrameAddProfessor(wx.Frame):
         wx.Frame.__init__(self, id=wxID_FRAMEADDPROFESSOR,
               name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(559, 219),
               size=wx.Size(1322, 722), style=wx.DEFAULT_FRAME_STYLE,
-              title=u'Adicionar Professor - AcademicSys')
+              title=u'Editar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEADDPROFESSORPANEL1, name='panel1',
@@ -49,7 +49,7 @@ class FrameAddProfessor(wx.Frame):
 
         self.nomeCPF = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECPF,
               label=u'CPF:', name=u'nomeCPF', parent=self.panel1,
-              pos=wx.Point(408, 167), size=wx.Size(23, 13), style=0)
+              pos=wx.Point(406, 167), size=wx.Size(23, 13), style=0)
 
         self.nomeSexo = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMESEXO,
               label=u'Sexo:', name=u'nomeSexo', parent=self.panel1,
@@ -93,7 +93,7 @@ class FrameAddProfessor(wx.Frame):
               size=wx.Size(122, 21), style=0, value=u'')
 
         self.campoCPF = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCPF,
-              name=u'campoCPF', parent=self.panel1, pos=wx.Point(411, 190),
+              name=u'campoCPF', parent=self.panel1, pos=wx.Point(407, 190),
               size=wx.Size(139, 21), style=0, value=u'')
 
         self.botaoMasc = wx.RadioButton(id=wxID_FRAMEADDPROFESSORBOTAOMASC,
