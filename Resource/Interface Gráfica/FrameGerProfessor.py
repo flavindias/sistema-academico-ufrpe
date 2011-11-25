@@ -19,6 +19,7 @@ class Frame1(wx.Frame):
               style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciamento de Professores - AcademicSYS')
         self.SetClientSize(wx.Size(1310, 688))
+        self.SetBackgroundColour(wx.Colour(255, 255, 255))
 
         self.logo = wx.Panel(id=wxID_FRAME1LOGO, name=u'logo', parent=self,
               pos=wx.Point(0, 0), size=wx.Size(1310, 688),
@@ -34,7 +35,7 @@ class Frame1(wx.Frame):
               id=wxID_FRAME1BOTAOEDITAR, name=u'botaoEditar', parent=self.logo,
               pos=wx.Point(553, 296), size=wx.Size(216, 208),
               style=wx.BU_AUTODRAW)
-        self.botaoEditar.SetBitmapLabel(wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/Icone Editar.png',
+        self.botaoEditar.SetBitmapLabel(wx.Bitmap(u'./Imagens/Icone Editar.png',
               wx.BITMAP_TYPE_PNG))
         self.botaoEditar.Center(wx.HORIZONTAL)
         self.botaoEditar.Bind(wx.EVT_BUTTON, self.OnBotaoEditarButton,
@@ -44,9 +45,9 @@ class Frame1(wx.Frame):
               id=wxID_FRAME1BOTAOCADASTRAR, name=u'botaoCadastrar',
               parent=self.logo, pos=wx.Point(209, 295), size=wx.Size(216, 208),
               style=wx.BU_AUTODRAW)
-        self.botaoCadastrar.SetBitmapDisabled(wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/Icone Adiconar.png',
+        self.botaoCadastrar.SetBitmapDisabled(wx.Bitmap(u'./Imagens/Icone Adiconar.png',
               wx.BITMAP_TYPE_PNG))
-        self.botaoCadastrar.SetBitmapLabel(wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/Icone Adiconar.png',
+        self.botaoCadastrar.SetBitmapLabel(wx.Bitmap(u'./Imagens/Icone Adiconar.png',
               wx.BITMAP_TYPE_PNG))
         self.botaoCadastrar.Bind(wx.EVT_BUTTON, self.OnBotaoCadastrarButton,
               id=wxID_FRAME1BOTAOCADASTRAR)
@@ -55,7 +56,7 @@ class Frame1(wx.Frame):
               id=wxID_FRAME1BOTAOEXCLUIR, name=u'botaoExcluir',
               parent=self.logo, pos=wx.Point(884, 297), size=wx.Size(216, 208),
               style=wx.BU_AUTODRAW)
-        self.botaoExcluir.SetBitmapLabel(wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/Icone deletar.png',
+        self.botaoExcluir.SetBitmapLabel(wx.Bitmap(u'./Imagens/Icone deletar.png',
               wx.BITMAP_TYPE_PNG))
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnBotaoExcluirButton,
               id=wxID_FRAME1BOTAOEXCLUIR)
@@ -73,13 +74,13 @@ class Frame1(wx.Frame):
               label=u'Excluir', name=u'textoExcluir', parent=self.logo,
               pos=wx.Point(984, 521), size=wx.Size(32, 13), style=0)
 
-        self.logoAcademicSys = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/logo professor.png',
+        self.logoAcademicSys = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logo professor.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1LOGOACADEMICSYS,
               name=u'logoAcademicSys', parent=self.logo, pos=wx.Point(305, 17),
               size=wx.Size(712, 216), style=0)
         self.logoAcademicSys.Center(wx.HORIZONTAL)
 
-        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.logo, pos=wx.Point(8, 8),
               size=wx.Size(48, 48), style=wx.BU_AUTODRAW)

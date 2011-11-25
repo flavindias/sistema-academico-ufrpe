@@ -1,6 +1,7 @@
 #Boa:Frame:frameLogin
 
 import wx
+import wx.richtext
 import sys
 import academics
 
@@ -107,7 +108,8 @@ class frameLogin(wx.Frame):
         self.valorSenha = self.digiteSenha.GetValue()
         if self.Logar.valida(self.valorLogin, self.valorSenha):
             self.Close()
-            return academics.comeca()
+            academics.comeca()
+            exit()
         else:
             self.nomeErro.SetLabel('Login ou Senha Invalido!')
         event.Skip()

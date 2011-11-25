@@ -1,5 +1,8 @@
 #Boa:Frame:frameGerDisciplina
 import sys
+import os
+import wx
+import academics
 
 lista = sys.path[0].split('\\')
 temp = ''
@@ -11,7 +14,6 @@ for i in range(len(lista)):
         temp += 'Modules'
 sys.path[0] = temp
 
-import wx
 from Disciplina import Disciplina
 from Professor import Professor
 from DadosPessoais import DadosPessoais
@@ -138,6 +140,8 @@ class frameGerDisciplina(wx.Frame):
         
     def DiscReturnMenu(self, event):
         self.Close(True)
+        academics.comeca()
+        exit()
         event.Skip()
 
     def OnDiscListBoxListboxDclick(self, event):
@@ -146,10 +150,12 @@ class frameGerDisciplina(wx.Frame):
     def carregarProf(self):
         prof = Professor()
         dados = DadosPessoais()
-        self.listProfId = prof.pegarId()
+        listProfId = prof.pegarId()
         self.listProf = []
-        for i in self.listProfId:
+        self.listProfId = []
+        for i in listProfId:
             prof.carregar(i)
+            self.listProfId += [i]
             dados.carregar(prof.getDadosId())
             self.listProf += [str(dados.getNome())]
     
@@ -209,10 +215,10 @@ class frameGerDisciplina(wx.Frame):
                 self.erroTextCtrl.SetValue('Insira um Nome para Editar a Disciplina!')
             else:
                 self.discEdit.setNome(self.nomeTextCtrl.GetValue())
-                if self.profChoice.GetSelection() == -1:
-                    None
+                select = self.profChoice.GetSelection()
+                self.erroTextCtrl.SetValue(str(select))
+                if (select == -1):None
                 else:
-                    select = self.profChoice.GetSelection()
                     self.discEdit.setProfessorId(self.listProfId[select])
                 self.discEdit.salvarEdit(self.discEdit.getId())
                 self.verificador = 0

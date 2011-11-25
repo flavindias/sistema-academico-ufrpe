@@ -1,6 +1,8 @@
 #Boa:Frame:Sistema_Academico
 
 import wx
+import AppGerDisciplina
+import Logon
 
 def create(parent):
     return Sistema_Academico(parent)
@@ -143,12 +145,17 @@ class Sistema_Academico(wx.Frame):
 
     def LogOffButton(self, event):
         self.Close(True)
+        Logon.main()
+        exit()
         event.Skip()
 
     def Gerenciar_DisciplinaButton(self, event):
         event.Skip()
 
     def OnGerenciar_DisciplinaButton(self, event):
+        self.Close(True)
+        AppGerDisciplina.iniciarDisc()
+        exit()
         event.Skip()
 
     def OnGerenciar_ProfessorButton(self, event):

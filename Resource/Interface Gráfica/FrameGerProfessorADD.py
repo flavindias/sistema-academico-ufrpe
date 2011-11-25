@@ -33,6 +33,7 @@ class FrameAddProfessor(wx.Frame):
               size=wx.Size(1322, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
+        self.SetBackgroundColour(wx.Colour(255, 255, 255))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEADDPROFESSORPANEL1, name='panel1',
               parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
@@ -163,7 +164,7 @@ class FrameAddProfessor(wx.Frame):
               size=wx.Size(575, 2), style=0)
         self.staticLine1.Center(wx.HORIZONTAL)
 
-        self.staticBitmap1 = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/logo pequeno.png',
+        self.staticBitmap1 = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logo pequeno.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORSTATICBITMAP1,
               name='staticBitmap1', parent=self.panel1, pos=wx.Point(518, 24),
               size=wx.Size(274, 112), style=0)

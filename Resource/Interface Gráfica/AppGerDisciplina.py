@@ -16,9 +16,9 @@ class BoaApp(wx.App):
         self.SetTopWindow(self.main)
         return True
 
-def main():
+def mainDisc():
     application = BoaApp(0)
     application.MainLoop()
 
-if __name__ == '__main__':
-    main()
+def iniciarDisc():
+    mainDisc()
