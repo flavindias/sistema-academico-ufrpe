@@ -102,10 +102,10 @@ class frameGerDisciplina(wx.Frame):
               name='staticBitmap1', parent=self, pos=wx.Point(456, 128),
               size=wx.Size(208, 312), style=0)
 
-        self.okBitmapButton1 = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/Emblem-Ok-48.PNG',
+        self.okBitmapButton1 = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERDISCIPLINAOKBITMAPBUTTON1,
               name=u'okBitmapButton1', parent=self, pos=wx.Point(600, 520),
-              size=wx.Size(64, 56), style=wx.BU_AUTODRAW)
+              size=wx.Size(50, 50), style=wx.BU_AUTODRAW)
         self.okBitmapButton1.Bind(wx.EVT_BUTTON, self.DiscReturnMenu,
               id=wxID_FRAMEGERDISCIPLINAOKBITMAPBUTTON1)
 
