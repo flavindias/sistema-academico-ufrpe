@@ -18,6 +18,7 @@ class Dialog1(wx.Dialog):
               style=wx.DEFAULT_DIALOG_STYLE,
               title=u'Excluir Professor - AcademicSys')
         self.SetClientSize(wx.Size(388, 216))
+        self.SetBackgroundColour(wx.Colour(255, 255, 255))
 
         self.textoAviso = wx.StaticText(id=wxID_DIALOG1TEXTOAVISO,
               label=u'Insira o CPF para excluir e clique em confirmar:',
