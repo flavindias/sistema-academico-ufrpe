@@ -145,6 +145,8 @@ class frameGerDisciplina(wx.Frame):
         event.Skip()
 
     def OnDiscListBoxListboxDclick(self, event):
+        self.verificador = 1
+        self.editDisc()
         event.Skip()
         
     def carregarProf(self):
@@ -216,7 +218,6 @@ class frameGerDisciplina(wx.Frame):
             else:
                 self.discEdit.setNome(self.nomeTextCtrl.GetValue())
                 select = self.profChoice.GetSelection()
-                self.erroTextCtrl.SetValue(str(select))
                 if (select == -1):None
                 else:
                     self.discEdit.setProfessorId(self.listProfId[select])
