@@ -32,7 +32,7 @@ class frameLogin(wx.Frame):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMELOGIN, name=u'frameLogin',
               parent=prnt, pos=wx.Point(574, 234), size=wx.Size(1322, 722),
-              style=wx.DEFAULT_FRAME_STYLE | wx.BORDER_RAISED,
+              style=wx.DEFAULT_FRAME_STYLE,
               title=u'AcademicSYS - Gerenciamento Escolar')
         self.SetClientSize(wx.Size(1310, 688))
         self.Center(wx.BOTH)

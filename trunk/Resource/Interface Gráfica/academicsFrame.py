@@ -27,7 +27,7 @@ class Sistema_Academico(wx.Frame):
         wx.Frame.__init__(self, id=wxID_SISTEMA_ACADEMICO,
               name=u'Sistema_Academico', parent=prnt, pos=wx.Point(40, 2),
               size=wx.Size(1326, 726),
-              style=wx.DEFAULT_FRAME_STYLE | wx.BORDER_RAISED,
+              style=wx.CAPTION,
               title=u'Sistema Academico')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
