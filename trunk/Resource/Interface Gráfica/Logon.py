@@ -2,14 +2,12 @@
 #Boa:App:BoaApp
 
 import wx
-import Frame1
-modules ={'Frame1': [1,
-            'Main frame of Application',
-            u'Frame1.py']}
+import FrameLogon
+modules ={u'FrameLogon': [1, 'Main frame of Application', u'FrameLogon.py']}
 
 class BoaApp(wx.App):
     def OnInit(self):
-        self.main = Frame1.create(None)
+        self.main = FrameLogon.create(None)
         self.main.Show()
         self.SetTopWindow(self.main)
         return True
