@@ -11,9 +11,9 @@ def create(parent):
  wxID_FRAMEADDPROFESSORBOTAOBUSCARCEP, wxID_FRAMEADDPROFESSORBOTAOBUSCARCPF, 
  wxID_FRAMEADDPROFESSORBOTAOEDITAR, wxID_FRAMEADDPROFESSORBOTAOEXCLUIR, 
  wxID_FRAMEADDPROFESSORBOTAOFEMININO, wxID_FRAMEADDPROFESSORBOTAOMASC, 
- wxID_FRAMEADDPROFESSORCAMPOBAIRRO, wxID_FRAMEADDPROFESSORCAMPOCELULAR, 
- wxID_FRAMEADDPROFESSORCAMPOCEP, wxID_FRAMEADDPROFESSORCAMPOCIDADE, 
- wxID_FRAMEADDPROFESSORCAMPOCOMPLEMENTO, 
+ wxID_FRAMEADDPROFESSORBOTAOVOLTAR, wxID_FRAMEADDPROFESSORCAMPOBAIRRO, 
+ wxID_FRAMEADDPROFESSORCAMPOCELULAR, wxID_FRAMEADDPROFESSORCAMPOCEP, 
+ wxID_FRAMEADDPROFESSORCAMPOCIDADE, wxID_FRAMEADDPROFESSORCAMPOCOMPLEMENTO, 
  wxID_FRAMEADDPROFESSORCAMPOCONFIRMESENHA, wxID_FRAMEADDPROFESSORCAMPOCPF, 
  wxID_FRAMEADDPROFESSORCAMPOENDERECO, wxID_FRAMEADDPROFESSORCAMPOFIXO, 
  wxID_FRAMEADDPROFESSORCAMPONASCIMENTO, wxID_FRAMEADDPROFESSORCAMPONOME, 
@@ -28,7 +28,7 @@ def create(parent):
  wxID_FRAMEADDPROFESSORNOMESENHA, wxID_FRAMEADDPROFESSORNOMESEXO, 
  wxID_FRAMEADDPROFESSORNOMETELEFONE, wxID_FRAMEADDPROFESSORNOMEUF, 
  wxID_FRAMEADDPROFESSORPANEL1, wxID_FRAMEADDPROFESSORSTATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(40)]
+] = [wx.NewId() for _init_ctrls in range(41)]
 
 class FrameAddProfessor(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -39,6 +39,7 @@ class FrameAddProfessor(wx.Frame):
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEADDPROFESSORPANEL1, name='panel1',
               parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
@@ -199,23 +200,28 @@ class FrameAddProfessor(wx.Frame):
         self.botaoADD = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOADD,
               label=u'Adicionar', name=u'botaoADD', parent=self.panel1,
-              pos=wx.Point(824, 544), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(827, 541), size=wx.Size(78, 24), style=0)
         self.botaoADD.Bind(wx.EVT_BUTTON, self.OnBotaoADDButton,
               id=wxID_FRAMEADDPROFESSORBOTAOADD)
 
         self.botaoEditar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o editar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOEDITAR,
               label=u'Editar      ', name=u'botaoEditar', parent=self.panel1,
-              pos=wx.Point(825, 574), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(828, 571), size=wx.Size(78, 24), style=0)
         self.botaoEditar.Bind(wx.EVT_BUTTON, self.OnBotaoEditarButton,
               id=wxID_FRAMEADDPROFESSORBOTAOEDITAR)
 
         self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOEXCLUIR,
               label=u'Excluir    ', name=u'botaoExcluir', parent=self.panel1,
-              pos=wx.Point(824, 603), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(827, 600), size=wx.Size(78, 24), style=0)
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnBotaoExcluirButton,
               id=wxID_FRAMEADDPROFESSORBOTAOEXCLUIR)
+
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOVOLTAR,
+              name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(368, 16),
+              size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
