@@ -246,7 +246,7 @@ class FrameGerAlunos(wx.Frame):
               label=u'Serie:', name=u'nomeSerie', parent=self.window1,
               pos=wx.Point(413, 154), size=wx.Size(29, 13), style=0)
 
-        self.logoGerAlunos = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/LogoAlunos.png',
+        self.logoGerAlunos = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/LogoAlunos.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSLOGOGERALUNOS,
               name=u'logoGerAlunos', parent=self.panel1, pos=wx.Point(413, 8),
               size=wx.Size(485, 110), style=0)
@@ -257,12 +257,12 @@ class FrameGerAlunos(wx.Frame):
               size=wx.Size(799, 2), style=0)
         self.staticLine1.Center(wx.HORIZONTAL)
 
-        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(253, 12),
               size=wx.Size(48, 48), style=wx.BU_AUTODRAW)
 
-        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/bot\xe3o adicionar.png',
+        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOSALVAR,
               label=u'       Salvar      ', name=u'botaoSalvar',
               parent=self.panel1, pos=wx.Point(1183, 632), size=wx.Size(104,
