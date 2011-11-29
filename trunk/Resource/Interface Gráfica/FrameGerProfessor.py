@@ -3,6 +3,22 @@
 import wx
 import wx.lib.buttons
 import wx.richtext
+import sys
+
+lista = sys.path[0].split('\\')
+temp = ''
+for i in range(len(lista)):
+    if i != len(lista)-1:
+        temp += lista[i]
+        temp += '\\'
+    else:
+        temp += 'Modules'
+sys.path[0] = temp
+
+from Login import Login
+from Endereco import Endereco
+from DadosPessoais import DadosPessoais
+from Professor import Professor
 
 def create(parent):
     return FrameAddProfessor(parent)
@@ -38,6 +54,7 @@ class FrameAddProfessor(wx.Frame):
               size=wx.Size(1322, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
+        self.Center(wx.BOTH)
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
@@ -233,6 +250,57 @@ class FrameAddProfessor(wx.Frame):
         event.Skip()
 
     def OnBotaoADDButton(self, event):
+        prof = Professor()
+        dados = DadosPessoais()
+        endereco = Endereco()
+        login = Login()
+        
+        prof.setDadosId(self.campoCPF.GetValue())
+        prof.setLoginId(self.campoCPF.GetValue())
+        login.setUsuario(self.campoCPF.GetValue())
+        dados.setDocumento(self.campoCPF.GetValue())
+        
+        dados.setDataNascId(self.campoNascimento.GetValue())
+        
+        dados.setNome(self.campoNome.GetValue())
+        
+        if self.botaoMasc.GetValue():
+            dados.setSexo('Masculino')
+        else:
+            dados.setSexo('Feminino')
+            
+        endereco.setCep(self.campoCep.GetValue())
+        
+        endereco.setRua(self.campoEndereco.GetValue())
+        
+        endereco.setBairro(self.campoBairro.GetValue())
+        
+        endereco.setCidade(self.campoCidade.GetValue())
+        
+        endereco.setNum(self.campoNumero.GetValue())
+        
+        endereco.setUf(self.campoUF.GetValue())
+        
+        endereco.setComp(self.campoComplemento.GetValue())
+        
+        dados.setFixo(self.campoFixo.GetValue())
+        
+        dados.setCelular(self.campoCelular.GetValue())
+        
+        login.setSenha(self.campoSenha.GetValue())
+        
+        login.setTipo('PRF')
+        
+        endereco.addNova()
+        
+        listaId = endereco.pegarId()
+        
+        dados.setEnderecoId(listaId[-1])
+        
+        dados.addNova()
+        prof.addNova()
+        login.addNova()
+        
         event.Skip()
 
     def OnBotaoEditarButton(self, event):
