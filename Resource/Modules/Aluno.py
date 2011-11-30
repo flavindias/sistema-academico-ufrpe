@@ -6,7 +6,7 @@ Created on 15/11/2011
 @author: Grupo Sistema Academico
 """
 
-import db
+from db import db
 
 class Aluno:
     """Classe de Gerenciamento de Aluno"""
@@ -16,7 +16,7 @@ class Aluno:
         if matricula is None:
             self.setMatricula(None) # INT
             self.setDadosId(None) # STR
-            self.setSituacaocao(None) # STR LEN(3) *apr = aprovado, rep = reprovado, ndf = nao definido, rec = recuperacao*
+            self.setSituacao(None) # STR LEN(3) *apr = aprovado, rep = reprovado, ndf = nao definido, rec = recuperacao*
             self.setLoginId(None) # STR
             self.setTurmaId(None) # INT
         else:
