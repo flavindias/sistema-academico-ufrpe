@@ -414,6 +414,7 @@ class db:
             return self.__lista
         except:
             return []
+        
 
     #***AREA DE COMUNICACAO COM A CLASSE TURMA***
     def carregarTurma(self, ide):
@@ -433,7 +434,8 @@ class db:
             else:
                 if ano != None:
                     self.cursor.execute("UPDATE TURMA SET ANO = %s WHERE ID = %s;" %(ano, ide))
-                if turno != None
+                if turno != None:
+                    passs
         except:
             return False
 
