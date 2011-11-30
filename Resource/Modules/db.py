@@ -494,7 +494,7 @@ class db:
             return []
 
 
-    #***AREA DE COMUNICACAO COM A CLASSE PROFESSOR***
+    #***AREA DE COMUNICACAO COM A CLASSE ALUNO***
     def carregarAluno(self, matricula):
         """Carrega uma Aluno a partir da ID"""
         try:
@@ -545,6 +545,63 @@ class db:
     def returnIdAluno(self):
         """Retorna uma lista de matriculas de alunos"""
         self.cursor.execute("SELECT MATRICULA FROM ALUNO;")
+        self.__result = self.cursor.fetchall()
+        self.__lista = []
+        try:
+            for self.__i in self.__result:
+                self.__lista.append(self.__i[0])
+            return self.__lista
+        except:
+            return []
+        
+
+    #***AREA DE COMUNICACAO COM A CLASSE RESPONSAVEL***
+    def carregarResponsavel(self, ide):
+        """Carrega uma Responsavel a partir da ID"""
+        try:
+            self.__id = int(ide)
+            self.cursor.execute("SELECT * FROM RESPONSAVEL WHERE ID = %s;" %(self.__id))
+            if self.cursor.rowcount == 1:
+                return self.cursor.fetchone()
+            else:
+                return None
+        except:
+            return None
+
+    def editarResponsavel(self, ide, dadosId = None, loginId = None):
+        """Salva um ajuste efetuado no responsavel a partir da ID"""
+        try:
+            if ide is None:
+                return False
+            else:
+                if dadosId != None:
+                    self.cursor.execute("UPDATE RESPONSAVEL SET DADOS = '%s' WHERE ID = %s;" %(dadosId, ide))
+                if loginId != None:
+                    self.cursor.execute("UPDATE RESPONSAVEL SET DADOS = '%s' WHERE ID = %s;" %(loginId, ide))
+                return True
+        except:
+            return False
+        
+    def addResponsavel(self, dadosId, loginId):
+        """Cria um novo responsavel no banco de dados"""
+        try:
+            self.cursor.execute("INSERT INTO RESPONSAVEL(ID, DADOS, LOGIN) VALUES (NULL, '%s', '%s');" %(dadosId, loginId))
+            return True
+        except:
+            return False
+
+    def delResponsavel(self, ide):
+        """Deleta um responsavel a partir da ID"""
+        try:
+            if ide is not None:
+                self.cursor.execute("DELETE FROM RESPONSAVEL WHERE ID = %s;" %(ide))
+                return True
+        except:
+            return False
+
+    def returnIdResponsavel(self):
+        """Retorna uma lista de ID de responsaveis"""
+        self.cursor.execute("SELECT ID FROM RESPONSAVEL;")
         self.__result = self.cursor.fetchall()
         self.__lista = []
         try:

@@ -38,21 +38,23 @@ class FrameGerAlunos(wx.Frame):
     def _init_coll_notebook1_Pages(self, parent):
         # generated method, don't edit
 
-        parent.AddPage(imageId=-1, page=self.window1, select=False,
+        parent.AddPage(imageId=-1, page=self.window1, select=True,
               text=u'Dados do Aluno')
-        parent.AddPage(imageId=-1, page=self.window2, select=True,
+        parent.AddPage(imageId=-1, page=self.window2, select=False,
               text=u'Dados do Resposavel')
 
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERALUNOS, name=u'FrameGerAlunos',
-              parent=prnt, pos=wx.Point(559, 219), size=wx.Size(1322, 722),
+              parent=prnt, pos=wx.Point(40, 2), size=wx.Size(1326, 726),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Gerenciar Alunos')
         self.SetClientSize(wx.Size(1310, 688))
+        self.Center(wx.BOTH)
 
         self.panel1 = wx.Panel(id=wxID_FRAMEGERALUNOSPANEL1, name='panel1',
               parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
               style=wx.TAB_TRAVERSAL)
+        self.panel1.Center(wx.BOTH)
 
         self.notebook1 = wx.Notebook(id=wxID_FRAMEGERALUNOSNOTEBOOK1,
               name='notebook1', parent=self.panel1, pos=wx.Point(16, 165),
@@ -162,6 +164,8 @@ class FrameGerAlunos(wx.Frame):
         self.botaoBuscarCEP = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCEP,
               label=u'Buscar', name=u'botaoBuscarCEP', parent=self.window2,
               pos=wx.Point(756, 151), size=wx.Size(56, 23), style=0)
+        self.botaoBuscarCEP.Bind(wx.EVT_BUTTON, self.OnBotaoBuscarCEPButton,
+              id=wxID_FRAMEGERALUNOSBOTAOBUSCARCEP)
 
         self.campoNascResponsavel = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONASCRESPONSAVEL,
               name=u'campoNascResponsavel', parent=self.window2,
@@ -248,12 +252,12 @@ class FrameGerAlunos(wx.Frame):
 
         self.logoGerAlunos = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/LogoAlunos.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSLOGOGERALUNOS,
-              name=u'logoGerAlunos', parent=self.panel1, pos=wx.Point(413, 8),
+              name=u'logoGerAlunos', parent=self.panel1, pos=wx.Point(412, 8),
               size=wx.Size(485, 110), style=0)
         self.logoGerAlunos.Center(wx.HORIZONTAL)
 
         self.staticLine1 = wx.StaticLine(id=wxID_FRAMEGERALUNOSSTATICLINE1,
-              name='staticLine1', parent=self.panel1, pos=wx.Point(256, 128),
+              name='staticLine1', parent=self.panel1, pos=wx.Point(255, 128),
               size=wx.Size(799, 2), style=0)
         self.staticLine1.Center(wx.HORIZONTAL)
 
@@ -272,3 +276,7 @@ class FrameGerAlunos(wx.Frame):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+
+    def OnBotaoBuscarCEPButton(self, event):
+        
+        event.Skip()

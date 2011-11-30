@@ -52,11 +52,11 @@ class Professor:
             return True
         
     def salvarEdit(self, ide):
-        """Salva ajuste de hora no BD"""
+        """Salva ajuste professor no BD"""
         return self.__DataBase.editarProfessor(ide, self.getDadosId(), self.getLoginId())
 
     def addNovo(self):
-        """Cria um novo endereco no BD"""
+        """Cria um novo professor no BD"""
         return self.__DataBase.addProfessor(self.getDadosId(), self.getLoginId())
 
     def delete(self, ide):
