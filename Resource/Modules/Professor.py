@@ -66,3 +66,7 @@ class Professor:
     def pegarId(self):
         """Retorna uma lista com todas as IDs de professores"""
         return self.__DataBase.returnIdProfessor()
+
+    def idPorCpf(self, cpf):
+        """Retorna a id do professor a partir do CPF"""
+        return self.__DataBase.getProfByCpf(cpf)
