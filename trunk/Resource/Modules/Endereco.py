@@ -1,8 +1,9 @@
 '''
 Created on 15/11/2011
 
-@author: Grupo Sistema Academico
+author: Grupo Sistema Academico
 '''
+
 
 from db import db
 import urllib
@@ -25,7 +26,7 @@ class Endereco:
         else:
             self.carregar(ide)
             self.setId(ide)
-            
+
     def getId(self):
         """Retorna o ID do endereco"""
         return self.__id
@@ -55,10 +56,10 @@ class Endereco:
         self.__bairro = novoBairro
 
     def getCidade(self):
-        """Retorna a cidade"""
+        """Retorna a Cidade"""
         return self.__cidade
     def setCidade(self, novoCidade):
-        """Ajusta a vidade"""
+        """Ajusta a Cidade"""
         self.__cidade = novoCidade
 
     def getUf(self):
