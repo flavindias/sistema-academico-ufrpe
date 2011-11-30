@@ -271,6 +271,15 @@ class db:
         except:
             return []
 
+    def getProfByCpf(self, cpf):
+        """Retorna o Id do professor pelo CPF"""
+        self.cursor.execute("SELECT ID FROM PROFESSOR WHERE DADOS = '%s';")
+        try:
+            self.__result = self.cursor.fetchone()
+            return self.__result
+        except:
+            return None
+
 
     #***AREA DE COMUNICACAO COM A CLASSE DADOSPESSOAIS***
     def carregarDadosPessoais(self, documento):
@@ -395,6 +404,62 @@ class db:
             return False
 
     def returnIdDisciplina(self):
+        """Retorna todas as ID de professores em lista"""
+        self.cursor.execute("SELECT ID FROM DISCIPLINA ORDER BY NOME;")
+        self.__result = self.cursor.fetchall()
+        self.__lista = []
+        try:
+            for self.__i in self.__result:
+                self.__lista.append(self.__i[0])
+            return self.__lista
+        except:
+            return []
+
+    #***AREA DE COMUNICACAO COM A CLASSE TURMA***
+    def carregarTurma(self, ide):
+        """Carrega uma turma a partir da ID"""
+        self.__id = str(ide)
+        self.cursor.execute("SELECT * FROM TURMA WHERE ID = %s;", (self.__id))
+        if self.cursor.rowcount == 1:
+            return self.cursor.fetchone()
+        else:
+            return None
+
+    def editarTurma(self, ide, ano = None, turno = None, disc = []):
+        """Salva um ajuste efetuado na Turma"""
+        try:
+            if ide == None:
+                return False
+            else:
+                if ano != None:
+                    self.cursor.execute("UPDATE TURMA SET ANO = %s WHERE ID = %s;" %(ano, ide))
+                if turno != None
+        except:
+            return False
+
+    def addTurma(self, nome, professorId):
+        """Cria uma nova disciplina"""
+        try:
+            if nome is not None and professorId is not None:
+                self.cursor.execute("INSERT INTO DISCIPLINA(ID, NOME, PROFESSOR) VALUES (NULL, '%s', %s);" %(nome, professorId))
+                return True
+            else:
+                return False
+        except:
+            return False
+
+    def delTurma(self, ide):
+        """Deleta uma disciplina do banco de dados"""
+        try:
+            if ide is not None:
+                self.cursor.execute("DELETE FROM DISCIPLINA WHERE ID = %s;" %(ide))
+                return True
+            else:
+                return False
+        except:
+            return False
+
+    def returnIdTurma(self):
         """Retorna todas as ID de professores em lista"""
         self.cursor.execute("SELECT ID FROM DISCIPLINA ORDER BY NOME;")
         self.__result = self.cursor.fetchall()
