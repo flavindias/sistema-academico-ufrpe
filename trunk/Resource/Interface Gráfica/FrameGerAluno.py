@@ -51,7 +51,7 @@ class FrameGerAlunos(wx.Frame):
         self.SetClientSize(wx.Size(1310, 688))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEGERALUNOSPANEL1, name='panel1',
-              parent=self, pos=wx.Point(0, 0), size=wx.Size(1312, 688),
+              parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
               style=wx.TAB_TRAVERSAL)
 
         self.notebook1 = wx.Notebook(id=wxID_FRAMEGERALUNOSNOTEBOOK1,
@@ -63,8 +63,8 @@ class FrameGerAlunos(wx.Frame):
               406), style=0)
 
         self.campoTelefone = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOTELEFONE,
-              name=u'campoTelefone', parent=self.window2, pos=wx.Point(441,
-              320), size=wx.Size(152, 21), style=0, value=u'')
+              name=u'campoTelefone', parent=self.window2, pos=wx.Point(424,
+              320), size=wx.Size(176, 21), style=0, value=u'')
 
         self.campoNomeResponsavel = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONOMERESPONSAVEL,
               name=u'campoNomeResponsavel', parent=self.window2,
@@ -83,12 +83,12 @@ class FrameGerAlunos(wx.Frame):
               pos=wx.Point(412, 72), size=wx.Size(24, 13), style=0)
 
         self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
-              name=u'campoComplemento', parent=self.window2, pos=wx.Point(428,
-              262), size=wx.Size(240, 21), style=0, value=u'')
+              name=u'campoComplemento', parent=self.window2, pos=wx.Point(416,
+              262), size=wx.Size(264, 21), style=0, value=u'')
 
         self.nomeEndereco = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEENDERECO,
               label=u'Endere\xe7o:', name=u'nomeEndereco', parent=self.window2,
-              pos=wx.Point(418, 182), size=wx.Size(50, 13), style=0)
+              pos=wx.Point(413, 182), size=wx.Size(50, 13), style=0)
 
         self.campoNumero = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONUMERO,
               name=u'campoNumero', parent=self.window2, pos=wx.Point(713, 264),
@@ -96,7 +96,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeComplemento = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECOMPLEMENTO,
               label=u'Complemento:', name=u'nomeComplemento',
-              parent=self.window2, pos=wx.Point(421, 236), size=wx.Size(70, 13),
+              parent=self.window2, pos=wx.Point(414, 236), size=wx.Size(70, 13),
               style=0)
 
         self.campoCelular = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCELULAR,
@@ -104,12 +104,12 @@ class FrameGerAlunos(wx.Frame):
               size=wx.Size(168, 21), style=0, value=u'')
 
         self.campoEndereco = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOENDERECO,
-              name=u'campoEndereco', parent=self.window2, pos=wx.Point(423,
-              203), size=wx.Size(392, 21), style=0, value=u'')
+              name=u'campoEndereco', parent=self.window2, pos=wx.Point(416,
+              203), size=wx.Size(399, 21), style=0, value=u'')
 
         self.campoCPFResponsavel = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCPFRESPONSAVEL,
               name=u'campoCPFResponsavel', parent=self.window2,
-              pos=wx.Point(417, 96), size=wx.Size(167, 21), style=0, value=u'')
+              pos=wx.Point(413, 96), size=wx.Size(167, 21), style=0, value=u'')
 
         self.nomeResponsavel = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMERESPONSAVEL,
               label=u'Nome:', name=u'nomeResponsavel', parent=self.window2,
@@ -126,15 +126,15 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeTelefone = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMETELEFONE,
               label=u'Telefone:', name=u'nomeTelefone', parent=self.window2,
-              pos=wx.Point(425, 299), size=wx.Size(47, 13), style=0)
+              pos=wx.Point(419, 299), size=wx.Size(47, 13), style=0)
 
         self.staticText5 = wx.StaticText(id=wxID_FRAMEGERALUNOSSTATICTEXT5,
               label=u'Sexo:', name='staticText5', parent=self.window2,
-              pos=wx.Point(414, 131), size=wx.Size(29, 13), style=0)
+              pos=wx.Point(411, 131), size=wx.Size(29, 13), style=0)
 
         self.staticText3 = wx.StaticText(id=wxID_FRAMEGERALUNOSSTATICTEXT3,
               label=u'Senha:', name='staticText3', parent=self.window2,
-              pos=wx.Point(423, 350), size=wx.Size(35, 13), style=0)
+              pos=wx.Point(418, 350), size=wx.Size(35, 13), style=0)
 
         self.staticText1 = wx.StaticText(id=wxID_FRAMEGERALUNOSSTATICTEXT1,
               label=u'Data de Nascimento:', name='staticText1',
@@ -143,7 +143,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.radioButton2 = wx.RadioButton(id=wxID_FRAMEGERALUNOSRADIOBUTTON2,
               label=u'Masculino', name='radioButton2', parent=self.window2,
-              pos=wx.Point(427, 153), size=wx.Size(81, 13), style=0)
+              pos=wx.Point(419, 153), size=wx.Size(81, 13), style=0)
         self.radioButton2.SetValue(True)
 
         self.radioButton1 = wx.RadioButton(id=wxID_FRAMEGERALUNOSRADIOBUTTON1,
@@ -169,12 +169,12 @@ class FrameGerAlunos(wx.Frame):
               value=u'')
 
         self.textCtrl3 = wx.TextCtrl(id=wxID_FRAMEGERALUNOSTEXTCTRL3,
-              name='textCtrl3', parent=self.window2, pos=wx.Point(441, 371),
-              size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
+              name='textCtrl3', parent=self.window2, pos=wx.Point(432, 371),
+              size=wx.Size(169, 21), style=wx.TE_PASSWORD, value=u'')
 
         self.textCtrl2 = wx.TextCtrl(id=wxID_FRAMEGERALUNOSTEXTCTRL2,
-              name='textCtrl2', parent=self.window2, pos=wx.Point(657, 372),
-              size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
+              name='textCtrl2', parent=self.window2, pos=wx.Point(648, 372),
+              size=wx.Size(169, 21), style=wx.TE_PASSWORD, value=u'')
 
         self.window1 = wx.Window(id=wxID_FRAMEGERALUNOSWINDOW1, name='window1',
               parent=self.notebook1, pos=wx.Point(0, 0), size=wx.Size(1264,
