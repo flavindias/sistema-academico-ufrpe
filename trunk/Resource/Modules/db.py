@@ -492,3 +492,64 @@ class db:
             return self.__lista
         except:
             return []
+
+
+    #***AREA DE COMUNICACAO COM A CLASSE PROFESSOR***
+    def carregarAluno(self, matricula):
+        """Carrega uma Aluno a partir da ID"""
+        try:
+            self.__id = int(matricula)
+            self.cursor.execute("SELECT * FROM ALUNO WHERE MATRICULA = %s;" %(self.__id))
+            if self.cursor.rowcount == 1:
+                return self.cursor.fetchone()
+            else:
+                return None
+        except:
+            return None
+
+    def editarAluno(self, matricula, dados, situacao, login, turma):
+        """Salva um ajuste efetuado no aluno a partir da ID"""
+        try:
+            if matricula is None:
+                return False
+            else:
+                if dados != None:
+                    self.cursor.execute("UPDATE ALUNO SET DADOS = '%s' WHERE MATRICULA = %s;" %(dados, matricula))
+                if situacao != None:
+                    self.cursor.execute("UPDATE ALUNO SET SITUACAO = '%s' WHERE MATRICULA = %s;" %(situacao, matricula))
+                if login != None:
+                    self.cursor.execute("UPDATE ALUNO SET LOGIN = '%s' WHERE MATRICULA = %s;" %(login, matricula))
+                if turma != None:
+                    self.cursor.execute("UPDATE ALUNO SET TURMA = %s WHERE MATRICULA = %s;" %(turma, matricula))
+                return True
+        except:
+            return False
+        
+    def addAluno(self, dados, situacao, login, turma):
+        """Cria um novo aluno no banco de dados"""
+        try:
+            self.cursor.execute("INSERT INTO ALUNO(MATRICULA, DADOS, SITUACAO, LOGIN, TURMA) VALUES (NULL, '%s', '%s', '%s', %s);" %(dados, situacao, login, turma))
+            return True
+        except:
+            return False
+
+    def delAluno(self, matricula):
+        """Deleta um professor a partir da ID"""
+        try:
+            if matricula != None:
+                self.cursor.execute("DELETE FROM ALUNO WHERE MATRICULA = %s;" %(matricula))
+                return True
+        except:
+            return False
+
+    def returnIdAluno(self):
+        """Retorna uma lista de matriculas de alunos"""
+        self.cursor.execute("SELECT MATRICULA FROM ALUNO;")
+        self.__result = self.cursor.fetchall()
+        self.__lista = []
+        try:
+            for self.__i in self.__result:
+                self.__lista.append(self.__i[0])
+            return self.__lista
+        except:
+            return []
