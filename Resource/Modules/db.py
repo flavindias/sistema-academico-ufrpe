@@ -13,7 +13,7 @@ class db:
         """Carrega uma data a partir da ID"""
         try:
             self.__id = str(ide)
-            self.cursor.execute("SELECT * FROM DATAS WHERE ID = %s;", (self.__id))
+            self.cursor.execute("SELECT * FROM DATAS WHERE ID = %s;" %(self.__id))
             if self.cursor.rowcount == 1:
                 return self.cursor.fetchone()
             else:
@@ -78,7 +78,7 @@ class db:
     def carregarLogin(self, loginId):
         """Carrega uma usuario a partir do Usuario"""
         try:
-            self.cursor.execute("SELECT * FROM LOGIN WHERE USUARIO = %s;", (loginId))
+            self.cursor.execute("SELECT * FROM LOGIN WHERE USUARIO = %s;" %(loginId))
             if self.cursor.rowcount == 1:
                 return self.cursor.fetchone()
             else:
@@ -149,7 +149,7 @@ class db:
         """Carrega uma endereco a partir da ID"""
         try:
             self.__id = int(ide)
-            self.cursor.execute("SELECT * FROM ENDERECO WHERE ID = %s;", (self.__id))
+            self.cursor.execute("SELECT * FROM ENDERECO WHERE ID = %s;" %(self.__id))
             if self.cursor.rowcount == 1:
                 return self.cursor.fetchone()
             else:
@@ -220,7 +220,7 @@ class db:
         """Carrega uma Professor a partir da ID"""
         try:
             self.__id = int(ide)
-            self.cursor.execute("SELECT * FROM PROFESSOR WHERE ID = %s;", (self.__id))
+            self.cursor.execute("SELECT * FROM PROFESSOR WHERE ID = %s;" %(self.__id))
             if self.cursor.rowcount == 1:
                 return self.cursor.fetchone()
             else:
@@ -273,10 +273,10 @@ class db:
 
     def getProfByCpf(self, cpf):
         """Retorna o Id do professor pelo CPF"""
-        self.cursor.execute("SELECT ID FROM PROFESSOR WHERE DADOS = '%s';")
         try:
+            self.cursor.execute("SELECT ID FROM PROFESSOR WHERE DADOS = '%s';" %(cpf))
             self.__result = self.cursor.fetchone()
-            return self.__result
+            return self.__result[0]
         except:
             return None
 
@@ -285,7 +285,7 @@ class db:
     def carregarDadosPessoais(self, documento):
         """Carrega uma DadoPessoais a partir do documento"""
         self.__id = int(documento)
-        self.cursor.execute("SELECT * FROM DADOS_PESSOAIS WHERE DOCUMENTO = %s;", (self.__id))
+        self.cursor.execute("SELECT * FROM DADOS_PESSOAIS WHERE DOCUMENTO = %s;" %(self.__id))
         if self.cursor.rowcount == 1:
             return self.cursor.fetchone()
         else:
@@ -361,7 +361,7 @@ class db:
     def carregarDisciplina(self, ide):
         """Carrega uma disciplina a partir da ID"""
         self.__id = str(ide)
-        self.cursor.execute("SELECT * FROM DISCIPLINA WHERE ID = %s;", (self.__id))
+        self.cursor.execute("SELECT * FROM DISCIPLINA WHERE ID = %s;" %(self.__id))
         if self.cursor.rowcount == 1:
             return self.cursor.fetchone()
         else:
@@ -420,7 +420,7 @@ class db:
     def carregarTurma(self, ide):
         """Carrega uma turma a partir da ID"""
         self.__id = str(ide)
-        self.cursor.execute("SELECT * FROM TURMA WHERE ID = %s;", (self.__id))
+        self.cursor.execute("SELECT * FROM TURMA WHERE ID = %s;" %(self.__id))
         if self.cursor.rowcount == 1:
             return self.cursor.fetchone()
         else:
@@ -435,26 +435,46 @@ class db:
                 if ano != None:
                     self.cursor.execute("UPDATE TURMA SET ANO = %s WHERE ID = %s;" %(ano, ide))
                 if turno != None:
-                    passs
+                    self.cursor.execute("UPDATE TURMA SET TURNO = '%s' WHERE ID = %s;" %(turno, ide))
+                if disc != [] and len(disc)>=5:
+                    self.cursor.execute("UPDATE TURMA SET DISC1 = %s WHERE ID = %s;" %(disc[0], ide))
+                    self.cursor.execute("UPDATE TURMA SET DISC2 = %s WHERE ID = %s;" %(disc[1], ide))
+                    self.cursor.execute("UPDATE TURMA SET DISC3 = %s WHERE ID = %s;" %(disc[2], ide))
+                    self.cursor.execute("UPDATE TURMA SET DISC4 = %s WHERE ID = %s;" %(disc[3], ide))
+                    self.cursor.execute("UPDATE TURMA SET DISC5 = %s WHERE ID = %s;" %(disc[4], ide))
+                    if len(disc)>=6:
+                        self.cursor.execute("UPDATE TURMA SET DISC6 = %s WHERE ID = %s;" %(disc[5], ide))
+                    if len(disc)==7:
+                        self.cursor.execute("UPDATE TURMA SET DISC7 = %s WHERE ID = %s;" %(disc[6], ide))
+                return True
         except:
             return False
 
-    def addTurma(self, nome, professorId):
-        """Cria uma nova disciplina"""
+    def addTurma(self, ano, turno, disc):
+        """Cria uma nova turma"""
         try:
-            if nome is not None and professorId is not None:
-                self.cursor.execute("INSERT INTO DISCIPLINA(ID, NOME, PROFESSOR) VALUES (NULL, '%s', %s);" %(nome, professorId))
-                return True
+            if ano != None and turno != None and disc != []:
+                if len(disc) == 5:
+                    self.cursor.execute("INSERT INTO DISCIPLINA(ID, ANO, TURNO, DISC1, DISC2, DISC3, DISC4, DISC5, DISC6, DISC7) VALUES (NULL, %s, '%s',  %s, %s, %s, %s, %s, %s, %s,);" %(ano, turno, disc[0], disc[1], disc[2], disc[3], disc[4], NULL, NULL))
+                    return True
+                elif len(disc) == 6:
+                    self.cursor.execute("INSERT INTO DISCIPLINA(ID, ANO, TURNO, DISC1, DISC2, DISC3, DISC4, DISC5, DISC6, DISC7) VALUES (NULL, %s, '%s',  %s, %s, %s, %s, %s, %s, %s,);" %(ano, turno, disc[0], disc[1], disc[2], disc[3], disc[4], disc[5], NULL))
+                    return True
+                elif len(disc) == 7:
+                    self.cursor.execute("INSERT INTO DISCIPLINA(ID, ANO, TURNO, DISC1, DISC2, DISC3, DISC4, DISC5, DISC6, DISC7) VALUES (NULL, %s, '%s',  %s, %s, %s, %s, %s, %s, %s,);" %(ano, turno, disc[0], disc[1], disc[2], disc[3], disc[4], disc[5], disc[6]))
+                    return True
+                else:
+                    return False
             else:
                 return False
         except:
             return False
 
     def delTurma(self, ide):
-        """Deleta uma disciplina do banco de dados"""
+        """Deleta uma Turma do banco de dados"""
         try:
-            if ide is not None:
-                self.cursor.execute("DELETE FROM DISCIPLINA WHERE ID = %s;" %(ide))
+            if ide != None:
+                self.cursor.execute("DELETE FROM TURMA WHERE ID = %s;" %(ide))
                 return True
             else:
                 return False
@@ -462,8 +482,8 @@ class db:
             return False
 
     def returnIdTurma(self):
-        """Retorna todas as ID de professores em lista"""
-        self.cursor.execute("SELECT ID FROM DISCIPLINA ORDER BY NOME;")
+        """Retorna todas as ID de turmas em lista"""
+        self.cursor.execute("SELECT ID FROM TURMA;")
         self.__result = self.cursor.fetchall()
         self.__lista = []
         try:
