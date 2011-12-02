@@ -41,7 +41,7 @@ class frameLogin(wx.Frame):
 
         self.telaLogin = wx.Window(id=wxID_FRAMELOGINTELALOGIN,
               name=u'telaLogin', parent=self, pos=wx.Point(-28, -9),
-              size=wx.Size(1366, 706), style=0)
+              size=wx.Size(1366, 706), style=wx.TAB_TRAVERSAL)
         self.telaLogin.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.telaLogin.Center(wx.BOTH)
         self.telaLogin.SetThemeEnabled(False)
@@ -60,20 +60,18 @@ class frameLogin(wx.Frame):
               label=u'Login: ', name=u'nomeLogin', parent=self.telaLogin,
               pos=wx.Point(497, 412), size=wx.Size(33, 13), style=0)
 
+        self.nomeSenha = wx.StaticText(id=wxID_FRAMELOGINNOMESENHA,
+              label=u'Senha:', name=u'nomeSenha', parent=self.telaLogin,
+              pos=wx.Point(496, 483), size=wx.Size(35, 13), style=0)
+
         self.digiteLogin = wx.TextCtrl(id=wxID_FRAMELOGINDIGITELOGIN,
               name=u'digiteLogin', parent=self.telaLogin, pos=wx.Point(533,
               440), size=wx.Size(299, 24), style=0, value=u'')
         self.digiteLogin.Center(wx.HORIZONTAL)
 
-        self.nomeSenha = wx.StaticText(id=wxID_FRAMELOGINNOMESENHA,
-              label=u'Senha:', name=u'nomeSenha', parent=self.telaLogin,
-              pos=wx.Point(496, 483), size=wx.Size(35, 13), style=0)
-
-        self.botaoLogar = wx.Button(id=wxID_FRAMELOGINBOTAOLOGAR,
-              label=u'Acessar', name=u'botaoLogar', parent=self.telaLogin,
-              pos=wx.Point(782, 546), size=wx.Size(75, 23), style=0)
-        self.botaoLogar.Bind(wx.EVT_BUTTON, self.OnBotaoLogarButton,
-              id=wxID_FRAMELOGINBOTAOLOGAR)
+        self.digiteSenha = wx.TextCtrl(id=wxID_FRAMELOGINDIGITESENHA,
+              name=u'digiteSenha', parent=self.telaLogin, pos=wx.Point(535,
+              512), size=wx.Size(299, 24), style=wx.TE_PASSWORD, value=u'')
 
         self.linhaDivisoria = wx.StaticLine(id=wxID_FRAMELOGINLINHADIVISORIA,
               name=u'linhaDivisoria', parent=self.telaLogin, pos=wx.Point(371,
@@ -86,16 +84,18 @@ class frameLogin(wx.Frame):
               278), style=0)
         self.logoSys.Center(wx.HORIZONTAL)
 
+        self.botaoLogar = wx.Button(id=wxID_FRAMELOGINBOTAOLOGAR,
+              label=u'Acessar', name=u'botaoLogar', parent=self.telaLogin,
+              pos=wx.Point(782, 546), size=wx.Size(75, 23), style=0)
+        self.botaoLogar.Bind(wx.EVT_BUTTON, self.OnBotaoLogarButton,
+              id=wxID_FRAMELOGINBOTAOLOGAR)
+
         self.nomeErro = wx.StaticText(id=wxID_FRAMELOGINNOMEERRO, label=u'',
               name=u'nomeErro', parent=self.telaLogin, pos=wx.Point(599, 416),
               size=wx.Size(168, 13),
               style=wx.ST_NO_AUTORESIZE | wx.ALIGN_CENTRE)
         self.nomeErro.SetAutoLayout(True)
         self.nomeErro.Center(wx.HORIZONTAL)
-
-        self.digiteSenha = wx.TextCtrl(id=wxID_FRAMELOGINDIGITESENHA,
-              name=u'digiteSenha', parent=self.telaLogin, pos=wx.Point(535,
-              512), size=wx.Size(299, 24), style=wx.TE_PASSWORD, value=u'')
 
     def __init__(self, parent):
         self._init_ctrls(parent)
