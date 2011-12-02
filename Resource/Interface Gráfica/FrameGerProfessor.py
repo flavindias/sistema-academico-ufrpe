@@ -60,7 +60,7 @@ class FrameAddProfessor(wx.Frame):
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEADDPROFESSORPANEL1, name='panel1',
-              parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
+              parent=self, pos=wx.Point(-28, -9), size=wx.Size(1366, 706),
               style=wx.TAB_TRAVERSAL)
 
         self.staticLine1 = wx.StaticLine(id=wxID_FRAMEADDPROFESSORSTATICLINE1,
