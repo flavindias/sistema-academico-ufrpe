@@ -19,6 +19,7 @@ from Login import Login
 from Endereco import Endereco
 from DadosPessoais import DadosPessoais
 from Professor import Professor
+from Data import Data
 
 def create(parent):
     return FrameAddProfessor(parent)
@@ -244,9 +245,62 @@ class FrameAddProfessor(wx.Frame):
         self._init_ctrls(parent)
 
     def OnBotaoBuscarCPFButton(self, event):
+        prof = Professor()
+        dados = DadosPessoais()
+        endereco = Endereco()
+        login = Login()
+        data = Data()
+        
+        if self.campoCPF.GetValue() == '':
+            return 0
+        elif prof.idPorCpf(self.campoCPF.GetValue()) == False:
+            return 0
+        else:
+            prof.carregar(prof.idPorCpf(self.campoCPF.GetValue()))
+        
+        dados.carregar(int(prof.getDadosId()))
+        login.carregar(int(prof.getLoginId()))
+        endereco.carregar(dados.getEnderecoId())
+        if dados.getDataNascId() != None:
+            data.carregar(dados.getDataNascId())
+            self.campoNascimento.SetValue(str(data.getDia()) + '/' + str(data.getMes()) + '/' + str(data.getAno()))
+        self.campoNome.SetValue(dados.getNome())
+        
+        if dados.getSexo == 'Feminino':
+            self.botaoFeminino.SetValue(True)
+        else:
+            self.botaoMasc.SetValue(True)
+        self.campoCep.SetValue(endereco.getCep())
+        self.campoEndereco.SetValue(endereco.getRua())
+        self.campoBairro.SetValue(endereco.getBairro())
+        self.campoCidade.SetValue(endereco.getCidade())
+        self.campoNumero.SetValue(str(endereco.getNum()))
+        self.campoUF.SetValue(endereco.getUf())
+        if endereco.getComp() == None:
+            None
+        else:
+            self.campoComplemento.SetValue(endereco.getComp())
+        if dados.getFixo() == None:
+            None
+        else:
+            self.campoFixo.SetValue(str(dados.getFixo()))
+        if dados.getCelular() == None:
+            None
+        else:
+            self.campoCelular.SetValue(str(dados.getCelular()))
+        
+        self.zerar()
         event.Skip()
 
     def OnBotaoBuscarCEPButton(self, event):
+        endereco = Endereco()
+        if endereco.getEnderecoNet(self.campoCep.GetValue()):
+            if endereco.getRua() != None and endereco.getBairro() != None:
+                self.campoEndereco.SetValue(endereco.getRua())
+                self.campoBairro.SetValue(endereco.getBairro())
+            self.campoCidade.SetValue(endereco.getCidade())
+            self.campoUF.SetValue(endereco.getUf())
+        
         event.Skip()
 
     def OnBotaoADDButton(self, event):
@@ -254,15 +308,30 @@ class FrameAddProfessor(wx.Frame):
         dados = DadosPessoais()
         endereco = Endereco()
         login = Login()
+        data = Data()
         
-        prof.setDadosId(self.campoCPF.GetValue())
-        prof.setLoginId(self.campoCPF.GetValue())
-        login.setUsuario(self.campoCPF.GetValue())
-        dados.setDocumento(self.campoCPF.GetValue())
+        if self.campoCPF.GetValue() == '' or len(self.campoCPF.GetValue()) != 11:
+            return 0
+        else:
+            prof.setDadosId(str(self.campoCPF.GetValue()))
+            prof.setLoginId(str(self.campoCPF.GetValue()))
+            login.setUsuario(str(self.campoCPF.GetValue()))
+            dados.setDocumento(str(self.campoCPF.GetValue()))
         
-        dados.setDataNascId(self.campoNascimento.GetValue())
-        
-        dados.setNome(self.campoNome.GetValue())
+        if  self.campoNascimento.GetValue() == '':
+            data.setDia(0)
+            data.setMes(0)
+            data.setAno(0)
+        else:
+            listaData = self.campoNascimento.GetValue().split('/')
+            data.setDia(int(listaData[0]))
+            data.setMes(int(listaData[1]))
+            data.setAno(int(listaData[2]))
+            
+        if self.campoNome.GetValue() == '':
+            return 0
+        else:
+            dados.setNome(self.campoNome.GetValue())
         
         if self.botaoMasc.GetValue():
             dados.setSexo('Masculino')
@@ -277,36 +346,78 @@ class FrameAddProfessor(wx.Frame):
         
         endereco.setCidade(self.campoCidade.GetValue())
         
-        endereco.setNum(self.campoNumero.GetValue())
+        endereco.setNum(int(self.campoNumero.GetValue()))
         
         endereco.setUf(self.campoUF.GetValue())
         
         endereco.setComp(self.campoComplemento.GetValue())
         
-        dados.setFixo(self.campoFixo.GetValue())
+        if self.campoFixo.GetValue() == '':
+            return 0
+        else:
+            dados.setFixo(int(self.campoFixo.GetValue()))
         
-        dados.setCelular(self.campoCelular.GetValue())
+        if self.campoCelular.GetValue() == '':
+            return 0
+        else:
+            dados.setCelular(int(self.campoCelular.GetValue()))
         
-        login.setSenha(self.campoSenha.GetValue())
+        if self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
+            return 0
+        else:
+            login.setSenha(self.campoSenha.GetValue())
         
         login.setTipo('PRF')
-        
+
+        prof.addNovo()
         endereco.addNova()
-        
         listaId = endereco.pegarId()
-        
         dados.setEnderecoId(listaId[-1])
-        
+        data.addNova()
+        dados.setDataNascId(data.PegarIds()[-1])
         dados.addNova()
-        prof.addNova()
         login.addNova()
+        self.zerar()
         
         event.Skip()
 
     def OnBotaoEditarButton(self, event):
+        
         event.Skip()
 
     def OnBotaoExcluirButton(self, event):
+        prof = Professor()
+        dados = DadosPessoais()
+        endereco = Endereco()
+        login = Login()
+        data = Data()
+        if self.campoCPF.GetValue() != '':
+            if prof.carregar(prof.idPorCpf(self.campoCPF.GetValue())):
+                dados.carregar(str(prof.getDadosId()))
+                data.deletar(dados.getDataNascId())
+                login.delete(str(prof.getLoginId()))
+                endereco.delete(dados.getEnderecoId())
+                dados.delete(prof.getDadosId())
+                prof.delete(self.campoCPF.GetValue())
+                self.zerar()
+            else:
+                print ''
+        else:
+            print ''
+        
         event.Skip()
-
-
+    def zerar(self):
+        self.campoCPF.SetValue('')
+        self.campoNascimento.SetValue('')
+        self.campoNome.SetValue('')
+        self.campoCep.SetValue('')
+        self.campoEndereco.SetValue('')
+        self.campoBairro.SetValue('')
+        self.campoCidade.SetValue('')
+        self.campoNumero.SetValue('')
+        self.campoUF.SetValue('')
+        self.campoComplemento.SetValue('')
+        self.campoFixo.SetValue('')
+        self.campoCelular.SetValue('')
+        self.campoSenha.SetValue('')
+        self.campoConfirmeSenha.SetValue('')
