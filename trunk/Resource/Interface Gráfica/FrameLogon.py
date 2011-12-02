@@ -50,7 +50,7 @@ class frameLogin(wx.Frame):
         self.espacoLogin = wx.StaticBox(id=wxID_FRAMELOGINESPACOLOGIN,
               label=u'Area de Login', name=u'espacoLogin',
               parent=self.telaLogin, pos=wx.Point(468, 380), size=wx.Size(430,
-              208), style=0)
+              208), style=wx.TAB_TRAVERSAL)
         self.espacoLogin.Center(wx.HORIZONTAL)
         self.espacoLogin.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.espacoLogin.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
