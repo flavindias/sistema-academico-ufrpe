@@ -142,7 +142,11 @@ class Professor:
 
     def listaDb(self):
         """Retorna uma lista com todos os Professores do DB"""
-        return DataBase.getListDbProfessor()
+        lista = DataBase.getListDbProfessor()
+        if lista == None:
+            return ()
+        else:
+            return lista
 
     def add(self, cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone=None, celular=None):
         """Adiciona um professor no BD"""

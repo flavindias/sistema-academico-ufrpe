@@ -110,7 +110,11 @@ class Turma:
 
     def listaDb(self):
         """Retorna uma lista com todas as Turmas cadastradas no BD"""
-        return DataBase.getListDbTurma()
+        lista = DataBase.getListDbTurma()
+        if lista == None:
+            return ()
+        else:
+            return lista
 
     def listaDbAluno(self, turma):
         """Retorna uma lista com todos os alunos de uma tuma do BD"""

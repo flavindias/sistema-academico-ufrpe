@@ -134,7 +134,8 @@ class frameGerDisciplina(wx.Frame):
 
     def __init__(self, parent):
         self.verificador = 0
-        self.carregarProf()
+        #self.carregarProf()
+        self.listProf= []
         self._init_ctrls(parent)
         self.carregarDisc()
         
@@ -163,9 +164,8 @@ class frameGerDisciplina(wx.Frame):
         listDiscBox = []
         self.listDiscId = []
         for i in self.listDisc:
-            disc.carregar(i[0])
-            prof.carregar(disc.getProfessor())
-            listDiscBox += [disc.getDisciplina() + ' - ' + prof.getNome()]
+            prof.carregar(i[1])
+            listDiscBox += [str(i[0]) + ' - ' + str(prof.getNome())]
         self.discListBox.Set(listDiscBox)
         
     def delDisc(self):
