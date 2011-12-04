@@ -38,9 +38,13 @@ class Disciplina:
     def carregar(self, disciplina):
         """Carrega informacoes de uma disciplina do BD"""
         self.__result=DataBase.carregarDisciplina(disciplina)
-        self.setDisciplina(self.__result[0])
-        self.setProfessor(self.__result[1])
-        del self.__result
+        if self.__result == None:
+            return False
+        else:
+            self.setDisciplina(self.__result[0])
+            self.setProfessor(self.__result[1])
+            del self.__result
+            return True
 
     def salvarEdit(self, disciplina, professor):
         """Salva uma edicao de uma disciplina no BD"""

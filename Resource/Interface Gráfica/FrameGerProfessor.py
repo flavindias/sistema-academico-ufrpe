@@ -278,6 +278,7 @@ class FrameAddProfessor(wx.Frame):
                 None
             else:
                 self.erroText.SetLabel('CPF nao encontrado!')
+                return 0
         self.campoNascimento.SetValue(str(prof.getData()))
         self.campoNome.SetValue(prof.getNome())
         
