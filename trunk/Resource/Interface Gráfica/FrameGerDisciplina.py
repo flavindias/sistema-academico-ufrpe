@@ -134,8 +134,7 @@ class frameGerDisciplina(wx.Frame):
 
     def __init__(self, parent):
         self.verificador = 0
-        #self.carregarProf()
-        self.listProf= []
+        self.carregarProf()
         self._init_ctrls(parent)
         self.carregarDisc()
         
@@ -177,7 +176,8 @@ class frameGerDisciplina(wx.Frame):
             disc.delete(self.listDisc[self.discListBox.GetSelections()[-1]][0])
         
     def editDisc(self):
-        self.nomeTextCtrl.SetValue(self.listDisc[self.discListBox.GetSelections()[-1]][0])
+        self.nomeDisc = self.listDisc[self.discListBox.GetSelections()[-1]][0]
+        self.nomeTextCtrl.SetValue(self.nomeDisc)
     
     def addDisc(self):
         if (self.nomeTextCtrl.GetValue() == '') or (self.profChoice.GetSelection() == -1):
@@ -185,11 +185,14 @@ class frameGerDisciplina(wx.Frame):
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
-            disc.setDisciplina(self.nomeTextCtrl.GetValue())
-            select = self.profChoice.GetSelection()
-            disc.setProfessor(self.listProfId[select][0])
-            disc.add()
-            self.nomeTextCtrl.SetValue('')
+            if disc.carregar(self.nomeTextCtrl.GetValue()):
+                self.erroTextCtrl.SetValue('Disciplina ja existi!')
+            else:
+                disc.setDisciplina(self.nomeTextCtrl.GetValue())
+                select = self.profChoice.GetSelection()
+                disc.setProfessor(self.listProfId[select][0])
+                disc.add(disc.getDisciplina(), disc.getProfessor())
+                self.nomeTextCtrl.SetValue('')
 
     def OnEditarButtonButton(self, event):
         self.verificador = 1
@@ -203,19 +206,17 @@ class frameGerDisciplina(wx.Frame):
 
     def OnAplicarButtonButton(self, event):
         if self.verificador == 1:
-            if (self.nomeTextCtrl.GetValue() == ''):
-                self.erroTextCtrl.SetValue('Insira um Nome para Editar a Disciplina!')
+            discEdit = Disciplina()
+            discEdit.carregar(self.nomeDisc)
+            select = self.profChoice.GetSelection()
+            if (select == -1):None
             else:
-                self.discEdit.setDisciplina(self.nomeTextCtrl.GetValue())
-                select = self.profChoice.GetSelection()
-                if (select == -1):None
-                else:
-                    self.discEdit.setProfessor(self.listProfId[select][0])
-                self.discEdit.salvarEdit(self.discEdit.getDisciplina(), self.discEdit.getProfessor())
-                self.verificador = 0
-                self.discEdit = None
-                self.nomeTextCtrl.SetValue('')
-                self.carregarDisc()
+                discEdit.setProfessor(self.listProfId[select][0])
+            discEdit.salvarEdit(discEdit.getDisciplina(), discEdit.getProfessor())
+            self.verificador = 0
+            self.nomeDisc = ''
+            self.nomeTextCtrl.SetValue('')
+            self.carregarDisc()
         else:
             self.addDisc()
             self.carregarDisc()
