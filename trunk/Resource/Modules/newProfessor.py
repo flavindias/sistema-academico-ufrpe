@@ -23,6 +23,9 @@ class Professor:
     def setData(self, novoData):
         """Ajusta a data"""
         self.__data=novoData
+    def setCep(self, novoCep):
+        """Ajusta o CEP"""
+        self.__cep = novoCep
     def setUf(self, novoUf):
         """Ajusta o estado"""
         self.__uf=novoUf
@@ -59,6 +62,9 @@ class Professor:
     def getData(self):
         """Retorna a data"""
         return self.__data
+    def getCep(self):
+        """Retorna o CEP"""
+        return self.__cep
     def getUf(self):
         """Retorna o estado"""
         return self.__uf
@@ -94,6 +100,7 @@ class Professor:
             self.setNome(None) #str len max 40
             self.setCpf(None) #str len 11
             self.setData(None) #str ex: ano-mes-dia
+            self.setCep(None) #str len 8
             self.setUf(None) #str len 2
             self.setCidade(None) #str len max 20
             self.setBairro(None) #str len max 20
@@ -114,27 +121,28 @@ class Professor:
         self.setNome(self.__result[1])
         self.setData(self.__result[2])
         self.setSexo(self.__result[3])
-        self.setUf(self.__result[4])
-        self.setCidade(self.__result[5])
-        self.setBairro(self.__result[6])
-        self.setRua(self.__result[7])
-        self.setNum(self.__result[8])
-        self.setComp(self.__result[9])
-        self.setTelefone(self.__result[10])
-        self.setCelular(self.__result[11])
+        self.setCpf(self.__result[4])
+        self.setUf(self.__result[5])
+        self.setCidade(self.__result[6])
+        self.setBairro(self.__result[7])
+        self.setRua(self.__result[8])
+        self.setNum(self.__result[9])
+        self.setComp(self.__result[10])
+        self.setTelefone(self.__result[11])
+        self.setCelular(self.__result[12])
         del self.__result
 
-    def salvarEdit(self, cpf, nome=None, data=None, sexo=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None):
+    def salvarEdit(self, cpf, nome=None, data=None, sexo=None, cep=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None):
         """Salva uma edicao no BD"""
-        return DataBase.editarProfessor([cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular])
+        return DataBase.editarProfessor([cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular])
 
     def listaDb(self):
         """Retorna uma lista com todos os Professores do DB"""
         return DataBase.getListDbProfessor()
 
-    def add(self, cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular):
+    def add(self, cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone=None, celular=None):
         """Adiciona um professor no BD"""
-        return DataBase.addProfessor(self, cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular)
+        return DataBase.addProfessor(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular)
 
     def delete(self, cpf):
         """Delete aluno do BD"""
