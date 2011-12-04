@@ -177,8 +177,8 @@ def editarDisciplina(lista):
     """Edita uma disciplina no BD"""
     try:
         if lista[0]!=None and lista[1]!=None:
-            cursor.execute("update Disciplina set professor = '%s' where disciplina = '%s':" %(lista[0], lista[1]))
-            return False
+            cursor.execute("update Disciplina set professor = '%s' where disciplina = '%s';" %(lista[1], lista[0]))
+            return True
         else:
             return False
     except:
