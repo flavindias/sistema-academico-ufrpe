@@ -10,4 +10,18 @@
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
+import DataBase
+
 lista = []
+
+def add(turma, aluno):
+    """Add aluno relacionado a turma direto no bd"""
+    return DataBase.addTurma_Aluno(turma, aluno)
+
+def carregar(turma):
+    """Carrega todos os alunos relacionados a turma"""
+    return DataBase.carregarTurma_Alunos(turma)
+
+def delete(aluno):
+    """Deleta aluno da tabela"""
+    return DataBase.deleteTurma_Alunos(aluno)
