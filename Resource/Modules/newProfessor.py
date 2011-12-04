@@ -110,10 +110,9 @@ class Professor:
             self.setTelefone(None) #str len 10 (sem caracteres especiais)
             self.setCelular(None) #str len 10 (sem caracteres especiais)
             self.setSexo(None) #int (1=Masculino / 2=Femenino)
-            return False
         else:
             ##Carregando do BD
-            return self.carregar(cpf)
+            self.carregar(cpf)
 
     def carregar(self, cpf):
         """Carrega um Professor no BD a partir do CPF"""
