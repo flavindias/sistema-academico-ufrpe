@@ -15,7 +15,7 @@ for i in range(len(lista)):
         temp += 'Modules'
 sys.path[0] = temp
 
-from Login import Login
+from newLogin import Login
 
 def create(parent):
     return frameLogin(parent)
@@ -105,10 +105,13 @@ class frameLogin(wx.Frame):
         self.Logar = Login()
         self.valorLogin = self.digiteLogin.GetValue()
         self.valorSenha = self.digiteSenha.GetValue()
-        if self.Logar.valida(self.valorLogin, self.valorSenha):
-            self.Close()
-            academics.comeca()
-            exit()
+        if self.Logar.carregar(self.valorLogin):
+            if self.valorSenha == self.Logar.getSenha(): #and self.Logar.getTipo() == 'ADM':
+                self.Close()
+                academics.comeca()
+                exit()
+            else:
+                self.nomeErro.SetLabel('Login ou Senha Invalido!')
         else:
             self.nomeErro.SetLabel('Login ou Senha Invalido!')
         event.Skip()
