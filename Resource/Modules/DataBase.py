@@ -66,7 +66,7 @@ def editarAluno(lista):
 def getListDbAluno():
     """Busca todos os alunos no BD"""
     cursor.execute("select * from Aluno")
-    return cursor.fetchone()
+    return cursor.fetchall()
 
 def addAluno(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno):
     """Adiciona um aluno no BD"""
