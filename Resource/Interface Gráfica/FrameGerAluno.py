@@ -13,12 +13,12 @@ def create(parent):
  wxID_FRAMEGERALUNOSCAIXATURNO, wxID_FRAMEGERALUNOSCAMPOCONFIRMESENHA, 
  wxID_FRAMEGERALUNOSCAMPOCPFA, wxID_FRAMEGERALUNOSCAMPONASCIMENTOA, 
  wxID_FRAMEGERALUNOSCAMPONOMEA, wxID_FRAMEGERALUNOSCAMPOSENHA, 
- wxID_FRAMEGERALUNOSLOGOGERALUNOS, wxID_FRAMEGERALUNOSNOMEALUNO, 
- wxID_FRAMEGERALUNOSNOMECONFIRMARSENHA, wxID_FRAMEGERALUNOSNOMECPFALUNO, 
- wxID_FRAMEGERALUNOSNOMENASCIMENTO, wxID_FRAMEGERALUNOSNOMESERIE, 
- wxID_FRAMEGERALUNOSNOMESEXOALUNO, wxID_FRAMEGERALUNOSNOMETURMA, 
- wxID_FRAMEGERALUNOSNOMETURNO, wxID_FRAMEGERALUNOSNOTEBOOK1, 
- wxID_FRAMEGERALUNOSPANEL1, wxID_FRAMEGERALUNOSPROFLISTBOX, 
+ wxID_FRAMEGERALUNOSLISTAALUNOS, wxID_FRAMEGERALUNOSLOGOGERALUNOS, 
+ wxID_FRAMEGERALUNOSNOMEALUNO, wxID_FRAMEGERALUNOSNOMECONFIRMARSENHA, 
+ wxID_FRAMEGERALUNOSNOMECPFALUNO, wxID_FRAMEGERALUNOSNOMENASCIMENTO, 
+ wxID_FRAMEGERALUNOSNOMESERIE, wxID_FRAMEGERALUNOSNOMESEXOALUNO, 
+ wxID_FRAMEGERALUNOSNOMETURMA, wxID_FRAMEGERALUNOSNOMETURNO, 
+ wxID_FRAMEGERALUNOSNOTEBOOK1, wxID_FRAMEGERALUNOSPANEL1, 
  wxID_FRAMEGERALUNOSSELECIONARTURMA, wxID_FRAMEGERALUNOSSELECIONASERIE, 
  wxID_FRAMEGERALUNOSSENHAALUNO, wxID_FRAMEGERALUNOSSEXOFALUNO, 
  wxID_FRAMEGERALUNOSSEXOMALUNO, wxID_FRAMEGERALUNOSSTATICLINE1, 
@@ -136,7 +136,7 @@ class FrameGerAlunos(wx.Frame):
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(253, 12),
               size=wx.Size(48, 48), style=wx.BU_AUTODRAW)
 
-        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar.png',
+        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOSALVAR,
               label=u'       Salvar      ', name=u'botaoSalvar',
               parent=self.panel1, pos=wx.Point(1236, 630), size=wx.Size(104,
@@ -186,15 +186,15 @@ class FrameGerAlunos(wx.Frame):
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnGenBitmapTextButton1Button,
               id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR)
 
-        self.profListBox = wx.ListBox(choices=[],
-              id=wxID_FRAMEGERALUNOSPROFLISTBOX, name=u'profListBox',
+        self.listaAlunos = wx.ListBox(choices=[],
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS, name=u'listaAlunos',
               parent=self.window1, pos=wx.Point(832, 72), size=wx.Size(200,
               272), style=wx.LB_HSCROLL | wx.NO_BORDER)
-        self.profListBox.Bind(wx.EVT_LISTBOX_DCLICK,
+        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK,
               self.OnProfListBoxListboxDclick,
-              id=wxID_FRAMEGERALUNOSPROFLISTBOX)
-        self.profListBox.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
-              id=wxID_FRAMEGERALUNOSPROFLISTBOX)
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
+        self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
 
         self._init_coll_notebook1_Pages(self.notebook1)
 
