@@ -179,7 +179,7 @@ class FrameGerAlunos(wx.Frame):
               name=u'boxAlunosMatriculadosNaTurma', parent=self.window1,
               pos=wx.Point(816, 48), size=wx.Size(232, 312), style=0)
 
-        self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botao excluir_p.png',
+        self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR,
               label=u'  Excluir   ', name=u'botaoExcluir', parent=self.panel1,
               pos=wx.Point(1110, 632), size=wx.Size(96, 32), style=0)
