@@ -131,24 +131,25 @@ class Aluno:
     def carregar(self, cpf):
         """Carrega um Aluno no BD a partir do CPF"""
         self.__result=DataBase.carregarAluno(cpf)
-        self.setCpf(self.__result[0])
-        self.setNome(self.__result[1])
-        self.setData(str(self.__result[2]))
-        self.setSexo(self.__result[3])
-        self.setCep(self.__result[4])
-        self.setUf(self.__result[5])
-        self.setCidade(self.__result[6])
-        self.setBairro(self.__result[7])
-        self.setRua(self.__result[8])
-        self.setNum(self.__result[9])
-        self.setComp(self.__result[10])
-        self.setTelefone(self.__result[11])
-        self.setCelular(self.__result[12])
-        self.setSerie(self.__result[13])
-        self.setTurno(self.__result[14])
-        if self.getCpf()==None:
+        if self.__result == None:
             return False
         else:
+            self.setCpf(self.__result[0])
+            self.setNome(self.__result[1])
+            self.setData(str(self.__result[2]))
+            self.setSexo(self.__result[3])
+            self.setCep(self.__result[4])
+            self.setUf(self.__result[5])
+            self.setCidade(self.__result[6])
+            self.setBairro(self.__result[7])
+            self.setRua(self.__result[8])
+            self.setNum(self.__result[9])
+            self.setComp(self.__result[10])
+            self.setTelefone(self.__result[11])
+            self.setCelular(self.__result[12])
+            self.setSerie(self.__result[13])
+            self.setTurno(self.__result[14])
+            del self.__result
             return True
 
     def salvarEdit(self, cpf, nome=None, data=None, sexo=None, cep=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None, serie=None, turno=None):
