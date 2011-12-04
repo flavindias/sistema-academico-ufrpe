@@ -110,9 +110,10 @@ class Professor:
             self.setTelefone(None) #str len 10 (sem caracteres especiais)
             self.setCelular(None) #str len 10 (sem caracteres especiais)
             self.setSexo(None) #int (1=Masculino / 2=Femenino)
+            return False
         else:
             ##Carregando do BD
-            self.carregar(cpf)
+            return self.carregar(cpf)
 
     def carregar(self, cpf):
         """Carrega um Professor no BD a partir do CPF"""
@@ -130,7 +131,10 @@ class Professor:
         self.setComp(self.__result[10])
         self.setTelefone(self.__result[11])
         self.setCelular(self.__result[12])
-        del self.__result
+        if self.getCpf(self.__result[0])==None:
+            return False
+        else:
+            return True
 
     def salvarEdit(self, cpf, nome=None, data=None, sexo=None, cep=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None):
         """Salva uma edicao no BD"""
