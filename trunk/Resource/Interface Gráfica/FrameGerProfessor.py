@@ -15,11 +15,8 @@ for i in range(len(lista)):
         temp += 'Modules'
 sys.path[0] = temp
 
-from Login import Login
+from newProfessor import Professor
 from Endereco import Endereco
-from DadosPessoais import DadosPessoais
-from Professor import Professor
-from Data import Data
 
 def create(parent):
     return FrameAddProfessor(parent)
@@ -35,24 +32,25 @@ def create(parent):
  wxID_FRAMEADDPROFESSORCAMPOENDERECO, wxID_FRAMEADDPROFESSORCAMPOFIXO, 
  wxID_FRAMEADDPROFESSORCAMPONASCIMENTO, wxID_FRAMEADDPROFESSORCAMPONOME, 
  wxID_FRAMEADDPROFESSORCAMPONUMERO, wxID_FRAMEADDPROFESSORCAMPOSENHA, 
- wxID_FRAMEADDPROFESSORCAMPOUF, wxID_FRAMEADDPROFESSORLOGOACADEMIC, 
- wxID_FRAMEADDPROFESSORNOMEBAIRRO, wxID_FRAMEADDPROFESSORNOMECELULAR, 
- wxID_FRAMEADDPROFESSORNOMECEP, wxID_FRAMEADDPROFESSORNOMECIDADE, 
- wxID_FRAMEADDPROFESSORNOMECOMPLEMENTO, 
+ wxID_FRAMEADDPROFESSORCAMPOUF, wxID_FRAMEADDPROFESSORERROTEXT, 
+ wxID_FRAMEADDPROFESSORLOGOACADEMIC, wxID_FRAMEADDPROFESSORNOMEBAIRRO, 
+ wxID_FRAMEADDPROFESSORNOMECELULAR, wxID_FRAMEADDPROFESSORNOMECEP, 
+ wxID_FRAMEADDPROFESSORNOMECIDADE, wxID_FRAMEADDPROFESSORNOMECOMPLEMENTO, 
  wxID_FRAMEADDPROFESSORNOMECONFIRMESENHA, wxID_FRAMEADDPROFESSORNOMECPF, 
  wxID_FRAMEADDPROFESSORNOMEDATANASC, wxID_FRAMEADDPROFESSORNOMENOME, 
  wxID_FRAMEADDPROFESSORNOMENUMERO, wxID_FRAMEADDPROFESSORNOMERUA, 
  wxID_FRAMEADDPROFESSORNOMESENHA, wxID_FRAMEADDPROFESSORNOMESEXO, 
  wxID_FRAMEADDPROFESSORNOMETELEFONE, wxID_FRAMEADDPROFESSORNOMEUF, 
- wxID_FRAMEADDPROFESSORPANEL1, wxID_FRAMEADDPROFESSORSTATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(41)]
+ wxID_FRAMEADDPROFESSORPANEL1, wxID_FRAMEADDPROFESSORPROFLISTBOX, 
+ wxID_FRAMEADDPROFESSORPROFSTATICBOX, wxID_FRAMEADDPROFESSORSTATICLINE1, 
+] = [wx.NewId() for _init_ctrls in range(44)]
 
 class FrameAddProfessor(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEADDPROFESSOR,
-              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(559, 219),
-              size=wx.Size(1322, 722), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(48, 16),
+              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.Center(wx.BOTH)
@@ -60,7 +58,7 @@ class FrameAddProfessor(wx.Frame):
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
         self.panel1 = wx.Panel(id=wxID_FRAMEADDPROFESSORPANEL1, name='panel1',
-              parent=self, pos=wx.Point(-28, -9), size=wx.Size(1366, 706),
+              parent=self, pos=wx.Point(0, 0), size=wx.Size(1310, 688),
               style=wx.TAB_TRAVERSAL)
 
         self.staticLine1 = wx.StaticLine(id=wxID_FRAMEADDPROFESSORSTATICLINE1,
@@ -241,55 +239,72 @@ class FrameAddProfessor(wx.Frame):
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(368, 16),
               size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
 
+        self.profStaticBox = wx.StaticBox(id=wxID_FRAMEADDPROFESSORPROFSTATICBOX,
+              label=u'Professores', name=u'profStaticBox', parent=self.panel1,
+              pos=wx.Point(952, 168), size=wx.Size(280, 496), style=0)
+
+        self.profListBox = wx.ListBox(choices=[],
+              id=wxID_FRAMEADDPROFESSORPROFLISTBOX, name=u'profListBox',
+              parent=self.panel1, pos=wx.Point(968, 184), size=wx.Size(256,
+              472), style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.profListBox.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick,
+              id=wxID_FRAMEADDPROFESSORPROFLISTBOX)
+
+        self.erroText = wx.StaticText(id=wxID_FRAMEADDPROFESSORERROTEXT,
+              label=u'                                                   ',
+              name=u'erroText', parent=self.panel1, pos=wx.Point(553, 648),
+              size=wx.Size(204, 16), style=0)
+        self.erroText.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
+        self.erroText.SetForegroundColour(wx.Colour(255, 6, 6))
+        self.erroText.Center(wx.HORIZONTAL)
+        self.erroText.SetMinSize(wx.Size(204, 16))
+        self.erroText.SetMaxSize(wx.Size(204, 16))
+
     def __init__(self, parent):
         self._init_ctrls(parent)
 
     def OnBotaoBuscarCPFButton(self, event):
         prof = Professor()
-        dados = DadosPessoais()
-        endereco = Endereco()
-        login = Login()
-        data = Data()
         
         if self.campoCPF.GetValue() == '':
-            return 0
-        elif prof.idPorCpf(self.campoCPF.GetValue()) == False:
+            self.erroText.SetLabel('Preencha o campo CPF corretamente!')
             return 0
         else:
-            prof.carregar(prof.idPorCpf(self.campoCPF.GetValue()))
+            if prof.carregar(self.campoCPF.GetValue()):
+                None
+            else:
+                self.erroText.SetLabel('CPF nao encontrado!')
+        self.campoNascimento.SetValue(str(prof.getData()))
+        self.campoNome.SetValue(prof.getNome())
         
-        dados.carregar(int(prof.getDadosId()))
-        login.carregar(int(prof.getLoginId()))
-        endereco.carregar(dados.getEnderecoId())
-        if dados.getDataNascId() != None:
-            data.carregar(dados.getDataNascId())
-            self.campoNascimento.SetValue(str(data.getDia()) + '/' + str(data.getMes()) + '/' + str(data.getAno()))
-        self.campoNome.SetValue(dados.getNome())
-        
-        if dados.getSexo == 'Feminino':
+        if prof.getSexo == 2:
             self.botaoFeminino.SetValue(True)
         else:
             self.botaoMasc.SetValue(True)
-        self.campoCep.SetValue(endereco.getCep())
-        self.campoEndereco.SetValue(endereco.getRua())
-        self.campoBairro.SetValue(endereco.getBairro())
-        self.campoCidade.SetValue(endereco.getCidade())
-        self.campoNumero.SetValue(str(endereco.getNum()))
-        self.campoUF.SetValue(endereco.getUf())
-        if endereco.getComp() == None:
+            
+        self.campoCep.SetValue(str(prof.getCep()))
+        self.campoEndereco.SetValue(prof.getRua())
+        self.campoBairro.SetValue(prof.getBairro())
+        self.campoCidade.SetValue(prof.getCidade())
+        self.campoNumero.SetValue(str(prof.getNum()))
+        self.campoUF.SetValue(prof.getUf())
+        if prof.getComp() == None:
             None
         else:
-            self.campoComplemento.SetValue(endereco.getComp())
-        if dados.getFixo() == None:
+            self.campoComplemento.SetValue(prof.getComp())
+            
+        if prof.getTelefone() == None:
             None
         else:
-            self.campoFixo.SetValue(str(dados.getFixo()))
-        if dados.getCelular() == None:
+            self.campoFixo.SetValue(str(prof.getTelefone()))
+            
+        if prof.getCelular() == None:
             None
         else:
-            self.campoCelular.SetValue(str(dados.getCelular()))
-        
-        self.zerar()
+            self.campoCelular.SetValue(str(prof.getCelular()))
+        self.erroText.SetLabel('Carregado com Sucesso!')
         event.Skip()
 
     def OnBotaoBuscarCEPButton(self, event):
@@ -305,105 +320,60 @@ class FrameAddProfessor(wx.Frame):
 
     def OnBotaoADDButton(self, event):
         prof = Professor()
-        dados = DadosPessoais()
-        endereco = Endereco()
-        login = Login()
-        data = Data()
-        
+        sexo = 0
+
         if self.campoCPF.GetValue() == '' or len(self.campoCPF.GetValue()) != 11:
             return 0
         else:
-            prof.setDadosId(str(self.campoCPF.GetValue()))
-            prof.setLoginId(str(self.campoCPF.GetValue()))
-            login.setUsuario(str(self.campoCPF.GetValue()))
-            dados.setDocumento(str(self.campoCPF.GetValue()))
+            if self.botaoMasc.GetValue():
+                sexo = 1
+            else:
+                sexo = 2
+            prof.add(self.campoCPF.GetValue(), self.campoNome.GetValue(), self.campoNascimento.GetValue(), sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
+                     self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), int(self.campoNumero.GetValue()),
+                     self.campoComplemento.GetValue(), self.campoFixo.GetValue(), self.campoCelular.GetValue())
         
-        if  self.campoNascimento.GetValue() == '':
-            data.setDia(0)
-            data.setMes(0)
-            data.setAno(0)
-        else:
-            listaData = self.campoNascimento.GetValue().split('/')
-            data.setDia(int(listaData[0]))
-            data.setMes(int(listaData[1]))
-            data.setAno(int(listaData[2]))
+        #if self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
+            #return 0
+        #else:
+            #login.setSenha(self.campoSenha.GetValue())
+        
+        #login.setTipo('PRF')
             
-        if self.campoNome.GetValue() == '':
-            return 0
-        else:
-            dados.setNome(self.campoNome.GetValue())
-        
-        if self.botaoMasc.GetValue():
-            dados.setSexo('Masculino')
-        else:
-            dados.setSexo('Feminino')
-            
-        endereco.setCep(self.campoCep.GetValue())
-        
-        endereco.setRua(self.campoEndereco.GetValue())
-        
-        endereco.setBairro(self.campoBairro.GetValue())
-        
-        endereco.setCidade(self.campoCidade.GetValue())
-        
-        endereco.setNum(int(self.campoNumero.GetValue()))
-        
-        endereco.setUf(self.campoUF.GetValue())
-        
-        endereco.setComp(self.campoComplemento.GetValue())
-        
-        if self.campoFixo.GetValue() == '':
-            return 0
-        else:
-            dados.setFixo(int(self.campoFixo.GetValue()))
-        
-        if self.campoCelular.GetValue() == '':
-            return 0
-        else:
-            dados.setCelular(int(self.campoCelular.GetValue()))
-        
-        if self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
-            return 0
-        else:
-            login.setSenha(self.campoSenha.GetValue())
-        
-        login.setTipo('PRF')
-
-        prof.addNovo()
-        endereco.addNova()
-        listaId = endereco.pegarId()
-        dados.setEnderecoId(listaId[-1])
-        data.addNova()
-        dados.setDataNascId(data.PegarIds()[-1])
-        dados.addNova()
-        login.addNova()
+        self.erroText.SetLabel('Adicionado com Sucesso!')
         self.zerar()
         
         event.Skip()
 
     def OnBotaoEditarButton(self, event):
-        
+        prof = Professor()
+        sexo = 0
+
+        if self.campoCPF.GetValue() == '' or len(self.campoCPF.GetValue()) != 11:
+            return 0
+        else:
+            if self.botaoMasc.GetValue():
+                sexo = 1
+            else:
+                sexo = 2
+            prof.salvarEdit(self.campoCPF.GetValue(), self.campoNome.GetValue(), self.campoNascimento.GetValue(), sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
+                            self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), int(self.campoNumero.GetValue()),
+                            self.campoComplemento.GetValue(), self.campoFixo.GetValue(), self.campoCelular.GetValue())
+        self.erroText.SetLabel('Editado com Sucesso!')
+        self.zerar()
         event.Skip()
 
     def OnBotaoExcluirButton(self, event):
         prof = Professor()
-        dados = DadosPessoais()
-        endereco = Endereco()
-        login = Login()
-        data = Data()
         if self.campoCPF.GetValue() != '':
-            if prof.carregar(prof.idPorCpf(self.campoCPF.GetValue())):
-                dados.carregar(str(prof.getDadosId()))
-                data.deletar(dados.getDataNascId())
-                login.delete(str(prof.getLoginId()))
-                endereco.delete(dados.getEnderecoId())
-                dados.delete(prof.getDadosId())
+            if prof.carregar(self.campoCPF.GetValue()):
                 prof.delete(self.campoCPF.GetValue())
+                self.erroText.SetLabel('Excluido com Sucesso!')
                 self.zerar()
             else:
-                print ''
+                None
         else:
-            print ''
+            None
         
         event.Skip()
     def zerar(self):
@@ -421,3 +391,15 @@ class FrameAddProfessor(wx.Frame):
         self.campoCelular.SetValue('')
         self.campoSenha.SetValue('')
         self.campoConfirmeSenha.SetValue('')
+
+    def buscarProf(self):
+        prof = Professor()
+        listaProf = prof.listaDb()
+        listaBox = []
+        for i in listaProf:
+            prof.carregar(i)
+            listaBox += prof.getNome()
+        self.profListBox.Set(listaBox)
+
+    def OnProfListBoxListboxDclick(self, event):
+        event.Skip()
