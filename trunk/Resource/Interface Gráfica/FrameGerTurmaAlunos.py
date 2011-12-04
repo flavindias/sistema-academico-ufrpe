@@ -8,11 +8,11 @@ def create(parent):
 
 [wxID_FRAME1, wxID_FRAME1BOTAOADICIONAR, wxID_FRAME1BOTAOEXCLUIRTURMA, 
  wxID_FRAME1BOTAOREMOVER, wxID_FRAME1BOTAOSALVARTURMA, 
- wxID_FRAME1CAIXAALUNOSTODOS, wxID_FRAME1CAIXAALUNOSTURMA, 
- wxID_FRAME1CAMPOTURMA, wxID_FRAME1CHOICE1, wxID_FRAME1CHOICE2, 
- wxID_FRAME1LISTAALUNOS, wxID_FRAME1LISTBOX1, wxID_FRAME1LOGOACADEMIC, 
- wxID_FRAME1NOMESERIE, wxID_FRAME1NOMETURMA, wxID_FRAME1NOMETURNO, 
- wxID_FRAME1PANEL1, wxID_FRAME1STATICLINE1, 
+ wxID_FRAME1CAIXAALUNOSTODOS, wxID_FRAME1CAIXAALUNOSTURMA, wxID_FRAME1CHOICE1, 
+ wxID_FRAME1CHOICE2, wxID_FRAME1ESCOLHATURMA, wxID_FRAME1LISTAALUNOS, 
+ wxID_FRAME1LISTBOX1, wxID_FRAME1LOGOACADEMIC, wxID_FRAME1NOMESERIE, 
+ wxID_FRAME1NOMETURMA, wxID_FRAME1NOMETURNO, wxID_FRAME1PANEL1, 
+ wxID_FRAME1STATICLINE1, 
 ] = [wx.NewId() for _init_ctrls in range(18)]
 
 class Frame1(wx.Frame):
@@ -49,10 +49,6 @@ class Frame1(wx.Frame):
               id=wxID_FRAME1CHOICE2, name='choice2', parent=self.panel1,
               pos=wx.Point(600, 173), size=wx.Size(130, 21), style=0)
         self.choice2.SetStringSelection(u'Manha')
-
-        self.campoTurma = wx.TextCtrl(id=wxID_FRAME1CAMPOTURMA,
-              name=u'campoTurma', parent=self.panel1, pos=wx.Point(751, 172),
-              size=wx.Size(100, 21), style=0, value=u'')
 
         self.nomeTurma = wx.StaticText(id=wxID_FRAME1NOMETURMA, label=u'Turma:',
               name=u'nomeTurma', parent=self.panel1, pos=wx.Point(752, 156),
@@ -121,6 +117,11 @@ class Frame1(wx.Frame):
               name=u'logoAcademic', parent=self.panel1, pos=wx.Point(518, 16),
               size=wx.Size(274, 112), style=0)
         self.logoAcademic.Center(wx.HORIZONTAL)
+
+        self.escolhaTurma = wx.Choice(choices=["A", "B", "C", "D", "E"],
+              id=wxID_FRAME1ESCOLHATURMA, name=u'escolhaTurma',
+              parent=self.panel1, pos=wx.Point(754, 173), size=wx.Size(130, 21),
+              style=0)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
