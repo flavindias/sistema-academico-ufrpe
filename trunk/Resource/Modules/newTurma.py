@@ -88,17 +88,21 @@ class Turma:
     def carregar(self, turma):
         """Carregar uma turma no BD a partir do nome"""
         self.__result=DataBase.carregarTurma(turma)
-        self.setTurma(self.__result[0])
-        self.setTurno(self.__result[1])
-        self.setDisciplina1(self.__result[2])
-        self.setDisciplina2(self.__result[3])
-        self.setDisciplina3(self.__result[4])
-        self.setDisciplina4(self.__result[5])
-        self.setDisciplina5(self.__result[6])
-        self.setDisciplina6(self.__result[7])
-        self.__result = turma_aluno.carregar(turma)
-        self.setAlunos(self.__result)
-        del self.__result
+        if self.__result == None:
+            return False
+        else:
+            self.setTurma(self.__result[0])
+            self.setTurno(self.__result[1])
+            self.setDisciplina1(self.__result[2])
+            self.setDisciplina2(self.__result[3])
+            self.setDisciplina3(self.__result[4])
+            self.setDisciplina4(self.__result[5])
+            self.setDisciplina5(self.__result[6])
+            self.setDisciplina6(self.__result[7])
+            self.__result = turma_aluno.carregar(turma)
+            self.setAlunos(self.__result)
+            del self.__result
+            return True
 
     def salvarEdit(self, turma, turno=None, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None):
         """Edita uma turma no BD"""

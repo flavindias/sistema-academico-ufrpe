@@ -151,13 +151,10 @@ class frameGerDisciplina(wx.Frame):
         
     def carregarProf(self):
         prof = Professor()
-        dados = DadosPessoais()
         self.listProfId = prof.listaDb()
         self.listProf = []
         for i in self.listProfId:
-            prof.carregar(i)
-            self.listProfId += [i]
-            self.listProf += [str(prof.getNome())]
+            self.listProf += [i[1]]
     
     def carregarDisc(self):
         disc = Disciplina()
@@ -166,7 +163,7 @@ class frameGerDisciplina(wx.Frame):
         listDiscBox = []
         self.listDiscId = []
         for i in self.listDisc:
-            disc.carregar(i)
+            disc.carregar(i[0])
             prof.carregar(disc.getProfessor())
             listDiscBox += [disc.getDisciplina() + ' - ' + prof.getNome()]
         self.discListBox.Set(listDiscBox)
@@ -177,10 +174,10 @@ class frameGerDisciplina(wx.Frame):
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
-            disc.delete(self.listDisc[self.discListBox.GetSelections()[-1]])
+            disc.delete(self.listDisc[self.discListBox.GetSelections()[-1]][0])
         
     def editDisc(self):
-        self.nomeTextCtrl.SetValue(self.listDisc[self.discListBox.GetSelections()[-1]])
+        self.nomeTextCtrl.SetValue(self.listDisc[self.discListBox.GetSelections()[-1]][0])
     
     def addDisc(self):
         if (self.nomeTextCtrl.GetValue() == '') or (self.profChoice.GetSelection() == -1):
@@ -190,7 +187,7 @@ class frameGerDisciplina(wx.Frame):
             disc = Disciplina()
             disc.setDisciplina(self.nomeTextCtrl.GetValue())
             select = self.profChoice.GetSelection()
-            disc.setProfessor(self.listProfId[select])
+            disc.setProfessor(self.listProfId[select][0])
             disc.add()
             self.nomeTextCtrl.SetValue('')
 
@@ -213,7 +210,7 @@ class frameGerDisciplina(wx.Frame):
                 select = self.profChoice.GetSelection()
                 if (select == -1):None
                 else:
-                    self.discEdit.setProfessor(self.listProfId[select])
+                    self.discEdit.setProfessor(self.listProfId[select][0])
                 self.discEdit.salvarEdit(self.discEdit.getDisciplina(), self.discEdit.getProfessor())
                 self.verificador = 0
                 self.discEdit = None
