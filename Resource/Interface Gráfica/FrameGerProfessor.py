@@ -49,8 +49,8 @@ class FrameAddProfessor(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEADDPROFESSOR,
-              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(48, 16),
-              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(557, 217),
+              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.Center(wx.BOTH)
@@ -74,163 +74,163 @@ class FrameAddProfessor(wx.Frame):
 
         self.nomeCPF = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECPF,
               label=u'CPF:', name=u'nomeCPF', parent=self.panel1,
-              pos=wx.Point(407, 155), size=wx.Size(24, 13), style=0)
+              pos=wx.Point(246, 155), size=wx.Size(24, 13), style=0)
 
         self.nomeDataNasc = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMEDATANASC,
               label=u'Data de Nascimento:', name=u'nomeDataNasc',
-              parent=self.panel1, pos=wx.Point(778, 155), size=wx.Size(101, 13),
+              parent=self.panel1, pos=wx.Point(617, 155), size=wx.Size(101, 13),
               style=0)
 
         self.nomeNome = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMENOME,
               label=u'Nome:', name=u'nomeNome', parent=self.panel1,
-              pos=wx.Point(407, 210), size=wx.Size(32, 13), style=0)
+              pos=wx.Point(246, 210), size=wx.Size(32, 13), style=0)
 
         self.nomeCEP = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECEP,
               label=u'CEP:', name=u'nomeCEP', parent=self.panel1,
-              pos=wx.Point(407, 267), size=wx.Size(24, 13), style=0)
+              pos=wx.Point(246, 267), size=wx.Size(24, 13), style=0)
 
         self.nomeSexo = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMESEXO,
               label=u'Sexo:', name=u'nomeSexo', parent=self.panel1,
-              pos=wx.Point(723, 272), size=wx.Size(29, 15), style=0)
+              pos=wx.Point(562, 272), size=wx.Size(29, 15), style=0)
 
         self.nomeRua = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMERUA,
               label=u'Endereco:', name=u'nomeRua', parent=self.panel1,
-              pos=wx.Point(407, 323), size=wx.Size(50, 13), style=0)
+              pos=wx.Point(246, 323), size=wx.Size(50, 13), style=0)
 
         self.nomeBairro = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMEBAIRRO,
               label=u'Bairro:', name=u'nomeBairro', parent=self.panel1,
-              pos=wx.Point(407, 377), size=wx.Size(33, 13), style=0)
+              pos=wx.Point(246, 377), size=wx.Size(33, 13), style=0)
 
         self.nomeCidade = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECIDADE,
               label=u'Cidade:', name=u'nomeCidade', parent=self.panel1,
-              pos=wx.Point(685, 376), size=wx.Size(38, 13), style=0)
+              pos=wx.Point(524, 376), size=wx.Size(38, 13), style=0)
 
         self.nomeNumero = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMENUMERO,
               label=u'Numero:', name=u'nomeNumero', parent=self.panel1,
-              pos=wx.Point(408, 428), size=wx.Size(42, 13), style=0)
+              pos=wx.Point(247, 428), size=wx.Size(42, 13), style=0)
 
         self.nomeUF = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMEUF,
               label=u'UF:', name=u'nomeUF', parent=self.panel1,
-              pos=wx.Point(630, 429), size=wx.Size(18, 13), style=0)
+              pos=wx.Point(469, 429), size=wx.Size(18, 13), style=0)
 
         self.nomeComplemento = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECOMPLEMENTO,
               label=u'Complemento:', name=u'nomeComplemento',
-              parent=self.panel1, pos=wx.Point(407, 478), size=wx.Size(70, 13),
+              parent=self.panel1, pos=wx.Point(246, 478), size=wx.Size(70, 13),
               style=0)
 
         self.nomeCelular = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECELULAR,
               label=u'Celular:', name=u'nomeCelular', parent=self.panel1,
-              pos=wx.Point(618, 527), size=wx.Size(38, 13), style=0)
+              pos=wx.Point(457, 527), size=wx.Size(38, 13), style=0)
 
         self.nomeTelefone = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMETELEFONE,
               label=u'Fixo:', name=u'nomeTelefone', parent=self.panel1,
-              pos=wx.Point(407, 528), size=wx.Size(25, 13), style=0)
+              pos=wx.Point(246, 528), size=wx.Size(25, 13), style=0)
 
         self.nomeSenha = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMESENHA,
               label=u'Senha:', name=u'nomeSenha', parent=self.panel1,
-              pos=wx.Point(406, 580), size=wx.Size(35, 13), style=0)
+              pos=wx.Point(245, 580), size=wx.Size(35, 13), style=0)
 
         self.nomeConfirmesenha = wx.StaticText(id=wxID_FRAMEADDPROFESSORNOMECONFIRMESENHA,
               label=u'Confirme a senha:', name=u'nomeConfirmesenha',
-              parent=self.panel1, pos=wx.Point(622, 584), size=wx.Size(89, 13),
+              parent=self.panel1, pos=wx.Point(461, 584), size=wx.Size(89, 13),
               style=0)
 
         self.campoCPF = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCPF,
-              name=u'campoCPF', parent=self.panel1, pos=wx.Point(407, 178),
+              name=u'campoCPF', parent=self.panel1, pos=wx.Point(246, 178),
               size=wx.Size(139, 21), style=0, value=u'')
 
         self.botaoBuscarCPF = wx.Button(id=wxID_FRAMEADDPROFESSORBOTAOBUSCARCPF,
               label=u'Buscar CPF', name=u'botaoBuscarCPF', parent=self.panel1,
-              pos=wx.Point(572, 175), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(411, 175), size=wx.Size(75, 23), style=0)
         self.botaoBuscarCPF.Bind(wx.EVT_BUTTON, self.OnBotaoBuscarCPFButton,
               id=wxID_FRAMEADDPROFESSORBOTAOBUSCARCPF)
 
         self.campoNascimento = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPONASCIMENTO,
-              name=u'campoNascimento', parent=self.panel1, pos=wx.Point(778,
+              name=u'campoNascimento', parent=self.panel1, pos=wx.Point(617,
               177), size=wx.Size(126, 21), style=0, value=u'')
 
         self.campoNome = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPONOME,
-              name=u'campoNome', parent=self.panel1, pos=wx.Point(407, 232),
+              name=u'campoNome', parent=self.panel1, pos=wx.Point(246, 232),
               size=wx.Size(498, 21), style=0, value=u'')
 
         self.campoCep = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCEP,
-              name=u'campoCep', parent=self.panel1, pos=wx.Point(407, 291),
+              name=u'campoCep', parent=self.panel1, pos=wx.Point(246, 291),
               size=wx.Size(100, 21), style=0, value=u'')
 
         self.botaoBuscarCEP = wx.Button(id=wxID_FRAMEADDPROFESSORBOTAOBUSCARCEP,
               label=u'Buscar CEP', name=u'botaoBuscarCEP', parent=self.panel1,
-              pos=wx.Point(530, 289), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(369, 289), size=wx.Size(75, 23), style=0)
         self.botaoBuscarCEP.Bind(wx.EVT_BUTTON, self.OnBotaoBuscarCEPButton,
               id=wxID_FRAMEADDPROFESSORBOTAOBUSCARCEP)
 
         self.botaoMasc = wx.RadioButton(id=wxID_FRAMEADDPROFESSORBOTAOMASC,
               label=u'Masculino', name=u'botaoMasc', parent=self.panel1,
-              pos=wx.Point(723, 295), size=wx.Size(81, 13), style=0)
+              pos=wx.Point(562, 295), size=wx.Size(81, 13), style=0)
         self.botaoMasc.SetValue(True)
 
         self.botaoFeminino = wx.RadioButton(id=wxID_FRAMEADDPROFESSORBOTAOFEMININO,
               label=u'Feminino', name=u'botaoFeminino', parent=self.panel1,
-              pos=wx.Point(818, 296), size=wx.Size(81, 13), style=0)
+              pos=wx.Point(657, 296), size=wx.Size(81, 13), style=0)
         self.botaoFeminino.SetValue(True)
 
         self.campoEndereco = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOENDERECO,
-              name=u'campoEndereco', parent=self.panel1, pos=wx.Point(407, 347),
+              name=u'campoEndereco', parent=self.panel1, pos=wx.Point(246, 347),
               size=wx.Size(499, 21), style=0, value=u'')
 
         self.campoBairro = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOBAIRRO,
-              name=u'campoBairro', parent=self.panel1, pos=wx.Point(406, 398),
+              name=u'campoBairro', parent=self.panel1, pos=wx.Point(245, 398),
               size=wx.Size(232, 21), style=0, value=u'')
 
         self.campoCidade = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCIDADE,
-              name=u'campoCidade', parent=self.panel1, pos=wx.Point(684, 398),
+              name=u'campoCidade', parent=self.panel1, pos=wx.Point(523, 398),
               size=wx.Size(224, 21), style=0, value=u'')
 
         self.campoNumero = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPONUMERO,
-              name=u'campoNumero', parent=self.panel1, pos=wx.Point(407, 447),
+              name=u'campoNumero', parent=self.panel1, pos=wx.Point(246, 447),
               size=wx.Size(100, 21), style=0, value=u'')
 
         self.campoUF = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOUF,
-              name=u'campoUF', parent=self.panel1, pos=wx.Point(653, 447),
+              name=u'campoUF', parent=self.panel1, pos=wx.Point(492, 447),
               size=wx.Size(32, 21), style=0, value=u'')
 
         self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCOMPLEMENTO,
-              name=u'campoComplemento', parent=self.panel1, pos=wx.Point(407,
+              name=u'campoComplemento', parent=self.panel1, pos=wx.Point(246,
               500), size=wx.Size(499, 21), style=0, value=u'')
 
         self.campoFixo = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOFIXO,
-              name=u'campoFixo', parent=self.panel1, pos=wx.Point(407, 550),
+              name=u'campoFixo', parent=self.panel1, pos=wx.Point(246, 550),
               size=wx.Size(163, 21), style=0, value=u'')
 
         self.campoCelular = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCELULAR,
-              name=u'campoCelular', parent=self.panel1, pos=wx.Point(622, 549),
+              name=u'campoCelular', parent=self.panel1, pos=wx.Point(461, 549),
               size=wx.Size(162, 21), style=0, value=u'')
 
         self.campoSenha = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOSENHA,
-              name=u'campoSenha', parent=self.panel1, pos=wx.Point(406, 603),
+              name=u'campoSenha', parent=self.panel1, pos=wx.Point(245, 603),
               size=wx.Size(159, 21), style=wx.TE_PASSWORD, value=u'')
 
         self.campoConfirmeSenha = wx.TextCtrl(id=wxID_FRAMEADDPROFESSORCAMPOCONFIRMESENHA,
-              name=u'campoConfirmeSenha', parent=self.panel1, pos=wx.Point(624,
+              name=u'campoConfirmeSenha', parent=self.panel1, pos=wx.Point(463,
               604), size=wx.Size(159, 21), style=wx.TE_PASSWORD, value=u'')
 
         self.botaoADD = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOADD,
               label=u'Adicionar', name=u'botaoADD', parent=self.panel1,
-              pos=wx.Point(827, 541), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(666, 541), size=wx.Size(78, 24), style=0)
         self.botaoADD.Bind(wx.EVT_BUTTON, self.OnBotaoADDButton,
               id=wxID_FRAMEADDPROFESSORBOTAOADD)
 
         self.botaoEditar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o editar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOEDITAR,
               label=u'Editar      ', name=u'botaoEditar', parent=self.panel1,
-              pos=wx.Point(828, 571), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(667, 571), size=wx.Size(78, 24), style=0)
         self.botaoEditar.Bind(wx.EVT_BUTTON, self.OnBotaoEditarButton,
               id=wxID_FRAMEADDPROFESSORBOTAOEDITAR)
 
         self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOEXCLUIR,
               label=u'Excluir    ', name=u'botaoExcluir', parent=self.panel1,
-              pos=wx.Point(827, 600), size=wx.Size(78, 24), style=0)
+              pos=wx.Point(666, 600), size=wx.Size(78, 24), style=0)
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnBotaoExcluirButton,
               id=wxID_FRAMEADDPROFESSORBOTAOEXCLUIR)
 
@@ -241,14 +241,16 @@ class FrameAddProfessor(wx.Frame):
 
         self.profStaticBox = wx.StaticBox(id=wxID_FRAMEADDPROFESSORPROFSTATICBOX,
               label=u'Professores', name=u'profStaticBox', parent=self.panel1,
-              pos=wx.Point(952, 168), size=wx.Size(280, 496), style=0)
+              pos=wx.Point(791, 168), size=wx.Size(280, 456), style=0)
 
         self.profListBox = wx.ListBox(choices=[],
               id=wxID_FRAMEADDPROFESSORPROFLISTBOX, name=u'profListBox',
-              parent=self.panel1, pos=wx.Point(968, 184), size=wx.Size(256,
-              472), style=wx.LB_HSCROLL | wx.NO_BORDER)
+              parent=self.panel1, pos=wx.Point(803, 184), size=wx.Size(256,
+              432), style=wx.LB_HSCROLL | wx.NO_BORDER)
         self.profListBox.Bind(wx.EVT_LISTBOX_DCLICK,
               self.OnProfListBoxListboxDclick,
+              id=wxID_FRAMEADDPROFESSORPROFLISTBOX)
+        self.profListBox.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
               id=wxID_FRAMEADDPROFESSORPROFLISTBOX)
 
         self.erroText = wx.StaticText(id=wxID_FRAMEADDPROFESSORERROTEXT,
@@ -402,4 +404,7 @@ class FrameAddProfessor(wx.Frame):
         self.profListBox.Set(listaBox)
 
     def OnProfListBoxListboxDclick(self, event):
+        event.Skip()
+
+    def OnProfListBoxListbox(self, event):
         event.Skip()
