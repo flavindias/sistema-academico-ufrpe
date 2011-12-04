@@ -14,9 +14,8 @@ for i in range(len(lista)):
         temp += 'Modules'
 sys.path[0] = temp
 
-from Disciplina import Disciplina
-from Professor import Professor
-from DadosPessoais import DadosPessoais
+from newDisciplina import Disciplina
+from newProfessor import Professor
 
 def create(parent):
     return frameGerDisciplina(parent)
@@ -153,28 +152,23 @@ class frameGerDisciplina(wx.Frame):
     def carregarProf(self):
         prof = Professor()
         dados = DadosPessoais()
-        listProfId = prof.pegarId()
+        self.listProfId = prof.listaDb()
         self.listProf = []
-        self.listProfId = []
-        for i in listProfId:
+        for i in self.listProfId:
             prof.carregar(i)
             self.listProfId += [i]
-            dados.carregar(prof.getDadosId())
-            self.listProf += [str(dados.getNome())]
+            self.listProf += [str(prof.getNome())]
     
     def carregarDisc(self):
         disc = Disciplina()
         prof = Professor()
-        dados = DadosPessoais()
-        listDisc = disc.pegarId()
+        self.listDisc = disc.listaDb()
         listDiscBox = []
         self.listDiscId = []
-        for i in listDisc:
-            self.listDiscId += [i]
+        for i in self.listDisc:
             disc.carregar(i)
-            prof.carregar(disc.getProfessorId())
-            dados.carregar(prof.getDadosId())
-            listDiscBox += [disc.getNome() + ' - ' + dados.getNome()]
+            prof.carregar(disc.getProfessor())
+            listDiscBox += [disc.getDisciplina() + ' - ' + prof.getNome()]
         self.discListBox.Set(listDiscBox)
         
     def delDisc(self):
@@ -183,12 +177,10 @@ class frameGerDisciplina(wx.Frame):
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
-            disc.delete(self.listDiscId[self.discListBox.GetSelections()[-1]])
+            disc.delete(self.listDisc[self.discListBox.GetSelections()[-1]])
         
     def editDisc(self):
-        self.discEdit = Disciplina()
-        self.discEdit.carregar(self.listDiscId[self.discListBox.GetSelections()[-1]])
-        self.nomeTextCtrl.SetValue(self.discEdit.getNome())
+        self.nomeTextCtrl.SetValue(self.listDisc[self.discListBox.GetSelections()[-1]])
     
     def addDisc(self):
         if (self.nomeTextCtrl.GetValue() == '') or (self.profChoice.GetSelection() == -1):
@@ -196,10 +188,10 @@ class frameGerDisciplina(wx.Frame):
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
-            disc.setNome(self.nomeTextCtrl.GetValue())
+            disc.setDisciplina(self.nomeTextCtrl.GetValue())
             select = self.profChoice.GetSelection()
-            disc.setProfessorId(self.listProfId[select])
-            disc.addNova()
+            disc.setProfessor(self.listProfId[select])
+            disc.add()
             self.nomeTextCtrl.SetValue('')
 
     def OnEditarButtonButton(self, event):
@@ -217,12 +209,12 @@ class frameGerDisciplina(wx.Frame):
             if (self.nomeTextCtrl.GetValue() == ''):
                 self.erroTextCtrl.SetValue('Insira um Nome para Editar a Disciplina!')
             else:
-                self.discEdit.setNome(self.nomeTextCtrl.GetValue())
+                self.discEdit.setDisciplina(self.nomeTextCtrl.GetValue())
                 select = self.profChoice.GetSelection()
                 if (select == -1):None
                 else:
-                    self.discEdit.setProfessorId(self.listProfId[select])
-                self.discEdit.salvarEdit(self.discEdit.getId())
+                    self.discEdit.setProfessor(self.listProfId[select])
+                self.discEdit.salvarEdit(self.discEdit.getDisciplina(), self.discEdit.getProfessor())
                 self.verificador = 0
                 self.discEdit = None
                 self.nomeTextCtrl.SetValue('')
