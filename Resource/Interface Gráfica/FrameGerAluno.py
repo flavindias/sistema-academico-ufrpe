@@ -24,14 +24,13 @@ def create(parent):
  wxID_FRAMEGERALUNOSNOMECPFALUNO, wxID_FRAMEGERALUNOSNOMEENDERECO, 
  wxID_FRAMEGERALUNOSNOMENASCIMENTO, wxID_FRAMEGERALUNOSNOMENUMERO, 
  wxID_FRAMEGERALUNOSNOMESERIE, wxID_FRAMEGERALUNOSNOMESEXOALUNO, 
- wxID_FRAMEGERALUNOSNOMETELEFONE, wxID_FRAMEGERALUNOSNOMETURMA, 
- wxID_FRAMEGERALUNOSNOMETURNO, wxID_FRAMEGERALUNOSNOMEUF, 
- wxID_FRAMEGERALUNOSNOTEBOOK1, wxID_FRAMEGERALUNOSPANEL1, 
- wxID_FRAMEGERALUNOSSELECIONARSERIE, wxID_FRAMEGERALUNOSSELECIONARTURMA, 
+ wxID_FRAMEGERALUNOSNOMETELEFONE, wxID_FRAMEGERALUNOSNOMETURNO, 
+ wxID_FRAMEGERALUNOSNOMEUF, wxID_FRAMEGERALUNOSNOTEBOOK1, 
+ wxID_FRAMEGERALUNOSPANEL1, wxID_FRAMEGERALUNOSSELECIONARSERIE, 
  wxID_FRAMEGERALUNOSSENHAALUNO, wxID_FRAMEGERALUNOSSEXOFALUNO, 
  wxID_FRAMEGERALUNOSSEXOMALUNO, wxID_FRAMEGERALUNOSSTATICLINE1, 
  wxID_FRAMEGERALUNOSWINDOW1, 
-] = [wx.NewId() for _init_ctrls in range(48)]
+] = [wx.NewId() for _init_ctrls in range(46)]
 
 class FrameGerAlunos(wx.Frame):
     def _init_coll_notebook1_Pages(self, parent):
@@ -68,11 +67,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeCEP = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECEP,
               label=u'CEP:', name=u'nomeCEP', parent=self.window1,
-              pos=wx.Point(536, 159), size=wx.Size(24, 13), style=0)
-
-        self.nomeTurma = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMETURMA,
-              label=u'Turma:', name=u'nomeTurma', parent=self.window1,
-              pos=wx.Point(427, 157), size=wx.Size(35, 13), style=0)
+              pos=wx.Point(507, 159), size=wx.Size(24, 13), style=0)
 
         self.nomeTurno = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMETURNO,
               label=u'Turno:', name=u'nomeTurno', parent=self.window1,
@@ -183,6 +178,13 @@ class FrameGerAlunos(wx.Frame):
               pos=wx.Point(323, 124), size=wx.Size(81, 13), style=0)
         self.sexoMAluno.SetValue(True)
 
+        self.sexoFAluno = wx.RadioButton(id=wxID_FRAMEGERALUNOSSEXOFALUNO,
+              label=u'Feminino', name=u'sexoFAluno', parent=self.window1,
+              pos=wx.Point(425, 124), size=wx.Size(81, 13), style=0)
+        self.sexoFAluno.SetValue(True)
+        self.sexoFAluno.Bind(wx.EVT_RADIOBUTTON, self.OnSexoFAlunoRadiobutton,
+              id=wxID_FRAMEGERALUNOSSEXOFALUNO)
+
         self.selecionarSerie = wx.Choice(choices=['Selecione a serie',
               'Fundamental I', '          1 Ano', '          2 Ano',
               '          3 Ano', '          4 Ano', '          5 Ano',
@@ -196,31 +198,17 @@ class FrameGerAlunos(wx.Frame):
         self.selecionarSerie.SetLabel(u'Selecione a serie')
         self.selecionarSerie.SetHelpText(u'')
 
-        self.sexoFAluno = wx.RadioButton(id=wxID_FRAMEGERALUNOSSEXOFALUNO,
-              label=u'Feminino', name=u'sexoFAluno', parent=self.window1,
-              pos=wx.Point(425, 124), size=wx.Size(81, 13), style=0)
-        self.sexoFAluno.SetValue(True)
-        self.sexoFAluno.Bind(wx.EVT_RADIOBUTTON, self.OnSexoFAlunoRadiobutton,
-              id=wxID_FRAMEGERALUNOSSEXOFALUNO)
-
         self.caixaTurno = wx.Choice(choices=["Manha", "Tarde", "Noite"],
               id=wxID_FRAMEGERALUNOSCAIXATURNO, name=u'caixaTurno',
-              parent=self.window1, pos=wx.Point(323, 176), size=wx.Size(85, 21),
-              style=0)
+              parent=self.window1, pos=wx.Point(323, 176), size=wx.Size(117,
+              21), style=0)
         self.caixaTurno.SetStringSelection(u'Manha')
         self.caixaTurno.Bind(wx.EVT_CHOICE, self.OnCaixaTurnoChoice,
               id=wxID_FRAMEGERALUNOSCAIXATURNO)
 
-        self.selecionarTurma = wx.Choice(choices=[],
-              id=wxID_FRAMEGERALUNOSSELECIONARTURMA, name=u'selecionarTurma',
-              parent=self.window1, pos=wx.Point(437, 177), size=wx.Size(79, 21),
-              style=0)
-        self.selecionarTurma.Bind(wx.EVT_CHOICE, self.OnSelecionarTurmaChoice,
-              id=wxID_FRAMEGERALUNOSSELECIONARTURMA)
-
         self.campoCEP = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCEP,
-              name=u'campoCEP', parent=self.window1, pos=wx.Point(537, 178),
-              size=wx.Size(100, 21), style=0, value=u'')
+              name=u'campoCEP', parent=self.window1, pos=wx.Point(508, 178),
+              size=wx.Size(124, 21), style=0, value=u'')
 
         self.botaoBuscarCEP = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCEP,
               label=u'Buscar CEP', name=u'botaoBuscarCEP', parent=self.window1,
@@ -238,28 +226,13 @@ class FrameGerAlunos(wx.Frame):
               name=u'campoCidade', parent=self.window1, pos=wx.Point(453, 278),
               size=wx.Size(211, 21), style=0, value=u'')
 
-        self.listaAlunos = wx.ListBox(choices=[],
-              id=wxID_FRAMEGERALUNOSLISTAALUNOS, name=u'listaAlunos',
-              parent=self.window1, pos=wx.Point(832, 49), size=wx.Size(200,
-              367), style=wx.LB_HSCROLL | wx.NO_BORDER)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK,
-              self.OnProfListBoxListboxDclick,
-              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
-              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
+        self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
+              name=u'campoComplemento', parent=self.window1, pos=wx.Point(328,
+              330), size=wx.Size(392, 21), style=0, value=u'')
 
-        self.boxAlunosMatriculadosNaTurma = wx.StaticBox(id=wxID_FRAMEGERALUNOSBOXALUNOSMATRICULADOSNATURMA,
-              label=u'Alunos Matriculados:',
-              name=u'boxAlunosMatriculadosNaTurma', parent=self.window1,
-              pos=wx.Point(816, 25), size=wx.Size(232, 407), style=0)
-
-        self.campoConfirmeSenha = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCONFIRMESENHA,
-              name=u'campoConfirmeSenha', parent=self.window1, pos=wx.Point(563,
-              423), size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
-
-        self.campoSenha = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOSENHA,
-              name=u'campoSenha', parent=self.window1, pos=wx.Point(328, 423),
-              size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
+        self.campoUF = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOUF,
+              name=u'campoUF', parent=self.window1, pos=wx.Point(688, 276),
+              size=wx.Size(30, 21), style=0, value=u'')
 
         self.campoTelefone = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOTELEFONE,
               name=u'campoTelefone', parent=self.window1, pos=wx.Point(328,
@@ -269,13 +242,28 @@ class FrameGerAlunos(wx.Frame):
               name=u'campoCelular', parent=self.window1, pos=wx.Point(584, 377),
               size=wx.Size(139, 21), style=0, value=u'')
 
-        self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
-              name=u'campoComplemento', parent=self.window1, pos=wx.Point(328,
-              330), size=wx.Size(392, 21), style=0, value=u'')
+        self.boxAlunosMatriculadosNaTurma = wx.StaticBox(id=wxID_FRAMEGERALUNOSBOXALUNOSMATRICULADOSNATURMA,
+              label=u'Alunos Matriculados:',
+              name=u'boxAlunosMatriculadosNaTurma', parent=self.window1,
+              pos=wx.Point(816, 25), size=wx.Size(232, 407), style=0)
 
-        self.campoUF = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOUF,
-              name=u'campoUF', parent=self.window1, pos=wx.Point(688, 276),
-              size=wx.Size(30, 21), style=0, value=u'')
+        self.campoSenha = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOSENHA,
+              name=u'campoSenha', parent=self.window1, pos=wx.Point(328, 423),
+              size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
+
+        self.campoConfirmeSenha = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCONFIRMESENHA,
+              name=u'campoConfirmeSenha', parent=self.window1, pos=wx.Point(563,
+              423), size=wx.Size(160, 21), style=wx.TE_PASSWORD, value=u'')
+
+        self.listaAlunos = wx.ListBox(choices=[],
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS, name=u'listaAlunos',
+              parent=self.window1, pos=wx.Point(832, 49), size=wx.Size(200,
+              367), style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick,
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
+        self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
+              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
 
         self._init_coll_notebook1_Pages(self.notebook1)
 
@@ -302,4 +290,7 @@ class FrameGerAlunos(wx.Frame):
         event.Skip()
 
     def OnSelecionarTurmaChoice(self, event):
+        event.Skip()
+
+
         event.Skip()
