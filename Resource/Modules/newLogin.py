@@ -48,7 +48,10 @@ class Login:
         self.setLogin(self.__result[0])
         self.setSenha(self.__result[1])
         self.setTipo(self.__result[2])
-        del self.__result
+        if self.getLogin() == None:
+            return False
+        else:
+            return True
 
     def salvarEdit(self, login, senha=None, tipo=None):
         """Salva uma edicao de login no BD"""

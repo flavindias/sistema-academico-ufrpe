@@ -270,9 +270,12 @@ def carregarLogin(login):
     """Carrega um Login no BD"""
     try:
         cursor.execute("select * from Login where login = '%s';" %(login))
-        self.__result = cursor.fetchone()
-        self.__result[1] = base64.b46decode(self.__result[1])
-        return self.__result
+        result = cursor.fetchone()
+        lista = []
+        lista.append(result[0])
+        lista.append(base64.b64decode(result[1]))
+        lista.append(result[1])
+        return lista
     except:
         return [None, None, None]
     
@@ -294,10 +297,7 @@ def getListDbLogin():
     """Busca todos os logins do BD"""
     try:
         cursor.execute("select * from Login;")
-        self.__result = cursor.fetchall()
-        for self.__i in range(len(self.__result)):
-            self.__result[i][1] = base64.b46decode(self.__result[i][1])
-        return self.__result
+        return cursor.fetchall()
     except:
         return None
     
@@ -305,7 +305,7 @@ def addLogin(login, senha, tipo):
     """Adiciona um login no BD"""
     try:
         if login!=None and senha!=None and tipo!=None and len(tipo)==3:
-            cursor.execute("insert into Login(login, senha, tipo) values ('%s', '%s', '%s');" %(login, senha, tipo))
+            cursor.execute("insert into Login(login, senha, tipo) values ('%s', '%s', '%s');" %(login, base64.b64encode(senha), tipo))
             return True
         else:
             return False
@@ -316,12 +316,13 @@ def deleteLogin(login):
     """Deleta um login do BD"""
     try:
         if login!=None:
-            cursor.execute("delete from Turma where login = '%s';" %(login))
+            cursor.execute("delete from Login where login = '%s';" %(login))
             return True
         else:
             return False
     except:
         return False
+
 
 ###TURMA_ALUNO###    
 def addTurma_Aluno(turma, aluno):
