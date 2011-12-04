@@ -1,0 +1,63 @@
+create table Professor (
+cpf char(11) not null,
+nome varchar(40) not null, 
+dat date not null,
+sexo tinyint unsigned not null,
+uf char(2) not null,
+cidade varchar(20) not null,
+bairro varchar(20) not null,
+rua varchar(40) not null,
+num int unsigned not null,
+comp varchar(100),
+telefone char(10) not null, 
+celular char(10) not null,
+primary key(cpf) );
+
+create table Aluno(
+cpf char(11) not null,
+nome varchar(40) not null, 
+dat date not null,
+sexo tinyint unsigned not null,
+uf char(2) not null,
+cidade varchar(20) not null,
+bairro varchar(20) not null,
+rua varchar(40) not null,
+num int unsigned not null,
+comp varchar(100),
+telefone char(10) not null, 
+celular char(10) not null,
+serie tinyint unsigned not null, 
+turno char(1) not null,
+primary key(cpf) );
+
+create table Disciplina (
+disciplina varchar(20) not null,
+professor char(11) not null,
+primary key (disciplina),
+constraint fk_professor foreign key (professor)
+references Professor(cpf) );
+
+create table Turma (
+turma char(3) not null,
+turno char(1) not null,
+disciplina1 varchar(20) not null,
+disciplina2 varchar(20) not null,
+disciplina3 varchar(20) not null,
+disciplina4 varchar(20) not null,
+disciplina5 varchar(20) not null,
+disciplina6 varchar(20) not null,
+primary key(turma),
+constraint fk_disciplina1 foreign key (disciplina1) references Disciplina(disciplina), 
+constraint fk_disciplina2 foreign key (disciplina2) references Disciplina(disciplina), 
+constraint fk_disciplina3 foreign key (disciplina3) references Disciplina(disciplina), 
+constraint fk_disciplina4 foreign key (disciplina4) references Disciplina(disciplina), 
+constraint fk_disciplina5 foreign key (disciplina5) references Disciplina(disciplina), 
+constraint fk_disciplina6 foreign key (disciplina6) references Disciplina(disciplina) );
+
+
+create table Turma_Aluno (
+aluno char(11) not null, 
+turma char(3) not null,
+primary key(aluno),
+constraint fk_aluno foreign key(aluno) references Aluno(cpf),
+constraint fk_turma foreign key(turma) references Turma(turma) )
