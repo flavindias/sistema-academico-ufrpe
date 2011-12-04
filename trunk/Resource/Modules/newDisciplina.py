@@ -43,7 +43,6 @@ class Disciplina:
         else:
             self.setDisciplina(self.__result[0])
             self.setProfessor(self.__result[1])
-            del self.__result
             return True
 
     def salvarEdit(self, disciplina, professor):
