@@ -135,30 +135,34 @@ class Aluno:
         self.setNome(self.__result[1])
         self.setData(str(self.__result[2]))
         self.setSexo(self.__result[3])
-        self.setUf(self.__result[4])
-        self.setCidade(self.__result[5])
-        self.setBairro(self.__result[6])
-        self.setRua(self.__result[7])
-        self.setNum(self.__result[8])
-        self.setComp(self.__result[9])
-        self.setTelefone(self.__result[10])
-        self.setCelular(self.__result[11])
-        self.setSerie(self.__result[12])
-        self.setTurno(self.__result[13])
-        del self.__result
+        self.setCep(self.__result[4])
+        self.setUf(self.__result[5])
+        self.setCidade(self.__result[6])
+        self.setBairro(self.__result[7])
+        self.setRua(self.__result[8])
+        self.setNum(self.__result[9])
+        self.setComp(self.__result[10])
+        self.setTelefone(self.__result[11])
+        self.setCelular(self.__result[12])
+        self.setSerie(self.__result[13])
+        self.setTurno(self.__result[14])
+        if self.getCpf()==None:
+            return False
+        else:
+            return True
 
-    def salvarEdit(self, cpf, nome=None, data=None, sexo=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None, serie=None, turno=None):
+    def salvarEdit(self, cpf, nome=None, data=None, sexo=None, cep=None, uf=None, cidade=None, bairro=None, rua=None, num=None, comp=None, telefone=None, celular=None, serie=None, turno=None):
         """Salva uma edicao no BD"""
-        return DataBase.editarAluno([cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno])
+        return DataBase.editarAluno([cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno])
 
     def listaDb(self):
         """Retorna uma lista com todos os Professores do DB"""
         return DataBase.getListDbAluno()
 
-    def add(self, cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, serie, turno, telefone=None, celular=None):
+    def add(self, cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, serie, turno, telefone=None, celular=None):
         """Adiciona um Aluno no BD"""
-        if cpf!= None and nome!=None and data!=None and sexo!=None and uf!=None and cidade!=None and bairro!=None and rua!=None and num!=None and comp!=None and serie!=None and turno!=None:
-            return DataBase.addAluno(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno)
+        if cpf!= None and nome!=None and data!=None and sexo!=None and cep!=None and uf!=None and cidade!=None and bairro!=None and rua!=None and num!=None and comp!=None and serie!=None and turno!=None:
+            return DataBase.addAluno(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno)
         else:
             return False
 
