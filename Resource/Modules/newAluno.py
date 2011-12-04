@@ -56,6 +56,9 @@ class Aluno:
     def setTurno(self, novoTurno):
         """Ajusta o turno preferencial do aluno"""
         self.__turno=novoTurno
+    def setCep(self, novoCep):
+        """Ajusta o cep"""
+        self.__cep = novoCep
     def getNome(self):
         """Retorna o nome"""
         return self.__nome
@@ -98,6 +101,9 @@ class Aluno:
     def getTurno(self):
         """Retorna o turno de preferencia do aluno"""
         return self.__turno
+    def getCep(self):
+        """Retorna o cep"""
+        return self.__cep
 
     def __init__(self, cpf = None):
         """Inicia uma nova instancia"""
@@ -106,6 +112,7 @@ class Aluno:
             self.setNome(None) #str len max 40
             self.setCpf(None) #str len 11
             self.setData(None) #str ex: ano-mes-dia
+            self.setCep(None) #str len 8
             self.setUf(None) #str len 2
             self.setCidade(None) #str len max 20
             self.setBairro(None) #str len max 20

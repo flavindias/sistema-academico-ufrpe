@@ -23,7 +23,7 @@ def carregarAluno(cpf):
         result = cursor.fetchone()
         return result
     except:
-        return [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+        return (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)
 
 def editarAluno(lista):
     """Edita dados do aluno no BD"""
@@ -70,20 +70,14 @@ def getListDbAluno():
 
 def addAluno(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno):
     """Adiciona um aluno no BD"""
-    if cursor.execute("select * from Aluno where cpf = '%s';" %(cpf)) == 0:
-        try:
-            if celular!=None and telefone!=None:    
-                cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s,' '%s', '%s', %s, '%s', '%s', '%s', %s, '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno))
-            if celular!=None and telefone==None:
-                cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s,' '%s', '%s', %s, '%s', null, '%s', %s, '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, celular, serie, turno))
-            if celular==None and telefone!=None:
-                cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s,' '%s', '%s', %s, '%s', '%s', null, %s, '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, serie, turno))
-            if celular==None and telefone==None:
-                cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s,' '%s', '%s', %s, '%s', null, null, %s, '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, serie, turno))
-            return True
-        except:
-            return False
-    else:
+    try:
+        cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', NULL, NULL, '%s', '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, serie, turno))
+        if celular!=None:
+            cursor.execute("update Aluno set celular = '%s' where cpf = '%s';" %(celular, cpf))
+        if telefone!=None:
+            cursor.execute("update Aluno set telefone = '%s' where cpf = '%s';" %(telefone, cpf))
+        return True
+    except:
         return False
 
 def deleteAluno(cpf):
@@ -93,6 +87,7 @@ def deleteAluno(cpf):
         return True
     except:
         return False
+
 
 ###PROFESSOR###
 def carregarProfessor(cpf):
@@ -148,9 +143,9 @@ def addProfessor(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp,
     try:
         cursor.execute("insert into Professor(cpf, nome, dat, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular) values ('%s', '%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', %s, '%s', NULL, NULL);" %(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp))
         if celular!=None:
-            cursor.execute("update Professor set celular = '%s';" %(celular))
+            cursor.execute("update Professor set celular = '%s' where cpf = '%s';" %(celular, cpf))
         if telefone!=None:
-            cursor.execute("update Professor set telefone = '%s';" %(telefone))
+            cursor.execute("update Professor set telefone = '%s' where cpf = '%s';" %(telefone, cpf))
         return True
     except:
         return False

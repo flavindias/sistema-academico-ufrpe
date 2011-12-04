@@ -131,7 +131,7 @@ class Professor:
         self.setComp(self.__result[10])
         self.setTelefone(self.__result[11])
         self.setCelular(self.__result[12])
-        if self.getCpf(self.__result[0])==None:
+        if self.getCpf()==None:
             return False
         else:
             return True
