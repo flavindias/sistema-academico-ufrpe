@@ -121,7 +121,7 @@ class Professor:
         self.setNome(self.__result[1])
         self.setData(self.__result[2])
         self.setSexo(self.__result[3])
-        self.setCpf(self.__result[4])
+        self.setCep(self.__result[4])
         self.setUf(self.__result[5])
         self.setCidade(self.__result[6])
         self.setBairro(self.__result[7])
