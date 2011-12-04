@@ -11,7 +11,7 @@
 #!/usr/bin/env python
 
 import DataBase
-import turma_aluno
+import Turma_Aluno
 
 class Turma:
     """Classe Turma"""
@@ -99,9 +99,8 @@ class Turma:
             self.setDisciplina4(self.__result[5])
             self.setDisciplina5(self.__result[6])
             self.setDisciplina6(self.__result[7])
-            self.__result = turma_aluno.carregar(turma)
+            self.__result = Turma_Aluno.carregar(turma)
             self.setAlunos(self.__result)
-            del self.__result
             return True
 
     def salvarEdit(self, turma, turno=None, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None):
@@ -110,15 +109,11 @@ class Turma:
 
     def listaDb(self):
         """Retorna uma lista com todas as Turmas cadastradas no BD"""
-        lista = DataBase.getListDbTurma()
-        if lista == None:
-            return ()
-        else:
-            return lista
+        return DataBase.getListDbTurma()            
 
     def listaDbAluno(self, turma):
         """Retorna uma lista com todos os alunos de uma tuma do BD"""
-        return DataBase.getListDbTurma_Aluno(turma)
+        self.setAlunos(Database.carregarTurma_Alunos(turma))
 
     def add(self, turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6):
         """Adiciona uma Turma no BD"""
@@ -126,5 +121,5 @@ class Turma:
 
     def delete(self, turma):
         """Deleta uma disciplina do BD"""
-        turma_aluno.delete(turma)
+        Turma_Aluno.delete(turma)
         return DataBase.deleteTurma(turma)

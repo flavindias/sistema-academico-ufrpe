@@ -238,9 +238,6 @@ def getListDbTurma():
     """Busca todas as turmas no BD"""
     cursor.execute("select * from Turma;")
     return cursor.fetchall()
-
-def getListDbTurma_Aluno(turma):
-    """Busca todos os alunos da turma no BD"""
     
 def addTurma(turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6):
     """Adiciona uma turma no BD"""
