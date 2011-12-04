@@ -23,7 +23,7 @@ def carregarAluno(cpf):
         result = cursor.fetchone()
         return result
     except:
-        return (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)
+        return [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
 
 def editarAluno(lista):
     """Edita dados do aluno no BD"""
