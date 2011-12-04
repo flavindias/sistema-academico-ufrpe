@@ -22,7 +22,7 @@ class Disciplina:
         self.__professor=novoProfessor
     def getDisciplina(self):
         """Retorna o nome da Disciplina"""
-        self.__disciplina
+        return self.__disciplina
     def getProfessor(self):
         """Retorna um documento do professor"""
         return self.__professor
@@ -41,7 +41,7 @@ class Disciplina:
         if self.__result == None:
             return False
         else:
-            self.setDisciplina(self.__result[0])
+            self.setDisciplina(disciplina)
             self.setProfessor(self.__result[1])
             return True
 
