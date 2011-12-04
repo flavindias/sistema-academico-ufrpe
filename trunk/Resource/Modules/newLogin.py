@@ -45,12 +45,12 @@ class Login:
     def carregar(self, login):
         """Carrega um login a partir do BD"""
         self.__result=DataBase.carregarLogin(login)
-        self.setLogin(self.__result[0])
-        self.setSenha(self.__result[1])
-        self.setTipo(self.__result[2])
-        if self.getLogin() == None:
+        if self.__result == None:
             return False
         else:
+            self.setLogin(self.__result[0])
+            self.setSenha(self.__result[1])
+            self.setTipo(self.__result[2])
             return True
 
     def salvarEdit(self, login, senha=None, tipo=None):

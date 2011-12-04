@@ -266,48 +266,10 @@ class FrameAddProfessor(wx.Frame):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+        self.buscarProf()
 
     def OnBotaoBuscarCPFButton(self, event):
-        prof = Professor()
-        
-        if self.campoCPF.GetValue() == '':
-            self.erroText.SetLabel('Preencha o campo CPF corretamente!')
-            return 0
-        else:
-            if prof.carregar(self.campoCPF.GetValue()):
-                None
-            else:
-                self.erroText.SetLabel('CPF nao encontrado!')
-                return 0
-        self.campoNascimento.SetValue(str(prof.getData()))
-        self.campoNome.SetValue(prof.getNome())
-        
-        if prof.getSexo == 2:
-            self.botaoFeminino.SetValue(True)
-        else:
-            self.botaoMasc.SetValue(True)
-            
-        self.campoCep.SetValue(str(prof.getCep()))
-        self.campoEndereco.SetValue(prof.getRua())
-        self.campoBairro.SetValue(prof.getBairro())
-        self.campoCidade.SetValue(prof.getCidade())
-        self.campoNumero.SetValue(str(prof.getNum()))
-        self.campoUF.SetValue(prof.getUf())
-        if prof.getComp() == None:
-            None
-        else:
-            self.campoComplemento.SetValue(prof.getComp())
-            
-        if prof.getTelefone() == None:
-            None
-        else:
-            self.campoFixo.SetValue(str(prof.getTelefone()))
-            
-        if prof.getCelular() == None:
-            None
-        else:
-            self.campoCelular.SetValue(str(prof.getCelular()))
-        self.erroText.SetLabel('Carregado com Sucesso!')
+        self.buscaCpfBox()
         event.Skip()
 
     def OnBotaoBuscarCEPButton(self, event):
@@ -397,14 +359,57 @@ class FrameAddProfessor(wx.Frame):
 
     def buscarProf(self):
         prof = Professor()
-        listaProf = prof.listaDb()
+        self.listaProf = prof.listaDb()
         listaBox = []
-        for i in listaProf:
-            prof.carregar(i)
-            listaBox += prof.getNome()
+        for i in self.listaProf:
+            listaBox += [i[1]]
         self.profListBox.Set(listaBox)
 
+    def buscaCpfBox(self):
+        prof = Professor()
+        
+        if self.campoCPF.GetValue() == '':
+            self.erroText.SetLabel('Preencha o campo CPF corretamente!')
+            return 0
+        else:
+            if prof.carregar(self.campoCPF.GetValue()):
+                None
+            else:
+                self.erroText.SetLabel('CPF nao encontrado!')
+                return 0
+        self.campoNascimento.SetValue(str(prof.getData()))
+        self.campoNome.SetValue(prof.getNome())
+        
+        if prof.getSexo == 2:
+            self.botaoFeminino.SetValue(True)
+        else:
+            self.botaoMasc.SetValue(True)
+            
+        self.campoCep.SetValue(str(prof.getCep()))
+        self.campoEndereco.SetValue(prof.getRua())
+        self.campoBairro.SetValue(prof.getBairro())
+        self.campoCidade.SetValue(prof.getCidade())
+        self.campoNumero.SetValue(str(prof.getNum()))
+        self.campoUF.SetValue(prof.getUf())
+        if prof.getComp() == None:
+            None
+        else:
+            self.campoComplemento.SetValue(prof.getComp())
+            
+        if prof.getTelefone() == None:
+            None
+        else:
+            self.campoFixo.SetValue(str(prof.getTelefone()))
+            
+        if prof.getCelular() == None:
+            None
+        else:
+            self.campoCelular.SetValue(str(prof.getCelular()))
+        self.erroText.SetLabel('Carregado com Sucesso!')
+
     def OnProfListBoxListboxDclick(self, event):
+        self.campoCPF.SetValue(self.listaProf[self.profListBox.GetSelections()[-1]][0])
+        self.buscaCpfBox()
         event.Skip()
 
     def OnProfListBoxListbox(self, event):
