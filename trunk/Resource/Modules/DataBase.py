@@ -38,19 +38,19 @@ def editarAluno(lista):
             if lista[3] != None:
                 cursor.execute("update Aluno set sexo = %s where cpf = '%s';" %(lista[3], lista[0]))
             if lista[4] != None:
-                cursor.execute("update Aluno set uf = '%s' where cpf = '%s';" %(lista[4], lista[0]))
+                cursor.execute("update Aluno set cep = '%s' where cpf = '%s';" %(lista[4], lista[0]))
             if lista[5] != None:
-                cursor.execute("update Aluno set cidade = '%s' where cpf = '%s';" %(lista[5], lista[0]))
+                cursor.execute("update Aluno set uf = '%s' where cpf = '%s';" %(lista[5], lista[0]))
             if lista[6] != None:
-                cursor.execute("update Aluno set bairro = '%s' where cpf = '%s';" %(lista[6], lista[0]))
+                cursor.execute("update Aluno set cidade = '%s' where cpf = '%s';" %(lista[6], lista[0]))
             if lista[7] != None:
-                cursor.execute("update Aluno set rua = '%s' where cpf = '%s';" %(lista[7], lista[0]))
+                cursor.execute("update Aluno set bairro = '%s' where cpf = '%s';" %(lista[7], lista[0]))
             if lista[8] != None:
-                cursor.execute("update Aluno set num = %s where cpf = '%s';" %(lista[8], lista[0]))
+                cursor.execute("update Aluno set rua = '%s' where cpf = '%s';" %(lista[8], lista[0]))
             if lista[9] != None:
-                cursor.execute("update Aluno set comp = '%s' where cpf = '%s';" %(lista[9], lista[0]))
+                cursor.execute("update Aluno set num = %s where cpf = '%s';" %(lista[9], lista[0]))
             if lista[10] != None:
-                cursor.execute("update Aluno set cidade = '%s' where cpf = '%s';" %(lista[10], lista[0]))
+                cursor.execute("update Aluno set comp = '%s' where cpf = '%s';" %(lista[10], lista[0]))
             if lista[11] != None:
                 cursor.execute("update Aluno set telefone = '%s' where cpf = '%s';" %(lista[11], lista[0]))
             if lista[12] != None:
