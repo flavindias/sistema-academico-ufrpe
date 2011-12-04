@@ -52,7 +52,11 @@ class Disciplina:
 
     def listaDb(self):
         """Returna uma lista com todos as disciplinas do BD"""
-        return DataBase.getListDbDisciplina()
+        lista = DataBase.getListDbDisciplina()
+        if lista == None:
+            return ()
+        else:
+            return lista
 
     def add(self, disciplina, professor):
         """Add uma disciplina no BD"""
