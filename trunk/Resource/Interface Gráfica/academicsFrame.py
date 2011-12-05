@@ -1,7 +1,7 @@
 #Boa:Frame:Sistema_Academico
 
 import wx
-import AppGerDisciplina
+import AppGerenciarProfessor
 import Logon
 
 def create(parent):
@@ -159,4 +159,7 @@ class Sistema_Academico(wx.Frame):
         event.Skip()
 
     def OnGerenciar_ProfessorButton(self, event):
+        self.Close(True)
+        AppGerenciarProfessor.iniciarProf()
+        exit()
         event.Skip()

@@ -3,6 +3,7 @@
 import wx
 import wx.lib.buttons
 import wx.richtext
+import academics
 import sys
 
 lista = sys.path[0].split('\\')
@@ -17,6 +18,7 @@ sys.path[0] = temp
 
 from newProfessor import Professor
 from Endereco import Endereco
+from newLogin import Login
 
 def create(parent):
     return FrameAddProfessor(parent)
@@ -49,8 +51,8 @@ class FrameAddProfessor(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEADDPROFESSOR,
-              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(557, 217),
-              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameAddProfessor', parent=prnt, pos=wx.Point(48, 16),
+              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Adicionar Professor - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.Center(wx.BOTH)
@@ -238,6 +240,8 @@ class FrameAddProfessor(wx.Frame):
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEADDPROFESSORBOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(368, 16),
               size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+        self.botaoVoltar.Bind(wx.EVT_BUTTON, self.OnBotaoVoltarButton,
+              id=wxID_FRAMEADDPROFESSORBOTAOVOLTAR)
 
         self.profStaticBox = wx.StaticBox(id=wxID_FRAMEADDPROFESSORPROFSTATICBOX,
               label=u'Professores', name=u'profStaticBox', parent=self.panel1,
@@ -268,6 +272,15 @@ class FrameAddProfessor(wx.Frame):
         self._init_ctrls(parent)
         self.buscarProf()
 
+    def verificador(self):
+        if '' in [self.campoCPF.GetValue(), self.campoNome.GetValue(), self.campoNascimento.GetValue(), self.campoCep.GetValue(), self.campoUF.GetValue(),
+                  self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), self.campoNumero.GetValue(),
+                  self.campoFixo.GetValue()]:
+            return False
+        else:
+            return True
+            
+    
     def OnBotaoBuscarCPFButton(self, event):
         self.buscaCpfBox()
         event.Skip()
@@ -285,46 +298,77 @@ class FrameAddProfessor(wx.Frame):
 
     def OnBotaoADDButton(self, event):
         prof = Professor()
+        login = Login()
         sexo = 0
 
         if self.campoCPF.GetValue() == '' or len(self.campoCPF.GetValue()) != 11:
+            self.erroText.SetLabel('Preencha o campo CPF corretamente!')
+            return 0
+        elif self.verificador() == False:
+            self.erroText.SetLabel('Preencha os campos corretamente!')
+            return 0
+        elif self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
+            self.erroText.SetLabel('Preencha o campo Senha corretamente!')
             return 0
         else:
             if self.botaoMasc.GetValue():
                 sexo = 1
             else:
                 sexo = 2
-            prof.add(self.campoCPF.GetValue(), self.campoNome.GetValue(), self.campoNascimento.GetValue(), sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
+            data = self.campoNascimento.GetValue().split('-')
+            nasc = ''
+            for i in range(len(data)-1, -1, -1):
+                if nasc == '':
+                    nasc += data[i]
+                else:
+                    nasc += '-' + data[i]
+            prof.add(self.campoCPF.GetValue(), self.campoNome.GetValue(), nasc, sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
                      self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), int(self.campoNumero.GetValue()),
                      self.campoComplemento.GetValue(), self.campoFixo.GetValue(), self.campoCelular.GetValue())
         
-        #if self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
-            #return 0
-        #else:
-            #login.setSenha(self.campoSenha.GetValue())
-        
-        #login.setTipo('PRF')
+            login.setSenha(self.campoSenha.GetValue())
+            login.add(self.campoCPF.GetValue(), login.getSenha(), 'PRF')
             
-        self.erroText.SetLabel('Adicionado com Sucesso!')
+            self.erroText.SetLabel('Adicionado com Sucesso!')
         self.zerar()
         
         event.Skip()
 
     def OnBotaoEditarButton(self, event):
         prof = Professor()
+        login = Login()
         sexo = 0
 
         if self.campoCPF.GetValue() == '' or len(self.campoCPF.GetValue()) != 11:
+            self.erroText.SetLabel('Preencha o campo CPF corretamente!')
+            return 0
+        elif self.verificador() == False:
+            self.erroText.SetLabel('Preencha os campos corretamente!')
+            return 0
+        elif self.campoSenha.GetValue() != self.campoConfirmeSenha.GetValue():
+            self.erroText.SetLabel('Preencha o campo Senha corretamente!')
             return 0
         else:
             if self.botaoMasc.GetValue():
                 sexo = 1
             else:
                 sexo = 2
-            prof.salvarEdit(self.campoCPF.GetValue(), self.campoNome.GetValue(), self.campoNascimento.GetValue(), sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
+            data = self.campoNascimento.GetValue().split('-')
+            nasc = ''
+            for i in range(len(data)-1, -1, -1):
+                if nasc == '':
+                    nasc += data[i]
+                else:
+                    nasc += '-' + data[i]
+            prof.salvarEdit(self.campoCPF.GetValue(), self.campoNome.GetValue(), nasc, sexo, self.campoCep.GetValue(), self.campoUF.GetValue(),
                             self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), int(self.campoNumero.GetValue()),
                             self.campoComplemento.GetValue(), self.campoFixo.GetValue(), self.campoCelular.GetValue())
-        self.erroText.SetLabel('Editado com Sucesso!')
+            if self.campoSenha.GetValue() != '' and self.campoConfirmeSenha.GetValue() != '':
+                None
+            else:
+                if login.carregar(self.campoCPF.GetValue()):
+                    login.salvarEdit(login.getLogin(), self.campoSenha.GetValue(), login.getTipo())
+            self.erroText.SetLabel('Editado com Sucesso!')
         self.zerar()
         event.Skip()
 
@@ -336,9 +380,11 @@ class FrameAddProfessor(wx.Frame):
                 self.erroText.SetLabel('Excluido com Sucesso!')
                 self.zerar()
             else:
-                None
+                self.erroText.SetLabel('CPF nao encontrado!')
+                return 0
         else:
-            None
+            self.erroText.SetLabel('Insira um CPF para excluir um Professor!')
+            return 0
         
         event.Skip()
     def zerar(self):
@@ -356,6 +402,7 @@ class FrameAddProfessor(wx.Frame):
         self.campoCelular.SetValue('')
         self.campoSenha.SetValue('')
         self.campoConfirmeSenha.SetValue('')
+        self.buscarProf()
 
     def buscarProf(self):
         prof = Professor()
@@ -377,7 +424,14 @@ class FrameAddProfessor(wx.Frame):
             else:
                 self.erroText.SetLabel('CPF nao encontrado!')
                 return 0
-        self.campoNascimento.SetValue(str(prof.getData()))
+        data = str(prof.getData()).split('-')
+        nasc = ''
+        for i in range(len(data)-1, -1, -1):
+            if nasc == '':
+                nasc += data[i]
+            else:
+                nasc += '-' + data[i]
+        self.campoNascimento.SetValue(nasc)
         self.campoNome.SetValue(prof.getNome())
         
         if prof.getSexo == 2:
@@ -413,4 +467,10 @@ class FrameAddProfessor(wx.Frame):
         event.Skip()
 
     def OnProfListBoxListbox(self, event):
+        event.Skip()
+
+    def OnBotaoVoltarButton(self, event):
+        self.Close(True)
+        academics.comeca()
+        exit()
         event.Skip()
