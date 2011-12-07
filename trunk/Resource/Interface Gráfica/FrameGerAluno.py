@@ -2,7 +2,9 @@
 
 import wx
 import wx.lib.buttons
+import sys
 
+original = sys.path[0]
 lista = sys.path[0].split('\\')
 temp = ''
 for i in range(len(lista)):
@@ -16,6 +18,7 @@ sys.path[0] = temp
 from newAluno import Aluno
 from Endereco import Endereco
 from newLogin import Login
+sys.path[0] = original
 
 def create(parent):
     return FrameGerAlunos(parent)
@@ -57,7 +60,7 @@ class FrameGerAlunos(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERALUNOS, name=u'FrameGerAlunos',
-              parent=prnt, pos=wx.Point(-4, 18), size=wx.Size(1370, 710),
+              parent=prnt, pos=wx.Point(4, 32), size=wx.Size(1362, 706),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Gerenciar Alunos')
         self.SetClientSize(wx.Size(1354, 672))
         self.Center(wx.BOTH)
@@ -287,12 +290,9 @@ class FrameGerAlunos(wx.Frame):
 
         self.listaAlunos = wx.ListBox(choices=[],
               id=wxID_FRAMEGERALUNOSLISTAALUNOS, name=u'listaAlunos',
-              parent=self.window1, pos=wx.Point(832, 49), size=wx.Size(200,
-              367), style=wx.LB_HSCROLL | wx.NO_BORDER)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK,
-              self.OnProfListBoxListboxDclick,
-              id=wxID_FRAMEGERALUNOSLISTAALUNOS)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
+              parent=self.window1, pos=wx.Point(832, 48), size=wx.Size(200,
+              368), style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK, self.OnAlunoListBoxDclick,
               id=wxID_FRAMEGERALUNOSLISTAALUNOS)
 
         self.nomeErro = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEERRO, label='',
@@ -304,6 +304,7 @@ class FrameGerAlunos(wx.Frame):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+        self.verificador = 0
 
     def OnBotaoBuscarCEPButton(self, event):
         endereco = Endereco()
@@ -319,25 +320,163 @@ class FrameGerAlunos(wx.Frame):
         event.Skip()
 
     def OnCaixaTurnoChoice(self, event):
+        if self.getSerie != 'false':
+            self.carregarAlunos(self.getSerie(), self.getTurno())
+            self.listaAlunos.Set(self.listaNome)
         event.Skip()
 
     def OnSexoFAlunoRadiobutton(self, event):
         event.Skip()
 
     def OnGenBitmapTextButtonExcluir(self, event):
+        aluno = Aluno()
+        try:
+            if str(int(self.campoCPFA)) == self.campoCPFA:
+                if aluno.delete(self.campoCPFA.GetValue()):
+                    None
+                    self.zerar()
+                else:
+                    None
+        except:
+            None
         event.Skip()
 
-    def OnProfListBoxListboxDclick(self, event):
-        event.Skip()
-
-    def OnProfListBoxListbox(self, event):
+    def OnAlunoListBoxDclick(self, event):
+        if self.listaAlunos.GetSelections()[-1] != -1:
+            self.campoCPFA.SetValue(self.listaA[self.listaAlunos.GetSelections()[-1]])
+            self.carregarDados()
         event.Skip()
 
     def OnSelecionarTurmaChoice(self, event):
         event.Skip()
 
     def OnBotaoSalvarButton(self, event):
+        aluno = Aluno()
+        try:
+            if self.verificador == 0:
+                try:
+                    if self.sexoMAluno.GetValue():
+                        sexo = 1
+                    else:
+                        sexo = 2
+                    num = int(self.campoNumero.GetValue())
+                    tel = str(int(self.campoTelefone.GetValue()))
+                    cel = str(int(self.campoCelular.GetValue()))
+                    aluno.add(str(int(self.campoCPFA.GetValue())), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
+                              self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
+                              self.getSerie(), self.getTurno(), tel, cel)
+                    self.zerar()
+                except:
+                    None
+            else:
+                try:
+                    if self.sexoMAluno.GetValue():
+                        sexo = 1
+                    else:
+                        sexo = 2
+                    num = int(self.campoNumero.GetValue())
+                    tel = str(int(self.campoTelefone.GetValue()))
+                    cel = str(int(self.campoCelular.GetValue()))
+                    aluno.salvarEdit(str(int(self.campoCPFA.GetValue())), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
+                              self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
+                              self.getSerie(), self.getTurno(), tel, cel)
+                    self.zerar()
+                except:
+                    None
+        except:
+            None
         event.Skip()
 
     def OnBotaoBuscarCPFAlunoButton(self, event):
+        self.carregarDados()
         event.Skip()
+
+    def carregarDados(self):
+        aluno = Aluno()
+        try:
+            if aluno.carregar(str(int(self.campoCPFA.GetValue()))):
+                self.campoCPFA.SetValue(aluno.getCpf())
+                self.campoNomeA.SetValue(aluno.getNome())
+                self.campoNascimentoA.SetValue(self.invertData(str(aluno.getData())))
+                if aluno.getSexo()== 1:
+                    self.sexoMAluno.SetValue(True)
+                else:
+                    self.sexoFAluno.SetValue(True)
+                self.campoCEP.SetValue(aluno.getCep())
+                self.campoUF.SetValue(aluno.getUf())
+                self.campoCidade.SetValue(aluno.getCidade())
+                self.campoBairro.SetValue(aluno.getBairro())
+                self.campoEndereco.SetValue(aluno.getRua())
+                self.campoNumero.SetValue(str(aluno.getNum()))
+                self.campoComplemento.SetValue(aluno.getComp())
+                self.campoTelefone.SetValue(aluno.getTelefone())
+                self.campoCelular.SetValue(aluno.getCelular())
+                #self.setSerie(aluno.getSerie())
+                self.setTurno(aluno.getTurno())
+                self.verificador = 1
+            else:
+                None
+        except:
+            None
+
+    def invertData(self, data):
+        nasc = ''
+        for i in range(len(data)-1, -1, -1):
+            if nasc == '':
+                nasc += data[i]
+            else:
+                nasc += '-' + data[i]
+        return nasc
+
+    def getTurno(self):
+        if self.caixaTurno.GetSelection() == 0:
+            return 'M'
+        elif self.caixaTurno.GetSelection() == 1:
+            return 'T'
+        elif self.caixaTurno.GetSelection() == 2:
+            return 'N'
+
+    def getSerie(self):
+        if self.selecionarSerie.GetSelection() in [0,1,7,12]:
+            return 'false'
+        else:
+            None
+
+    def setTurno(self, turno):
+        if turno == 'M':
+            self.caixaTurno.SetStringSelection('Manha')
+        elif turno == 'T':
+            self.caixaTurno.SetStringSelection('Tarde')
+        elif turno == 'N':
+            self.caixaTurno.SetStringSelection('Noite')
+
+    def setSerie(self, serie):
+        #self.selecionarSerie.SetStringSelection('')
+        None
+
+    def carregarAlunos(self, serie, turno):
+        aluno = Aluno()
+        tuplaA = aluno.listaDb()
+        self.listaA = []
+        self.listaNome = []
+        for i in tuplaA:
+            if i[13] == serie and i[14] == turno:
+                self.listaA += i[0]
+                self.listaNome += i[1]
+
+    def zerar(self):
+        self.campoCPFA.SetValue('')
+        self.campoNomeA.SetValue('')
+        self.campoNascimentoA.SetValue('')
+        self.campoCEP.SetValue('')
+        self.campoUF.SetValue('')
+        self.campoCidade.SetValue('')
+        self.campoBairro.SetValue('')
+        self.campoEndereco.SetValue('')
+        self.campoNumero.SetValue('')
+        self.campoComplemento.SetValue('')
+        self.campoTelefone.SetValue('')
+        self.campoCelular.SetValue('')
+        self.campoSenha.SetValue('')
+        self.campoConfirmeSenha.SetValue('')
+        self.verificador = 0

@@ -3,8 +3,9 @@
 import wx
 import wx.richtext
 import sys
-import academics
+import ponte
 
+original = sys.path[0]
 lista = sys.path[0].split('\\')
 temp = ''
 for i in range(len(lista)):
@@ -16,6 +17,7 @@ for i in range(len(lista)):
 sys.path[0] = temp
 
 from newLogin import Login
+sys.path[0] = original
 
 def create(parent):
     return frameLogin(parent)
@@ -108,7 +110,7 @@ class frameLogin(wx.Frame):
         if self.Logar.carregar(self.valorLogin):
             if self.valorSenha == self.Logar.getSenha(): #and self.Logar.getTipo() == 'ADM':
                 self.Close()
-                academics.comeca()
+                ponte.mainAcademicsFrameApp()
                 exit()
             else:
                 self.nomeErro.SetLabel('Login ou Senha Invalido!')

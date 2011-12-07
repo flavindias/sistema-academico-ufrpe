@@ -3,9 +3,10 @@
 import wx
 import wx.lib.buttons
 import wx.richtext
-import academics
+import ponte
 import sys
 
+original = sys.path[0]
 lista = sys.path[0].split('\\')
 temp = ''
 for i in range(len(lista)):
@@ -19,6 +20,7 @@ sys.path[0] = temp
 from newProfessor import Professor
 from Endereco import Endereco
 from newLogin import Login
+sys.path[0] = original
 
 def create(parent):
     return FrameAddProfessor(parent)
@@ -473,6 +475,6 @@ class FrameAddProfessor(wx.Frame):
 
     def OnBotaoVoltarButton(self, event):
         self.Close(True)
-        academics.comeca()
+        ponte.mainAcademicsFrameApp()
         exit()
         event.Skip()
