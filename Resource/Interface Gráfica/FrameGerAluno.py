@@ -24,15 +24,16 @@ def create(parent):
  wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO, wxID_FRAMEGERALUNOSBOTAOEXCLUIR, 
  wxID_FRAMEGERALUNOSBOTAOSALVAR, wxID_FRAMEGERALUNOSBOTAOVOLTAR, 
  wxID_FRAMEGERALUNOSBOXALUNOSMATRICULADOSNATURMA, 
- wxID_FRAMEGERALUNOSCAIXATURNO, wxID_FRAMEGERALUNOSCAMPOCELULAR, 
- wxID_FRAMEGERALUNOSCAMPOCEP, wxID_FRAMEGERALUNOSCAMPOCIDADE, 
- wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO, wxID_FRAMEGERALUNOSCAMPOCONFIRMESENHA, 
- wxID_FRAMEGERALUNOSCAMPOCPFA, wxID_FRAMEGERALUNOSCAMPOENDERECO, 
- wxID_FRAMEGERALUNOSCAMPONASCIMENTOA, wxID_FRAMEGERALUNOSCAMPONOMEA, 
- wxID_FRAMEGERALUNOSCAMPONUMERO, wxID_FRAMEGERALUNOSCAMPOSENHA, 
- wxID_FRAMEGERALUNOSCAMPOTELEFONE, wxID_FRAMEGERALUNOSCAMPOUF, 
- wxID_FRAMEGERALUNOSLISTAALUNOS, wxID_FRAMEGERALUNOSLOGOGERALUNOS, 
- wxID_FRAMEGERALUNOSNOMEALUNO, wxID_FRAMEGERALUNOSNOMECELULAR, 
+ wxID_FRAMEGERALUNOSCAIXATURNO, wxID_FRAMEGERALUNOSCAMPOBAIRRO, 
+ wxID_FRAMEGERALUNOSCAMPOCELULAR, wxID_FRAMEGERALUNOSCAMPOCEP, 
+ wxID_FRAMEGERALUNOSCAMPOCIDADE, wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO, 
+ wxID_FRAMEGERALUNOSCAMPOCONFIRMESENHA, wxID_FRAMEGERALUNOSCAMPOCPFA, 
+ wxID_FRAMEGERALUNOSCAMPOENDERECO, wxID_FRAMEGERALUNOSCAMPONASCIMENTOA, 
+ wxID_FRAMEGERALUNOSCAMPONOMEA, wxID_FRAMEGERALUNOSCAMPONUMERO, 
+ wxID_FRAMEGERALUNOSCAMPOSENHA, wxID_FRAMEGERALUNOSCAMPOTELEFONE, 
+ wxID_FRAMEGERALUNOSCAMPOUF, wxID_FRAMEGERALUNOSLISTAALUNOS, 
+ wxID_FRAMEGERALUNOSLOGOGERALUNOS, wxID_FRAMEGERALUNOSNOMEALUNO, 
+ wxID_FRAMEGERALUNOSNOMEBAIRRO, wxID_FRAMEGERALUNOSNOMECELULAR, 
  wxID_FRAMEGERALUNOSNOMECEP, wxID_FRAMEGERALUNOSNOMECIDADE, 
  wxID_FRAMEGERALUNOSNOMECOMPLEMENTO, wxID_FRAMEGERALUNOSNOMECONFIRMARSENHA, 
  wxID_FRAMEGERALUNOSNOMECPFALUNO, wxID_FRAMEGERALUNOSNOMEENDERECO, 
@@ -44,7 +45,7 @@ def create(parent):
  wxID_FRAMEGERALUNOSSENHAALUNO, wxID_FRAMEGERALUNOSSEXOFALUNO, 
  wxID_FRAMEGERALUNOSSEXOMALUNO, wxID_FRAMEGERALUNOSSTATICLINE1, 
  wxID_FRAMEGERALUNOSWINDOW1, 
-] = [wx.NewId() for _init_ctrls in range(46)]
+] = [wx.NewId() for _init_ctrls in range(48)]
 
 class FrameGerAlunos(wx.Frame):
     def _init_coll_notebook1_Pages(self, parent):
@@ -56,7 +57,7 @@ class FrameGerAlunos(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERALUNOS, name=u'FrameGerAlunos',
-              parent=prnt, pos=wx.Point(4, 32), size=wx.Size(1362, 706),
+              parent=prnt, pos=wx.Point(-4, 18), size=wx.Size(1370, 710),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Gerenciar Alunos')
         self.SetClientSize(wx.Size(1354, 672))
         self.Center(wx.BOTH)
@@ -74,6 +75,10 @@ class FrameGerAlunos(wx.Frame):
         self.window1 = wx.Window(id=wxID_FRAMEGERALUNOSWINDOW1, name='window1',
               parent=self.notebook1, pos=wx.Point(0, 0), size=wx.Size(1320,
               454), style=wx.TAB_TRAVERSAL)
+
+        self.nomebairro = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEBAIRRO,
+              label='Bairro:', name='nomebairro', parent=self.window1,
+              pos=wx.Point(324, 309), size=wx.Size(33, 13), style=0)
 
         self.nomeEndereco = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEENDERECO,
               label=u'Endereco:', name=u'nomeEndereco', parent=self.window1,
@@ -102,7 +107,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeComplemento = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECOMPLEMENTO,
               label=u'Complemento:', name=u'nomeComplemento',
-              parent=self.window1, pos=wx.Point(322, 308), size=wx.Size(70, 13),
+              parent=self.window1, pos=wx.Point(493, 308), size=wx.Size(70, 13),
               style=0)
 
         self.nomeAluno = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEALUNO,
@@ -130,10 +135,6 @@ class FrameGerAlunos(wx.Frame):
               label=u'Cidade:', name=u'nomeCidade', parent=self.window1,
               pos=wx.Point(448, 261), size=wx.Size(38, 13), style=0)
 
-        self.nomeCPFAluno = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECPFALUNO,
-              label=u'CPF:', name=u'nomeCPFAluno', parent=self.window1,
-              pos=wx.Point(318, 54), size=wx.Size(24, 13), style=0)
-
         self.logoGerAlunos = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/LogoAlunos.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSLOGOGERALUNOS,
               name=u'logoGerAlunos', parent=self.panel1, pos=wx.Point(434, 8),
@@ -158,6 +159,10 @@ class FrameGerAlunos(wx.Frame):
         self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
               id=wxID_FRAMEGERALUNOSBOTAOSALVAR)
 
+        self.nomeCPFAluno = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECPFALUNO,
+              label=u'CPF:', name=u'nomeCPFAluno', parent=self.window1,
+              pos=wx.Point(318, 54), size=wx.Size(24, 13), style=0)
+
         self.nomeUF = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEUF, label=u'UF:',
               name=u'nomeUF', parent=self.window1, pos=wx.Point(679, 259),
               size=wx.Size(18, 13), style=0)
@@ -174,19 +179,19 @@ class FrameGerAlunos(wx.Frame):
               name=u'campoCPFA', parent=self.window1, pos=wx.Point(323, 73),
               size=wx.Size(167, 21), style=0, value=u'')
 
-        self.botaoBuscarCPFAluno = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO,
-              label=u'Buscar', name=u'botaoBuscarCPFAluno', parent=self.window1,
-              pos=wx.Point(501, 72), size=wx.Size(56, 23), style=0)
-        self.botaoBuscarCPFAluno.Bind(wx.EVT_BUTTON,
-              self.OnBotaoBuscarCPFAlunoButton,
-              id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO)
-
         self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR,
               label=u'  Excluir   ', name=u'botaoExcluir', parent=self.panel1,
               pos=wx.Point(1110, 632), size=wx.Size(96, 32), style=0)
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnGenBitmapTextButtonExcluir,
               id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR)
+
+        self.botaoBuscarCPFAluno = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO,
+              label=u'Buscar', name=u'botaoBuscarCPFAluno', parent=self.window1,
+              pos=wx.Point(501, 72), size=wx.Size(56, 23), style=0)
+        self.botaoBuscarCPFAluno.Bind(wx.EVT_BUTTON,
+              self.OnBotaoBuscarCPFAlunoButton,
+              id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO)
 
         self.campoNascimentoA = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONASCIMENTOA,
               name=u'campoNascimentoA', parent=self.window1, pos=wx.Point(575,
@@ -247,9 +252,13 @@ class FrameGerAlunos(wx.Frame):
               name=u'campoCidade', parent=self.window1, pos=wx.Point(453, 278),
               size=wx.Size(211, 21), style=0, value=u'')
 
+        self.campoBairro = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOBAIRRO,
+              name='campoBairro', parent=self.window1, pos=wx.Point(329, 330),
+              size=wx.Size(149, 21), style=0, value='')
+
         self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
-              name=u'campoComplemento', parent=self.window1, pos=wx.Point(328,
-              330), size=wx.Size(392, 21), style=0, value=u'')
+              name=u'campoComplemento', parent=self.window1, pos=wx.Point(499,
+              330), size=wx.Size(221, 21), style=0, value=u'')
 
         self.campoUF = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOUF,
               name=u'campoUF', parent=self.window1, pos=wx.Point(688, 276),
