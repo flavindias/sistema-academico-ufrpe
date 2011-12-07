@@ -37,15 +37,15 @@ def create(parent):
  wxID_FRAMEGERALUNOSNOMECEP, wxID_FRAMEGERALUNOSNOMECIDADE, 
  wxID_FRAMEGERALUNOSNOMECOMPLEMENTO, wxID_FRAMEGERALUNOSNOMECONFIRMARSENHA, 
  wxID_FRAMEGERALUNOSNOMECPFALUNO, wxID_FRAMEGERALUNOSNOMEENDERECO, 
- wxID_FRAMEGERALUNOSNOMENASCIMENTO, wxID_FRAMEGERALUNOSNOMENUMERO, 
- wxID_FRAMEGERALUNOSNOMESERIE, wxID_FRAMEGERALUNOSNOMESEXOALUNO, 
- wxID_FRAMEGERALUNOSNOMETELEFONE, wxID_FRAMEGERALUNOSNOMETURNO, 
- wxID_FRAMEGERALUNOSNOMEUF, wxID_FRAMEGERALUNOSNOTEBOOK1, 
- wxID_FRAMEGERALUNOSPANEL1, wxID_FRAMEGERALUNOSSELECIONARSERIE, 
- wxID_FRAMEGERALUNOSSENHAALUNO, wxID_FRAMEGERALUNOSSEXOFALUNO, 
- wxID_FRAMEGERALUNOSSEXOMALUNO, wxID_FRAMEGERALUNOSSTATICLINE1, 
- wxID_FRAMEGERALUNOSWINDOW1, 
-] = [wx.NewId() for _init_ctrls in range(48)]
+ wxID_FRAMEGERALUNOSNOMEERRO, wxID_FRAMEGERALUNOSNOMENASCIMENTO, 
+ wxID_FRAMEGERALUNOSNOMENUMERO, wxID_FRAMEGERALUNOSNOMESERIE, 
+ wxID_FRAMEGERALUNOSNOMESEXOALUNO, wxID_FRAMEGERALUNOSNOMETELEFONE, 
+ wxID_FRAMEGERALUNOSNOMETURNO, wxID_FRAMEGERALUNOSNOMEUF, 
+ wxID_FRAMEGERALUNOSNOTEBOOK1, wxID_FRAMEGERALUNOSPANEL1, 
+ wxID_FRAMEGERALUNOSSELECIONARSERIE, wxID_FRAMEGERALUNOSSENHAALUNO, 
+ wxID_FRAMEGERALUNOSSEXOFALUNO, wxID_FRAMEGERALUNOSSEXOMALUNO, 
+ wxID_FRAMEGERALUNOSSTATICLINE1, wxID_FRAMEGERALUNOSWINDOW1, 
+] = [wx.NewId() for _init_ctrls in range(49)]
 
 class FrameGerAlunos(wx.Frame):
     def _init_coll_notebook1_Pages(self, parent):
@@ -78,7 +78,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomebairro = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEBAIRRO,
               label='Bairro:', name='nomebairro', parent=self.window1,
-              pos=wx.Point(324, 309), size=wx.Size(33, 13), style=0)
+              pos=wx.Point(325, 259), size=wx.Size(33, 13), style=0)
 
         self.nomeEndereco = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEENDERECO,
               label=u'Endereco:', name=u'nomeEndereco', parent=self.window1,
@@ -99,7 +99,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeNumero = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMENUMERO,
               label=u'Numero:', name=u'nomeNumero', parent=self.window1,
-              pos=wx.Point(323, 260), size=wx.Size(42, 13), style=0)
+              pos=wx.Point(323, 305), size=wx.Size(42, 13), style=0)
 
         self.nomeSexoAluno = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMESEXOALUNO,
               label=u'Sexo:', name=u'nomeSexoAluno', parent=self.window1,
@@ -133,7 +133,7 @@ class FrameGerAlunos(wx.Frame):
 
         self.nomeCidade = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMECIDADE,
               label=u'Cidade:', name=u'nomeCidade', parent=self.window1,
-              pos=wx.Point(448, 261), size=wx.Size(38, 13), style=0)
+              pos=wx.Point(497, 261), size=wx.Size(38, 13), style=0)
 
         self.logoGerAlunos = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/LogoAlunos.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSLOGOGERALUNOS,
@@ -244,25 +244,25 @@ class FrameGerAlunos(wx.Frame):
               name=u'campoEndereco', parent=self.window1, pos=wx.Point(327,
               228), size=wx.Size(392, 21), style=0, value=u'')
 
-        self.campoNumero = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONUMERO,
-              name=u'campoNumero', parent=self.window1, pos=wx.Point(328, 277),
-              size=wx.Size(94, 21), style=0, value=u'')
-
-        self.campoCidade = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCIDADE,
-              name=u'campoCidade', parent=self.window1, pos=wx.Point(453, 278),
-              size=wx.Size(211, 21), style=0, value=u'')
-
         self.campoBairro = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOBAIRRO,
-              name='campoBairro', parent=self.window1, pos=wx.Point(329, 330),
+              name='campoBairro', parent=self.window1, pos=wx.Point(330, 280),
               size=wx.Size(149, 21), style=0, value='')
 
-        self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
-              name=u'campoComplemento', parent=self.window1, pos=wx.Point(499,
-              330), size=wx.Size(221, 21), style=0, value=u'')
+        self.campoCidade = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCIDADE,
+              name=u'campoCidade', parent=self.window1, pos=wx.Point(500, 278),
+              size=wx.Size(162, 21), style=0, value=u'')
 
         self.campoUF = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOUF,
               name=u'campoUF', parent=self.window1, pos=wx.Point(688, 276),
               size=wx.Size(30, 21), style=0, value=u'')
+
+        self.campoNumero = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONUMERO,
+              name=u'campoNumero', parent=self.window1, pos=wx.Point(331, 322),
+              size=wx.Size(94, 21), style=0, value=u'')
+
+        self.campoComplemento = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOCOMPLEMENTO,
+              name=u'campoComplemento', parent=self.window1, pos=wx.Point(499,
+              330), size=wx.Size(221, 21), style=0, value=u'')
 
         self.campoTelefone = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOTELEFONE,
               name=u'campoTelefone', parent=self.window1, pos=wx.Point(328,
@@ -294,6 +294,11 @@ class FrameGerAlunos(wx.Frame):
               id=wxID_FRAMEGERALUNOSLISTAALUNOS)
         self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
               id=wxID_FRAMEGERALUNOSLISTAALUNOS)
+
+        self.nomeErro = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEERRO, label='',
+              name='nomeErro', parent=self.panel1, pos=wx.Point(552, 640),
+              size=wx.Size(0, 13), style=0)
+        self.nomeErro.SetAutoLayout(True)
 
         self._init_coll_notebook1_Pages(self.notebook1)
 
