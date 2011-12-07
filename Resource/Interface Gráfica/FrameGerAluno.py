@@ -3,6 +3,20 @@
 import wx
 import wx.lib.buttons
 
+lista = sys.path[0].split('\\')
+temp = ''
+for i in range(len(lista)):
+    if i != len(lista)-1:
+        temp += lista[i]
+        temp += '\\'
+    else:
+        temp += 'Modules'
+sys.path[0] = temp
+
+from newAluno import Aluno
+from Endereco import Endereco
+from newLogin import Login
+
 def create(parent):
     return FrameGerAlunos(parent)
 
@@ -42,7 +56,7 @@ class FrameGerAlunos(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERALUNOS, name=u'FrameGerAlunos',
-              parent=prnt, pos=wx.Point(535, 225), size=wx.Size(1370, 710),
+              parent=prnt, pos=wx.Point(4, 32), size=wx.Size(1362, 706),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Gerenciar Alunos')
         self.SetClientSize(wx.Size(1354, 672))
         self.Center(wx.BOTH)
@@ -141,6 +155,8 @@ class FrameGerAlunos(wx.Frame):
               label=u'       Salvar      ', name=u'botaoSalvar',
               parent=self.panel1, pos=wx.Point(1236, 630), size=wx.Size(104,
               34), style=0)
+        self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
+              id=wxID_FRAMEGERALUNOSBOTAOSALVAR)
 
         self.nomeUF = wx.StaticText(id=wxID_FRAMEGERALUNOSNOMEUF, label=u'UF:',
               name=u'nomeUF', parent=self.window1, pos=wx.Point(679, 259),
@@ -161,12 +177,15 @@ class FrameGerAlunos(wx.Frame):
         self.botaoBuscarCPFAluno = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO,
               label=u'Buscar', name=u'botaoBuscarCPFAluno', parent=self.window1,
               pos=wx.Point(501, 72), size=wx.Size(56, 23), style=0)
+        self.botaoBuscarCPFAluno.Bind(wx.EVT_BUTTON,
+              self.OnBotaoBuscarCPFAlunoButton,
+              id=wxID_FRAMEGERALUNOSBOTAOBUSCARCPFALUNO)
 
         self.botaoExcluir = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR,
               label=u'  Excluir   ', name=u'botaoExcluir', parent=self.panel1,
               pos=wx.Point(1110, 632), size=wx.Size(96, 32), style=0)
-        self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnGenBitmapTextButton1Button,
+        self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnGenBitmapTextButtonExcluir,
               id=wxID_FRAMEGERALUNOSBOTAOEXCLUIR)
 
         self.campoNascimentoA = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPONASCIMENTOA,
@@ -213,6 +232,8 @@ class FrameGerAlunos(wx.Frame):
         self.botaoBuscarCEP = wx.Button(id=wxID_FRAMEGERALUNOSBOTAOBUSCARCEP,
               label=u'Buscar CEP', name=u'botaoBuscarCEP', parent=self.window1,
               pos=wx.Point(644, 177), size=wx.Size(75, 23), style=0)
+        self.botaoBuscarCEP.Bind(wx.EVT_BUTTON, self.OnBotaoBuscarCEPButton,
+              id=wxID_FRAMEGERALUNOSBOTAOBUSCARCEP)
 
         self.campoEndereco = wx.TextCtrl(id=wxID_FRAMEGERALUNOSCAMPOENDERECO,
               name=u'campoEndereco', parent=self.window1, pos=wx.Point(327,
@@ -271,7 +292,16 @@ class FrameGerAlunos(wx.Frame):
         self._init_ctrls(parent)
 
     def OnBotaoBuscarCEPButton(self, event):
-        
+        endereco = Endereco()
+        try:
+            if endereco.getEnderecoNet(self.campoCep.GetValue()):
+                if endereco.getRua() != None and endereco.getBairro() != None:
+                    self.campoEndereco.SetValue(endereco.getRua())
+                    self.campoBairro.SetValue(endereco.getBairro())
+                self.campoCidade.SetValue(endereco.getCidade())
+                self.campoUF.SetValue(endereco.getUf())
+        except:
+            None
         event.Skip()
 
     def OnCaixaTurnoChoice(self, event):
@@ -280,7 +310,7 @@ class FrameGerAlunos(wx.Frame):
     def OnSexoFAlunoRadiobutton(self, event):
         event.Skip()
 
-    def OnGenBitmapTextButton1Button(self, event):
+    def OnGenBitmapTextButtonExcluir(self, event):
         event.Skip()
 
     def OnProfListBoxListboxDclick(self, event):
@@ -292,5 +322,8 @@ class FrameGerAlunos(wx.Frame):
     def OnSelecionarTurmaChoice(self, event):
         event.Skip()
 
+    def OnBotaoSalvarButton(self, event):
+        event.Skip()
 
+    def OnBotaoBuscarCPFAlunoButton(self, event):
         event.Skip()

@@ -1,7 +1,6 @@
 #Boa:Frame:Sistema_Academico
 
 import wx
-import AppGerenciarProfessor
 import Logon
 
 def create(parent):
