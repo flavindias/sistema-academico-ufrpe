@@ -2,8 +2,9 @@
 import sys
 import os
 import wx
-import academics
+import ponte
 
+original = sys.path[0]
 lista = sys.path[0].split('\\')
 temp = ''
 for i in range(len(lista)):
@@ -16,6 +17,7 @@ sys.path[0] = temp
 
 from newDisciplina import Disciplina
 from newProfessor import Professor
+sys.path[0] = original
 
 def create(parent):
     return frameGerDisciplina(parent)
@@ -140,7 +142,7 @@ class frameGerDisciplina(wx.Frame):
         
     def DiscReturnMenu(self, event):
         self.Close(True)
-        academics.comeca()
+        ponte.mainAcademicsFrameApp()
         exit()
         event.Skip()
 
