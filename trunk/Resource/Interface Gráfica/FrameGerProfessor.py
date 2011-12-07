@@ -287,13 +287,15 @@ class FrameAddProfessor(wx.Frame):
 
     def OnBotaoBuscarCEPButton(self, event):
         endereco = Endereco()
-        if endereco.getEnderecoNet(self.campoCep.GetValue()):
-            if endereco.getRua() != None and endereco.getBairro() != None:
-                self.campoEndereco.SetValue(endereco.getRua())
-                self.campoBairro.SetValue(endereco.getBairro())
-            self.campoCidade.SetValue(endereco.getCidade())
-            self.campoUF.SetValue(endereco.getUf())
-        
+        try:
+            if endereco.getEnderecoNet(self.campoCep.GetValue()):
+                if endereco.getRua() != None and endereco.getBairro() != None:
+                    self.campoEndereco.SetValue(endereco.getRua())
+                    self.campoBairro.SetValue(endereco.getBairro())
+                self.campoCidade.SetValue(endereco.getCidade())
+                self.campoUF.SetValue(endereco.getUf())
+        except:
+            self.erroText.SetLabel('Preencha o campo CEP corretamente!')
         event.Skip()
 
     def OnBotaoADDButton(self, event):
