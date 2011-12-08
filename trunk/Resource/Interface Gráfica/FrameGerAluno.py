@@ -3,6 +3,7 @@
 import wx
 import wx.lib.buttons
 import sys
+import ponte
 
 original = sys.path[0]
 lista = sys.path[0].split('\\')
@@ -153,6 +154,8 @@ class FrameGerAlunos(wx.Frame):
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(253, 12),
               size=wx.Size(48, 48), style=wx.BU_AUTODRAW)
+        self.botaoVoltar.Bind(wx.EVT_BUTTON, self.OnBotaoVoltarButton,
+              id=wxID_FRAMEGERALUNOSBOTAOVOLTAR)
 
         self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERALUNOSBOTAOSALVAR,
@@ -532,3 +535,9 @@ class FrameGerAlunos(wx.Frame):
         self.campoSenha.SetValue('')
         self.campoConfirmeSenha.SetValue('')
         self.verificador = 0
+
+    def OnBotaoVoltarButton(self, event):
+        self.Close(True)
+        ponte.mainAcademicsFrameApp()
+        exit()
+        event.Skip()
