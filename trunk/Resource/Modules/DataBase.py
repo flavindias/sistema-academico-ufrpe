@@ -68,10 +68,10 @@ def getListDbAluno():
     cursor.execute("select * from Aluno")
     return cursor.fetchall()
 
-def addAluno(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno):
+def addAluno(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno):
     """Adiciona um aluno no BD"""
     try:
-        cursor.execute("insert into Aluno(cpf, nome, dat, sexo, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', NULL, NULL, '%s', '%s');" %(cpf, nome, data, sexo, uf, cidade, bairro, rua, num, comp, serie, turno))
+        cursor.execute("insert into Aluno(cpf, nome, dat, sexo, cep, uf, cidade, bairro, rua, num, comp, telefone, celular, serie, turno) values ('%s', '%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', %s, '%s', NULL, NULL, '%s', '%s');" %(cpf, nome, data, sexo, cep, uf, cidade, bairro, rua, num, comp, serie, turno))
         if celular!=None:
             cursor.execute("update Aluno set celular = '%s' where cpf = '%s';" %(celular, cpf))
         if telefone!=None:
