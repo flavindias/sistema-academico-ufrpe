@@ -292,11 +292,19 @@ def editarLogin(login, senha, tipo):
     
 def getListDbLogin():
     """Busca todos os logins do BD"""
-    try:
-        cursor.execute("select * from Login;")
-        return cursor.fetchall()
-    except:
-        return None
+    #try:
+    cursor.execute("select * from Login;")
+    result=cursor.fetchall()
+    temp=[]
+    for i in result:
+        saida=[]
+        saida.append(i[0])
+        saida.append(base64.b64decode(i[1]))
+        saida.append(i[2])
+        temp.append(saida)
+    return temp
+    #except:
+     #   return None
     
 def addLogin(login, senha, tipo):
     """Adiciona um login no BD"""
