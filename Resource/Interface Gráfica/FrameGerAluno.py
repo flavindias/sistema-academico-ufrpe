@@ -352,6 +352,7 @@ class FrameGerAlunos(wx.Frame):
 
     def OnBotaoSalvarButton(self, event):
         aluno = Aluno()
+        login = Login()
         try:
             if self.verificador == 0:
                 try:
@@ -411,7 +412,7 @@ class FrameGerAlunos(wx.Frame):
                 self.campoComplemento.SetValue(aluno.getComp())
                 self.campoTelefone.SetValue(aluno.getTelefone())
                 self.campoCelular.SetValue(aluno.getCelular())
-                #self.setSerie(aluno.getSerie())
+                self.setSerie(aluno.getSerie())
                 self.setTurno(aluno.getTurno())
                 self.verificador = 1
             else:
@@ -440,7 +441,30 @@ class FrameGerAlunos(wx.Frame):
         if self.selecionarSerie.GetSelection() in [0,1,7,12]:
             return 'false'
         else:
-            None
+            if self.selecionarSerie.GetSelection() == 2:
+                return 'F1'
+            elif self.selecionarSerie.GetSelection() == 3:
+                return 'F2'
+            elif self.selecionarSerie.GetSelection() == 4:
+                return 'F3'
+            elif self.selecionarSerie.GetSelection() == 5:
+                return 'F4'
+            elif self.selecionarSerie.GetSelection() == 6:
+                return 'F5'
+            elif self.selecionarSerie.GetSelection() == 8:
+                return 'F6'
+            elif self.selecionarSerie.GetSelection() == 9:
+                return 'F7'
+            elif self.selecionarSerie.GetSelection() == 10:
+                return 'F8'
+            elif self.selecionarSerie.GetSelection() == 11:
+                return 'F9'
+            elif self.selecionarSerie.GetSelection() == 13:
+                return 'M1'
+            elif self.selecionarSerie.GetSelection() == 14:
+                return 'M2'
+            elif self.selecionarSerie.GetSelection() == 15:
+                return 'M3'
 
     def setTurno(self, turno):
         if turno == 'M':
@@ -452,7 +476,30 @@ class FrameGerAlunos(wx.Frame):
 
     def setSerie(self, serie):
         #self.selecionarSerie.SetStringSelection('')
-        None
+        if serie == 'F1':
+            self.selecionarSerie.SetStringSelection('          1 Ano')
+        elif serie == 'F2':
+            self.selecionarSerie.SetStringSelection('          2 Ano')
+        elif serie == 'F3':
+            self.selecionarSerie.SetStringSelection('          3 Ano')
+        elif serie == 'F4':
+            self.selecionarSerie.SetStringSelection('          4 Ano')
+        elif serie == 'F5':
+            self.selecionarSerie.SetStringSelection('          5 Ano')
+        elif serie == 'F6':
+            self.selecionarSerie.SetStringSelection('          6 Ano')
+        elif serie == 'F7':
+            self.selecionarSerie.SetStringSelection('          7 Ano')
+        elif serie == 'F8':
+            self.selecionarSerie.SetStringSelection('          8 Ano')
+        elif serie == 'F9':
+            self.selecionarSerie.SetStringSelection('          9 Ano')
+        elif serie == 'M1':
+            self.selecionarSerie.SetStringSelection('          1 Ano')
+        elif serie == 'M2':
+            self.selecionarSerie.SetStringSelection('          2 Ano')
+        elif serie == 'M3':
+            self.selecionarSerie.SetStringSelection('          3 Ano')
 
     def carregarAlunos(self, serie, turno):
         aluno = Aluno()
