@@ -188,7 +188,7 @@ class frameGerDisciplina(wx.Frame):
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
             if disc.carregar(self.nomeTextCtrl.GetValue()):
-                self.erroTextCtrl.SetValue('Disciplina ja existi!')
+                self.erroTextCtrl.SetValue('Disciplina ja existe!')
             else:
                 disc.setDisciplina(self.nomeTextCtrl.GetValue())
                 select = self.profChoice.GetSelection()
