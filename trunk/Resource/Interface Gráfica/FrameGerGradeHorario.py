@@ -37,8 +37,8 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONASERIE, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
- wxID_FRAMEGERENCIARHORARIOSTATICLINE1, wxID_FRAMEGERENCIARHORARIOTABELANOITE, 
- wxID_FRAMEGERENCIARHORARIOTABELATARDE, wxID_FRAMEGERENCIARHORARIOTEBELAMANHA, 
+ wxID_FRAMEGERENCIARHORARIOSTATICLINE1, wxID_FRAMEGERENCIARHORARIOTABELAMANHA, 
+ wxID_FRAMEGERENCIARHORARIOTABELANOITE, wxID_FRAMEGERENCIARHORARIOTABELATARDE, 
 ] = [wx.NewId() for _init_ctrls in range(50)]
 
 class FrameGerenciarHorario(wx.Frame):
@@ -49,8 +49,7 @@ class FrameGerenciarHorario(wx.Frame):
               190), size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
-        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',
-              wx.BITMAP_TYPE_ICO))
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
 
         self.panelGerenciarGradeHorario = wx.Panel(id=wxID_FRAMEGERENCIARHORARIOPANELGERENCIARGRADEHORARIO,
               name=u'panelGerenciarGradeHorario', parent=self, pos=wx.Point(0,
@@ -142,6 +141,8 @@ class FrameGerenciarHorario(wx.Frame):
               name=u'listaProfessores', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(24, 352), size=wx.Size(192, 184),
               style=wx.NO_BORDER)
+        self.listaProfessores.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL,
+              False, u'Tahoma'))
 
         self.nomeSelecineDia = wx.StaticText(id=wxID_FRAMEGERENCIARHORARIONOMESELECINEDIA,
               label=u'Selecione o Dia:', name=u'nomeSelecineDia',
@@ -158,18 +159,24 @@ class FrameGerenciarHorario(wx.Frame):
               label=u' Aplicar ', name=u'botaoAplicar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(414, 519),
               size=wx.Size(88, 30), style=0)
+        self.botaoAplicar.Bind(wx.EVT_BUTTON, self.OnBotaoAplicarButton,
+              id=wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR)
 
         self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR,
               label=u'   Salvar   ', name=u'botaoSalvar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(1168, 632),
               size=wx.Size(112, 30), style=0)
+        self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
+              id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR)
 
         self.botaoCancelar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR,
               label=u' Cancelar ', name=u'botaoCancelar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(304, 520),
               size=wx.Size(92, 30), style=0)
+        self.botaoCancelar.Bind(wx.EVT_BUTTON, self.OnBotaoCancelarButton,
+              id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR)
 
         self.selecionarAula = wx.Choice(choices=["1", "2", "3", "4", "5"],
               id=wxID_FRAMEGERENCIARHORARIOSELECIONARAULA,
@@ -185,128 +192,179 @@ class FrameGerenciarHorario(wx.Frame):
 
         self.campoSex5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX5,
               name=u'campoSex5', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1169, 528), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1169, 515), size=wx.Size(100, 44),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSex5.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSex4 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX4,
               name=u'campoSex4', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1169, 468), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1169, 462), size=wx.Size(100, 47),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSex4.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSex3 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX3,
               name=u'campoSex3', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1169, 419), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1169, 408), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSex3.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSex2 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX2,
               name=u'campoSex2', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1169, 364), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1169, 353), size=wx.Size(100, 47),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSex2.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSex1 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX1,
               name=u'campoSex1', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1169, 313), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1169, 299), size=wx.Size(100, 45),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSex1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQui4 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUI4,
               name=u'campoQui4', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1053, 468), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1053, 461), size=wx.Size(100, 50),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQui4.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQui3 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUI3,
               name=u'campoQui3', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1053, 419), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1053, 408), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQui3.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQui2 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUI2,
               name=u'campoQui2', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1053, 364), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1053, 352), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQui2.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQui1 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUI1,
               name=u'campoQui1', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1053, 313), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1053, 300), size=wx.Size(100, 45),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQui1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQui5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUI5,
               name=u'campoQui5', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(1053, 528), size=wx.Size(100, 27),
-              style=wx.NO_BORDER, value=u'')
+              pos=wx.Point(1053, 516), size=wx.Size(100, 46),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQui5.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQua5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUA5,
               name=u'campoQua5', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(937, 528), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(937, 516), size=wx.Size(100, 44),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQua5.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQua4 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUA4,
               name=u'campoQua4', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(937, 468), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(937, 461), size=wx.Size(100, 44),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQua4.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
+        self.campoQua4.SetToolTipString(u'campoQua4')
 
         self.campoQua3 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUA3,
               name=u'campoQua3', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(937, 419), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(937, 408), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQua3.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQua2 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUA2,
               name=u'campoQua2', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(937, 364), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(937, 353), size=wx.Size(100, 47),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQua2.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoQua1 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOQUA1,
               name=u'campoQua1', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(937, 313), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(937, 301), size=wx.Size(100, 45),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoQua1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoTer1 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOTER1,
               name=u'campoTer1', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(819, 313), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(819, 299), size=wx.Size(100, 45),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoTer1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoTer2 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOTER2,
               name=u'campoTer2', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(819, 364), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(819, 352), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoTer2.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoTer3 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOTER3,
               name=u'campoTer3', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(819, 419), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(819, 408), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoTer3.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoTer4 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOTER4,
               name=u'campoTer4', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(819, 468), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(819, 460), size=wx.Size(100, 52),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoTer4.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoTer5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOTER5,
               name=u'campoTer5', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(819, 528), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(819, 516), size=wx.Size(100, 46),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoTer5.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSeg5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEG5,
               name=u'campoSeg5', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(701, 528), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(701, 514), size=wx.Size(100, 46),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSeg5.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSeg4 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEG4,
               name=u'campoSeg4', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(701, 468), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(702, 464), size=wx.Size(100, 45),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSeg4.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSeg3 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEG3,
               name=u'campoSeg3', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(701, 419), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(703, 408), size=wx.Size(100, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSeg3.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSeg2 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEG2,
               name=u'campoSeg2', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(701, 364), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(699, 352), size=wx.Size(105, 48),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSeg2.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.campoSeg1 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEG1,
               name=u'campoSeg1', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(701, 313), size=wx.Size(100, 27), style=wx.NO_BORDER,
-              value=u'')
+              pos=wx.Point(699, 303), size=wx.Size(105, 41),
+              style=wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER, value=u'')
+        self.campoSeg1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
 
         self.tabelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTEBELAMANHA,
@@ -351,4 +409,13 @@ class FrameGerenciarHorario(wx.Frame):
             self.tabelaNoite.Show(True)
             self.tabelaTarde.Show(False)
                     
+        event.Skip()
+
+    def OnBotaoAplicarButton(self, event):
+        event.Skip()
+
+    def OnBotaoSalvarButton(self, event):
+        event.Skip()
+
+    def OnBotaoCancelarButton(self, event):
         event.Skip()
