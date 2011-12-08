@@ -3,6 +3,7 @@
 import wx
 import wx.lib.buttons
 import sys
+import ponte
 
 original = sys.path[0]
 lista = sys.path[0].split('\\')
@@ -16,7 +17,9 @@ for i in range(len(lista)):
 sys.path[0] = temp
 
 from newAluno import Aluno
+from newDisciplina import Disciplina
 from newTurma import Turma
+from newProfessor import Professor
 sys.path[0] = original
 
 def create(parent):
@@ -167,6 +170,7 @@ class FrameGerTurmaAlunos(wx.Frame):
               id=wxID_FRAMEGERTURMAALUNOSCHOICETURMA, name=u'choiceTurma',
               parent=self.panel1, pos=wx.Point(754, 173), size=wx.Size(130, 21),
               style=0)
+        self.choiceTurma.SetStringSelection(u'A')
         self.choiceTurma.Bind(wx.EVT_CHOICE, self.OnChoiceTurmaChoice,
               id=wxID_FRAMEGERTURMAALUNOSCHOICETURMA)
 
@@ -243,6 +247,11 @@ class FrameGerTurmaAlunos(wx.Frame):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+        self.listaAlTurmaId = []
+        self.listaAlTurmaNome = []
+        self.listaDiscTurma = []
+        self.carregarDisciplinas()
+        self.carregarAlunos()
 
     def OnDiscNaTurmaListboxDclick(self, event):
         event.Skip()
@@ -254,6 +263,13 @@ class FrameGerTurmaAlunos(wx.Frame):
         event.Skip()
 
     def OnChoiceSerie(self, event):
+        turma = Turma()
+        if self.getSerie() != 'false':
+            turmaId = self.getSerie() + self.getTurma()
+            if turma.carregar(turmaId):
+                self.carregarAlunosTurma(turmaId)
+                self.carregarDisciplinasTurma(turmaId)
+                
         event.Skip()
 
     def OnChoiceTurnoChoice(self, event):
@@ -266,6 +282,13 @@ class FrameGerTurmaAlunos(wx.Frame):
         event.Skip()
 
     def OnChoiceTurmaChoice(self, event):
+        turma = Turma()
+        if self.getSerie() != 'false':
+            turmaId = self.getSerie() + self.getTurma()
+            if turma.carregar(turmaId):
+                self.carregarAlunosTurma(turmaId)
+                self.carregarDisciplinasTurma(turmaId)
+                
         event.Skip()
 
     def OnAlunosMatriculadosListboxDclick(self, event):
@@ -282,3 +305,133 @@ class FrameGerTurmaAlunos(wx.Frame):
 
     def OnBotaoVoltarButton(self, event):
         event.Skip()
+
+    def carregarDisciplinas(self):
+        disc = Disciplina()
+        prof = Professor()
+        self.listDisc = disc.listaDb()
+        self.listDiscBox = []
+        for i in self.listDisc:
+            prof.carregar(i[1])
+            self.listDiscBox += [str(i[0]) + ' - ' + str(prof.getNome())]
+        self.listaDisciplinasTodas.Set(self.listDiscBox)
+
+    def carregarAlunos(self):
+        aluno = Aluno()
+        self.carregarAlunoComTurma()
+        lista = aluno.listaDb()
+        self.listaAlunos = []
+        self.listaAlunosBox = []
+        for i in lista:
+            if i[0] in self.alunosComTurma:continue
+            else:
+                self.listaAlunosBox += [i[1]]
+                self.listaAlunos +=[i[0]]
+        self.listaAlunosTodos.Set(self.listaAlunosBox)
+
+    def salvarAlunosTurma(self, alunoId):
+        aluno = Aluno()
+        if aluno.carregar(alunoId):
+            self.listaAlTurmaId += [alunoId]
+            self.listaAlTurmaNome += [aluno.getNome()]
+        self.listaAlunosSelecionados.Set(self.listaAlTurmaNome)
+
+    def salvarDisciplinasTurma(self, DiscId):
+        self.listaDiscTurma += [DiscId]
+        self.listaDisciplinasSelecionadas.Set(self.listaDiscTurma)
+
+    def excluirAlunosTurma(self, alunoId):
+        aluno = Aluno()
+        self.listaAlTurmaId.remove(alunoId)
+        self.listaAlTurmaNome.remove(aluno.getNome())
+
+    def excluirDisciplinasTurma(self, DiscId):
+        self.listaDiscTurma.remove(DiscId)
+
+    def carregarAlunosTurma(self, turma):
+        turma = Turma()
+        aluno = Aluno()
+        self.listaAlTurmaNome = []
+        turma.carregarAluno(turma)
+        self.listaAlTurmaId = turma.getAlunos()
+        for i in self.listaAlTurmaId:
+            if aluno.carregar(i):
+                self.listaAlTurmaNome += [aluno.getNome()]
+        self.listaAlunosSelecionados.Set(self.listaAlTurmaNome)
+
+    def carregarDisciplinasTurma(self, turmaId):
+        turma = Turma()
+        disc = Disciplina()
+        self.listaDiscTurma = []
+        turma.carregar(turmaId)
+        if turma.getDisciplina1() != None and disc.carregar(turma.getDisciplina1()):
+            self.listaDiscTurma += [turma.getDisciplina1()]
+        if turma.getDisciplina2() != None and disc.carregar(turma.getDisciplina2()):
+            self.listaDiscTurma += [turma.getDisciplina2()]
+        if turma.getDisciplina3() != None and disc.carregar(turma.getDisciplina3()):
+            self.listaDiscTurma += [turma.getDisciplina3()]
+        if turma.getDisciplina4() != None and disc.carregar(turma.getDisciplina4()):
+            self.listaDiscTurma += [turma.getDisciplina4()]
+        if turma.getDisciplina5() != None and disc.carregar(turma.getDisciplina5()):
+            self.listaDiscTurma += [turma.getDisciplina5()]
+        if turma.getDisciplina6() != None and disc.carregar(turma.getDisciplina6()):
+            self.listaDiscTurma += [turma.getDisciplina6()]
+
+        self.listaDisciplinasSelecionadas.Set(self.listaDiscTurma)
+
+    def carregarAlunoComTurma(self):
+        turma = Turma()
+        listaTurma = turma.listaDb()
+        self.alunosComTurma = []
+        for i in listaTurma:
+            turma.carregarAluno(i[0])
+            self.alunosComTurma += turma.getAlunos()
+
+    def getTurno(self):
+        if self.choiceTurno.GetSelection() == 0:
+            return 'M'
+        elif self.choiceTurno.GetSelection() == 1:
+            return 'T'
+        elif self.choiceTurno.GetSelection() == 2:
+            return 'N'
+
+    def getSerie(self):
+        if self.choiceSerie.GetSelection() in [0,1,7,12]:
+            return 'false'
+        else:
+            if self.choiceSerie.GetSelection() == 2:
+                return 'F1'
+            elif self.choiceSerie.GetSelection() == 3:
+                return 'F2'
+            elif self.choiceSerie.GetSelection() == 4:
+                return 'F3'
+            elif self.choiceSerie.GetSelection() == 5:
+                return 'F4'
+            elif self.choiceSerie.GetSelection() == 6:
+                return 'F5'
+            elif self.choiceSerie.GetSelection() == 8:
+                return 'F6'
+            elif self.choiceSerie.GetSelection() == 9:
+                return 'F7'
+            elif self.choiceSerie.GetSelection() == 10:
+                return 'F8'
+            elif self.choiceSerie.GetSelection() == 11:
+                return 'F9'
+            elif self.choiceSerie.GetSelection() == 13:
+                return 'M1'
+            elif self.choiceSerie.GetSelection() == 14:
+                return 'M2'
+            elif self.choiceSerie.GetSelection() == 15:
+                return 'M3'
+
+    def getTurma(self):
+        if self.choiceTurma.GetSelection() == 0:
+            return 'A'
+        elif self.choiceTurma.GetSelection() == 1:
+            return 'B'
+        elif self.choiceTurma.GetSelection() == 2:
+            return 'C'
+        elif self.choiceTurma.GetSelection() == 1:
+            return 'D'
+        elif self.choiceTurma.GetSelection() == 2:
+            return 'E'

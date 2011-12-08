@@ -102,13 +102,14 @@ class FrameGerenciarHorario(wx.Frame):
               id=wxID_FRAMEGERENCIARHORARIOSELECIONASERIE,
               name=u'selecionaSerie', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(33, 229), size=wx.Size(140, 27), style=0)
-        self.selecionaSerie.SetStringSelection(u"'Selecione a serie'")
+        self.selecionaSerie.SetStringSelection(u'Selecione a serie')
         self.selecionaSerie.SetToolTipString(u'selecionaSerie')
 
         self.selecionaTurno = wx.Choice(choices=["Manha", "Tarde", "Noite"],
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO,
               name=u'selecionaTurno', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(202, 228), size=wx.Size(140, 27), style=0)
+        self.selecionaTurno.SetStringSelection(u'Manha')
         self.selecionaTurno.Bind(wx.EVT_CHOICE, self.OnSelecionaTurnoChoice,
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO)
 
@@ -116,7 +117,7 @@ class FrameGerenciarHorario(wx.Frame):
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURMA,
               name=u'selecionaTurma', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(373, 229), size=wx.Size(140, 27), style=0)
-        self.selecionaTurma.SetStringSelection(u'"A"')
+        self.selecionaTurma.SetStringSelection(u'A')
         self.selecionaTurma.SetThemeEnabled(True)
         self.selecionaTurma.Bind(wx.EVT_CHOICE, self.OnSelecionaTurmaChoice,
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURMA)
@@ -174,11 +175,13 @@ class FrameGerenciarHorario(wx.Frame):
               id=wxID_FRAMEGERENCIARHORARIOSELECIONARAULA,
               name=u'selecionarAula', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(306, 432), size=wx.Size(140, 27), style=0)
+        self.selecionarAula.SetStringSelection(u'1')
 
         self.selecionadorDia = wx.Choice(choices=["Segunda", "Terca", "Quarta",
               "Quinta", "Sexta"], id=wxID_FRAMEGERENCIARHORARIOSELECIONADORDIA,
               name=u'selecionadorDia', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(303, 359), size=wx.Size(140, 27), style=0)
+        self.selecionadorDia.SetStringSelection(u'Segunda')
 
         self.campoSex5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX5,
               name=u'campoSex5', parent=self.panelGerenciarGradeHorario,
@@ -305,11 +308,11 @@ class FrameGerenciarHorario(wx.Frame):
               pos=wx.Point(701, 313), size=wx.Size(100, 27), style=wx.NO_BORDER,
               value=u'')
 
-        self.tebelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
+        self.tabelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTEBELAMANHA,
               name=u'tebelaManha', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(568, 240), size=wx.Size(722, 332), style=0)
-        self.tebelaManha.Show(False)
+        self.tabelaManha.Show(False)
 
         self.tabelaTarde = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeTarde.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTABELATARDE,
@@ -334,24 +337,18 @@ class FrameGerenciarHorario(wx.Frame):
 
     def OnSelecionaTurnoChoice(self, event):
         if self.selecionaTurno.GetSelection()  == 0:
-            self.tebelaManha.Show(True)
-            self.tebelaNoite.Show(False)
-            self.tebelaTarde.Show(False)
+            self.tabelaManha.Show(True)
+            self.tabelaNoite.Show(False)
+            self.tabelaTarde.Show(False)
 
         elif self.selecionaTurno.GetSelection()  == 1:
-            self.tebelaTarde.Show(True)
-            self.tebelaManha.Show(False)               
-            self.tebelaNoite.Show(False)
+            self.tabelaManha.Show(False)
+            self.tabelaNoite.Show(False)
+            self.tabelaTarde.Show(True)
 
         elif self.selecionaTurno.GetSelection()  == 2:
-            self.tebelaNoite.Show(True)
-            self.tebelaManha.Show(False)
-            self.tebelaTarde.Show(False)
-            
-        else:
-            self.tebelaManha.Show(False)
-            self.tebelaTarde.Show(False)
-            self.tebelaNoite.Show(False)
-            
+            self.tabelaManha.Show(False)
+            self.tabelaNoite.Show(True)
+            self.tabelaTarde.Show(False)
                     
         event.Skip()

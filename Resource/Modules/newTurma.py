@@ -123,8 +123,10 @@ class Turma:
 
     def delete(self, turma):
         """Deleta uma disciplina do BD"""
-        for self.__i in self.getAlunos():
-            self.deleteAluno(self.__i)
+        self.carregarAluno(turma)
+        if self.getAlunos() != None:
+            for self.__i in self.getAlunos():
+                self.deleteAluno(self.__i)
         self.deleteHorario(turma)
         return DataBase.deleteTurma(turma)
 
