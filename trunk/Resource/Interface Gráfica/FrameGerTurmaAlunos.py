@@ -6,14 +6,18 @@ import wx.lib.buttons
 def create(parent):
     return Frame1(parent)
 
-[wxID_FRAME1, wxID_FRAME1BOTAOADICIONAR, wxID_FRAME1BOTAOEXCLUIRTURMA, 
- wxID_FRAME1BOTAOREMOVER, wxID_FRAME1BOTAOSALVARTURMA, 
- wxID_FRAME1CAIXAALUNOSTODOS, wxID_FRAME1CAIXAALUNOSTURMA, wxID_FRAME1CHOICE1, 
- wxID_FRAME1CHOICE2, wxID_FRAME1ESCOLHATURMA, wxID_FRAME1LISTAALUNOS, 
- wxID_FRAME1LISTBOX1, wxID_FRAME1LOGOACADEMIC, wxID_FRAME1NOMESERIE, 
- wxID_FRAME1NOMETURMA, wxID_FRAME1NOMETURNO, wxID_FRAME1PANEL1, 
- wxID_FRAME1STATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(18)]
+[wxID_FRAME1, wxID_FRAME1BOTAOADDDISCIPLINA, wxID_FRAME1BOTAOADICIONARALUNO, 
+ wxID_FRAME1BOTAODELDISCIPLINA, wxID_FRAME1BOTAOEXCLUIRTURMA, 
+ wxID_FRAME1BOTAOREMOVERALUNO, wxID_FRAME1BOTAOSALVARTURMA, 
+ wxID_FRAME1BOTAOVOLTAR, wxID_FRAME1CAIXAALUNOS, wxID_FRAME1CAIXAALUNOSTODOS, 
+ wxID_FRAME1CAIXAALUNOSTURMA, wxID_FRAME1CAIXADISCIPLINAS, 
+ wxID_FRAME1CAIXADISCIPLINASSELECIONADAS, wxID_FRAME1CAIXATODASDISCIPLINAS, 
+ wxID_FRAME1CHOICE1, wxID_FRAME1CHOICE2, wxID_FRAME1ESCOLHATURMA, 
+ wxID_FRAME1LISTAALUNOSSELECIONADOS, wxID_FRAME1LISTAALUNOSTODOS, 
+ wxID_FRAME1LISTADISCIPLINASSELECIONADAS, wxID_FRAME1LISTADISCIPLINASTODAS, 
+ wxID_FRAME1LOGOACADEMIC, wxID_FRAME1NOMESERIE, wxID_FRAME1NOMETURMA, 
+ wxID_FRAME1NOMETURNO, wxID_FRAME1PANEL1, wxID_FRAME1STATICLINE1, 
+] = [wx.NewId() for _init_ctrls in range(27)]
 
 class Frame1(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -33,7 +37,7 @@ class Frame1(wx.Frame):
         self.caixaAlunosTurma = wx.StaticBox(id=wxID_FRAME1CAIXAALUNOSTURMA,
               label=u'Alunos Na Turma:', name=u'caixaAlunosTurma',
               parent=self.panel1, pos=wx.Point(782, 216), size=wx.Size(256,
-              424), style=0)
+              184), style=0)
 
         self.choice1 = wx.Choice(choices=['Selecione a serie', 'Fundamental I',
               '          1 Ano', '          2 Ano', '          3 Ano',
@@ -62,38 +66,47 @@ class Frame1(wx.Frame):
               name=u'nomeTurno', parent=self.panel1, pos=wx.Point(602, 157),
               size=wx.Size(33, 13), style=0)
 
-        self.listaAlunos = wx.ListBox(choices=[], id=wxID_FRAME1LISTAALUNOS,
-              name=u'listaAlunos', parent=self.panel1, pos=wx.Point(293, 232),
-              size=wx.Size(235, 400), style=wx.LB_HSCROLL | wx.NO_BORDER)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX_DCLICK,
-              self.OnProfListBoxListboxDclick, id=wxID_FRAME1LISTAALUNOS)
-        self.listaAlunos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
-              id=wxID_FRAME1LISTAALUNOS)
+        self.listaDisciplinasSelecionadas = wx.ListBox(choices=[],
+              id=wxID_FRAME1LISTADISCIPLINASSELECIONADAS,
+              name=u'listaDisciplinasSelecionadas', parent=self.panel1,
+              pos=wx.Point(791, 475), size=wx.Size(244, 136),
+              style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaDisciplinasSelecionadas.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick,
+              id=wxID_FRAME1LISTADISCIPLINASSELECIONADAS)
+        self.listaDisciplinasSelecionadas.Bind(wx.EVT_LISTBOX,
+              self.OnProfListBoxListbox,
+              id=wxID_FRAME1LISTADISCIPLINASSELECIONADAS)
 
-        self.listBox1 = wx.ListBox(choices=[], id=wxID_FRAME1LISTBOX1,
-              name='listBox1', parent=self.panel1, pos=wx.Point(792, 232),
-              size=wx.Size(233, 400), style=wx.LB_HSCROLL | wx.NO_BORDER)
-        self.listBox1.Bind(wx.EVT_LISTBOX_DCLICK,
-              self.OnProfListBoxListboxDclick, id=wxID_FRAME1LISTBOX1)
-        self.listBox1.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
-              id=wxID_FRAME1LISTBOX1)
+        self.listaAlunosSelecionados = wx.ListBox(choices=[],
+              id=wxID_FRAME1LISTAALUNOSSELECIONADOS,
+              name=u'listaAlunosSelecionados', parent=self.panel1,
+              pos=wx.Point(789, 234), size=wx.Size(241, 160),
+              style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaAlunosSelecionados.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick,
+              id=wxID_FRAME1LISTAALUNOSSELECIONADOS)
+        self.listaAlunosSelecionados.Bind(wx.EVT_LISTBOX,
+              self.OnProfListBoxListbox, id=wxID_FRAME1LISTAALUNOSSELECIONADOS)
 
         self.caixaAlunosTodos = wx.StaticBox(id=wxID_FRAME1CAIXAALUNOSTODOS,
               label=u'Alunos Matriculados', name=u'caixaAlunosTodos',
               parent=self.panel1, pos=wx.Point(285, 216), size=wx.Size(256,
-              424), style=0)
+              184), style=0)
 
-        self.botaoAdicionar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/add_p.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOADICIONAR,
-              name=u'botaoAdicionar', parent=self.panel1, pos=wx.Point(635,
-              320), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
-        self.botaoAdicionar.Center(wx.HORIZONTAL)
+        self.botaoAdicionarAluno = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/add_p.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOADICIONARALUNO,
+              name=u'botaoAdicionarAluno', parent=self.panel1, pos=wx.Point(635,
+              254), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+        self.botaoAdicionarAluno.Center(wx.HORIZONTAL)
+        self.botaoAdicionarAluno.Bind(wx.EVT_BUTTON,
+              self.OnBotaoAdicionarButton, id=wxID_FRAME1BOTAOADICIONARALUNO)
 
-        self.botaoRemover = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/del_p.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOREMOVER,
-              name=u'botaoRemover', parent=self.panel1, pos=wx.Point(635, 440),
-              size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
-        self.botaoRemover.Center(wx.HORIZONTAL)
+        self.botaoRemoverAluno = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/del_p.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOREMOVERALUNO,
+              name=u'botaoRemoverAluno', parent=self.panel1, pos=wx.Point(635,
+              332), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+        self.botaoRemoverAluno.Center(wx.HORIZONTAL)
 
         self.botaoSalvarTurma = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOSALVARTURMA,
@@ -123,6 +136,62 @@ class Frame1(wx.Frame):
               parent=self.panel1, pos=wx.Point(754, 173), size=wx.Size(130, 21),
               style=0)
 
+        self.caixaDisciplinasSelecionadas = wx.StaticBox(id=wxID_FRAME1CAIXADISCIPLINASSELECIONADAS,
+              label=u'Disciplinas Cadastradas',
+              name=u'caixaDisciplinasSelecionadas', parent=self.panel1,
+              pos=wx.Point(781, 457), size=wx.Size(264, 160), style=0)
+
+        self.listaAlunosTodos = wx.ListBox(choices=[],
+              id=wxID_FRAME1LISTAALUNOSTODOS, name=u'listaAlunosTodos',
+              parent=self.panel1, pos=wx.Point(290, 234), size=wx.Size(244,
+              160), style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaAlunosTodos.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick, id=wxID_FRAME1LISTBOX2)
+        self.listaAlunosTodos.Bind(wx.EVT_LISTBOX, self.OnProfListBoxListbox,
+              id=wxID_FRAME1LISTBOX2)
+
+        self.caixaTodasDisciplinas = wx.StaticBox(id=wxID_FRAME1CAIXATODASDISCIPLINAS,
+              label=u'Disciplinas Cadastradas', name=u'caixaTodasDisciplinas',
+              parent=self.panel1, pos=wx.Point(280, 457), size=wx.Size(264,
+              160), style=0)
+
+        self.listaDisciplinasTodas = wx.ListBox(choices=[],
+              id=wxID_FRAME1LISTADISCIPLINASTODAS,
+              name=u'listaDisciplinasTodas', parent=self.panel1,
+              pos=wx.Point(290, 475), size=wx.Size(244, 136),
+              style=wx.LB_HSCROLL | wx.NO_BORDER)
+        self.listaDisciplinasTodas.Bind(wx.EVT_LISTBOX_DCLICK,
+              self.OnProfListBoxListboxDclick,
+              id=wxID_FRAME1LISTADISCIPLINASTODAS)
+        self.listaDisciplinasTodas.Bind(wx.EVT_LISTBOX,
+              self.OnProfListBoxListbox, id=wxID_FRAME1LISTADISCIPLINASTODAS)
+
+        self.botaoAddDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/add_p.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOADDDISCIPLINA,
+              name=u'botaoAddDisciplina', parent=self.panel1, pos=wx.Point(635,
+              481), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+        self.botaoAddDisciplina.Center(wx.HORIZONTAL)
+
+        self.botaoDelDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/del_p.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAODELDISCIPLINA,
+              name=u'botaoDelDisciplina', parent=self.panel1, pos=wx.Point(635,
+              559), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+        self.botaoDelDisciplina.Center(wx.HORIZONTAL)
+
+        self.caixaAlunos = wx.StaticBox(id=wxID_FRAME1CAIXAALUNOS,
+              label=u'GerenciarAlunos', name=u'caixaAlunos', parent=self.panel1,
+              pos=wx.Point(278, 202), size=wx.Size(768, 201), style=0)
+
+        self.caixaDisciplinas = wx.StaticBox(id=wxID_FRAME1CAIXADISCIPLINAS,
+              label=u'Gerenciar Disciplinas', name=u'caixaDisciplinas',
+              parent=self.panel1, pos=wx.Point(275, 440), size=wx.Size(775,
+              184), style=0)
+
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOVOLTAR,
+              name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(304, 32),
+              size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
+
     def __init__(self, parent):
         self._init_ctrls(parent)
 
@@ -130,4 +199,7 @@ class Frame1(wx.Frame):
         event.Skip()
 
     def OnProfListBoxListbox(self, event):
+        event.Skip()
+
+    def OnBotaoAdicionarButton(self, event):
         event.Skip()
