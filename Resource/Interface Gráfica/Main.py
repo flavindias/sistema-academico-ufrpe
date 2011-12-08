@@ -1,3 +1,3 @@
-import Logon
+import ponte
 
-Logon.main()
+ponte.mainFrameLogonApp()

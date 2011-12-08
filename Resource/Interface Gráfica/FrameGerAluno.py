@@ -309,7 +309,7 @@ class FrameGerAlunos(wx.Frame):
     def OnBotaoBuscarCEPButton(self, event):
         endereco = Endereco()
         try:
-            if endereco.getEnderecoNet(self.campoCep.GetValue()):
+            if endereco.getEnderecoNet(self.campoCEP.GetValue()):
                 if endereco.getRua() != None and endereco.getBairro() != None:
                     self.campoEndereco.SetValue(endereco.getRua())
                     self.campoBairro.SetValue(endereco.getBairro())
@@ -331,12 +331,10 @@ class FrameGerAlunos(wx.Frame):
     def OnGenBitmapTextButtonExcluir(self, event):
         aluno = Aluno()
         try:
-            if str(int(self.campoCPFA)) == self.campoCPFA:
-                if aluno.delete(self.campoCPFA.GetValue()):
-                    None
-                    self.zerar()
-                else:
-                    None
+            if aluno.delete(self.campoCPFA.GetValue()):
+                self.zerar()
+            else:
+                None
         except:
             None
         event.Skip()
@@ -363,9 +361,12 @@ class FrameGerAlunos(wx.Frame):
                     num = int(self.campoNumero.GetValue())
                     tel = str(int(self.campoTelefone.GetValue()))
                     cel = str(int(self.campoCelular.GetValue()))
-                    aluno.add(str(int(self.campoCPFA.GetValue())), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
-                              self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
-                              self.getSerie(), self.getTurno(), tel, cel)
+                    if self.getSerie() != 'false':
+                        aluno.add(self.campoCPFA.GetValue(), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
+                                  self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
+                                  self.getSerie(), self.getTurno(), tel, cel)
+                    else:
+                        None
                     self.zerar()
                 except:
                     None
@@ -378,9 +379,12 @@ class FrameGerAlunos(wx.Frame):
                     num = int(self.campoNumero.GetValue())
                     tel = str(int(self.campoTelefone.GetValue()))
                     cel = str(int(self.campoCelular.GetValue()))
-                    aluno.salvarEdit(str(int(self.campoCPFA.GetValue())), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
-                              self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
-                              self.getSerie(), self.getTurno(), tel, cel)
+                    if self.getSerie() != 'false':
+                        aluno.salvarEdit(self.campoCPFA.GetValue(), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
+                                         self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
+                                         tel, cel, self.getSerie(), self.getTurno())
+                    else:
+                        None
                     self.zerar()
                 except:
                     None
@@ -395,7 +399,7 @@ class FrameGerAlunos(wx.Frame):
     def carregarDados(self):
         aluno = Aluno()
         try:
-            if aluno.carregar(str(int(self.campoCPFA.GetValue()))):
+            if aluno.carregar(self.campoCPFA.GetValue()):
                 self.campoCPFA.SetValue(aluno.getCpf())
                 self.campoNomeA.SetValue(aluno.getNome())
                 self.campoNascimentoA.SetValue(self.invertData(str(aluno.getData())))
@@ -421,6 +425,7 @@ class FrameGerAlunos(wx.Frame):
             None
 
     def invertData(self, data):
+        data = data.split('-')
         nasc = ''
         for i in range(len(data)-1, -1, -1):
             if nasc == '':
@@ -508,8 +513,8 @@ class FrameGerAlunos(wx.Frame):
         self.listaNome = []
         for i in tuplaA:
             if i[13] == serie and i[14] == turno:
-                self.listaA += i[0]
-                self.listaNome += i[1]
+                self.listaA += [i[0]]
+                self.listaNome += [i[1]]
 
     def zerar(self):
         self.campoCPFA.SetValue('')
