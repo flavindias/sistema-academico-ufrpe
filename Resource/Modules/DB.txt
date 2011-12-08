@@ -10,8 +10,8 @@ bairro varchar(20) not null,
 rua varchar(40) not null,
 num int unsigned not null,
 comp varchar(100),
-telefone char(10) not null, 
-celular char(10) not null,
+telefone char(10), 
+celular char(10),
 primary key(cpf) );
 
 create table Aluno(
@@ -28,7 +28,7 @@ num int unsigned not null,
 comp varchar(100),
 telefone char(10), 
 celular char(10),
-serie tinyint unsigned not null, 
+serie char(2), 
 turno char(1) not null,
 primary key(cpf) );
 
@@ -36,8 +36,7 @@ create table Disciplina (
 disciplina varchar(20) not null,
 professor char(11) not null,
 primary key (disciplina),
-constraint fk_professor foreign key (professor)
-references Professor(cpf) );
+constraint fk_professor foreign key (professor) references Professor(cpf) );
 
 create table Turma (
 turma char(3) not null,
@@ -62,4 +61,4 @@ aluno char(11) not null,
 turma char(3) not null,
 primary key(aluno),
 constraint fk_aluno foreign key(aluno) references Aluno(cpf),
-constraint fk_turma foreign key(turma) references Turma(turma) )
+constraint fk_turma foreign key(turma) references Turma(turma) );
