@@ -338,7 +338,11 @@ def carregarTurma_Alunos(turma):
     try:
         if turma != None:
             cursor.execute("select aluno from Turma_Aluno where turma = '%s';" %(turma))
-            return cursor.fetchall()
+            resultado = cursor.fetchall()
+            saida = []
+            for i in range(len(resultado)):
+                saida.append(resultado[i][0])
+            return saida
         else:
             return None
     except:

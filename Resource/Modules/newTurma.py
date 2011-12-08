@@ -99,7 +99,7 @@ class Turma:
             self.setDisciplina4(self.__result[5])
             self.setDisciplina5(self.__result[6])
             self.setDisciplina6(self.__result[7])
-            self.__result = Turma_Aluno.carregar(turma)
+            self.__result = self.carregarAluno(turma)
             self.setAlunos(self.__result)
             return True
 
@@ -121,5 +121,26 @@ class Turma:
 
     def delete(self, turma):
         """Deleta uma disciplina do BD"""
-        Turma_Aluno.delete(turma)
+        for self.__i in self.getAlunos():
+            self.deleteAluno(self.__i)
         return DataBase.deleteTurma(turma)
+
+    def addAluno(turma, aluno):
+        """Add aluno relacionado a turma direto no bd"""
+        if DataBase.addTurma_Aluno(turma, aluno):
+            self.carregarAluno(self.getTurma())
+            return True
+        else:
+            return False
+
+    def carregarAluno(turma):
+        """Carrega todos os alunos relacionados a turma"""
+        self.setAlunos(DataBase.carregarTurma_Alunos(turma))
+
+    def deleteAluno(aluno):
+        """Deleta aluno da tabela"""
+        if DataBase.deleteTurma_Alunos(aluno):
+            self.carregarAluno(self.getTurma())
+            return True
+        else:
+            return False
