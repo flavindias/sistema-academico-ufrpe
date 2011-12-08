@@ -366,3 +366,62 @@ def deleteTurma_Alunos(aluno):
             return False
     except:
         return False
+
+###TURMA_HORARIO###
+def addTurma_Horario(turma, disciplina):
+    """Add uma turma a uma posicao na tabela do banco"""
+    try:
+        if turma != None and aluno != None and posicao != None:
+            cursor.execute("insert into Turma_Horario(turma) values ('%s');" %(turma))
+            for i in range(25):
+                if disciplina[i] != None:
+                    if disciplina[i] == '':
+                        cursor.execute("update Turma_Horario disciplina%s = NULL where turma = '%s';" %(i+1, turma))
+                    else:
+                        cursor.execute("update Turma_Horario disciplina%s = '%s' where turma = '%s';" %(i+1, disciplina[i], turma))
+            return True
+        else:
+            return False
+    except:
+        return False
+
+def carregarTurma_Horario(turma):
+    """Carrega alunos da turma"""
+    try:
+        if turma != None:
+            cursor.execute("select * from Turma_Horario where turma = '%s';" %(turma))
+            resultado = cursor.fetchone()
+            saida = []
+            for i in range(25):
+                saida.append(resultado[i])
+            return saida
+        else:
+            return None
+    except:
+        return None
+
+def deleteTurma_Horario(turma):
+    """Deleta todos as relacoes de todos os alunos com a turma a ser deletada"""
+    try:
+        if aluno!=None:
+            cursor.execute("delete from Turma_Horario where turma = '%s';" %(turma))
+            return True
+        else:
+            return False
+    except:
+        return False
+
+def getListTurma_HorarioFromDb():
+    """Retorna todos os resultados da tabela horario"""
+    try:
+        cursor.execute("select * from Turma_Horario;")
+        saida = []
+        query = cursor.fetchall()
+        for i in range(len(query)):
+            temp=[]
+            for j in range(26):
+                temp.append(query[i][j])
+            saida.append(temp)
+        return saida
+    except:
+        return None

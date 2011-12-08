@@ -41,6 +41,9 @@ class Turma:
     def setAlunos(self, novoAlunos):
         """"Ajusta uma tupla de alunos"""
         self.__alunos = novoAlunos
+    def setHorario(self, novoHorario):
+        """Ajusta o Horario"""
+        self.__horario = novoHorario
     def getTurma(self):
         """Retorna o nome da turma"""
         return self.__turma
@@ -68,6 +71,9 @@ class Turma:
     def getAlunos(self):
         """Returna uma lista de alunos"""
         return self.__alunos
+    def getHorario(self):
+        """Retorna a lista de horario"""
+        return self.__horario
 
     def __init__(self, turma=None):
         """Inicia uma nova instancia"""
@@ -81,6 +87,7 @@ class Turma:
             self.setDisciplina5(None) #str len max 20
             self.setDisciplina6(None) #str len max 20
             self.setAlunos(None) #[str] len 11
+            self.setHorario(None) #[str] len max 20
         else:
             self.carregar(turma)
 
@@ -99,6 +106,7 @@ class Turma:
             self.setDisciplina5(self.__result[6])
             self.setDisciplina6(self.__result[7])
             self.carregarAluno(turma)
+            self.setHorario(self.carregarHorario(turma))
             return True
 
     def salvarEdit(self, turma, turno=None, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None):
@@ -107,11 +115,7 @@ class Turma:
 
     def listaDb(self):
         """Retorna uma lista com todas as Turmas cadastradas no BD"""
-        return DataBase.getListDbTurma()            
-
-    def listaDbAluno(self, turma):
-        """Retorna uma lista com todos os alunos de uma tuma do BD"""
-        self.setAlunos(Database.carregarTurma_Alunos(turma))
+        return DataBase.getListDbTurma()
 
     def add(self, turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6):
         """Adiciona uma Turma no BD"""
@@ -121,6 +125,7 @@ class Turma:
         """Deleta uma disciplina do BD"""
         for self.__i in self.getAlunos():
             self.deleteAluno(self.__i)
+        self.deleteHorario(turma)
         return DataBase.deleteTurma(turma)
 
     def addAluno(self, turma, aluno):
@@ -142,3 +147,27 @@ class Turma:
             return True
         else:
             return False
+
+    def addHorario(self, turma, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None, disciplina7=None, disciplina8=None, disciplina9=None, disciplina10=None, disciplina11=None, disciplina12=None, disciplina13=None, disciplina14=None, disciplina15=None, disciplina16=None, disciplina17=None, disciplina18=None, disciplina19=None, disciplina20=None, disciplina21=None, disciplina22=None, disciplina23=None, disciplina24=None, disciplina25=None):
+        """Add horario relacionado a turma direto no bd"""
+        if DataBase.addTurma_Horario(turma, [disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6, disciplina7, disciplina8, disciplina9, disciplina10, disciplina11, disciplina13, disciplina14, disciplina15, disciplina16, disciplina17, disciplina18, disciplina19, disciplina20, disciplina21, disciplina22, disciplina23, disciplina24, disciplina25]):
+            self.setHorario(self.carregarHorario(turma))
+            return True
+        else:
+            return False
+
+    def carregarHorario(self, turma):
+        """Carrega Horarios relacionados a turma"""
+        return DataBase.carregarTurma_Horario(turma)
+
+    def deleteHorario(self, turma):
+        """Deleta horario da tabela no BD"""
+        if DataBase.deleteTurma_Horario(turma):
+            self.setHorario(None)
+            return True
+        else:
+            return False
+
+    def listaDbHorario(self):
+        """Retorna uma lista com todas as tabelas do sistema de horarios"""
+        return DataBase.getListTurma_HorarioFromDb()
