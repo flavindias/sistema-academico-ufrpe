@@ -56,7 +56,7 @@ def editarAluno(lista):
             if lista[12] != None:
                 cursor.execute("update Aluno set celular = '%s' where cpf = '%s';" %(lista[12], lista[0]))
             if lista[13] != None:
-                cursor.execute("update Aluno set serie = %s where cpf = '%s';" %(lista[13], lista[0]))
+                cursor.execute("update Aluno set serie = '%s' where cpf = '%s';" %(lista[13], lista[0]))
             if lista[14] != None:
                 cursor.execute("update Aluno set turno = '%s' where cpf = '%s';" %(lista[14], lista[0]))
             return True

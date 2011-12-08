@@ -98,8 +98,7 @@ class Turma:
             self.setDisciplina4(self.__result[5])
             self.setDisciplina5(self.__result[6])
             self.setDisciplina6(self.__result[7])
-            self.__result = self.carregarAluno(turma)
-            self.setAlunos(self.__result)
+            self.carregarAluno(turma)
             return True
 
     def salvarEdit(self, turma, turno=None, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None):
@@ -124,7 +123,7 @@ class Turma:
             self.deleteAluno(self.__i)
         return DataBase.deleteTurma(turma)
 
-    def addAluno(turma, aluno):
+    def addAluno(self, turma, aluno):
         """Add aluno relacionado a turma direto no bd"""
         if DataBase.addTurma_Aluno(turma, aluno):
             self.carregarAluno(self.getTurma())
@@ -132,11 +131,11 @@ class Turma:
         else:
             return False
 
-    def carregarAluno(turma):
+    def carregarAluno(self, turma):
         """Carrega todos os alunos relacionados a turma"""
         self.setAlunos(DataBase.carregarTurma_Alunos(turma))
 
-    def deleteAluno(aluno):
+    def deleteAluno(self, aluno):
         """Deleta aluno da tabela"""
         if DataBase.deleteTurma_Alunos(aluno):
             self.carregarAluno(self.getTurma())
