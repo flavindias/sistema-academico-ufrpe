@@ -333,17 +333,25 @@ class FrameGerenciarHorario(wx.Frame):
         event.Skip()
 
     def OnSelecionaTurnoChoice(self, event):
-        if self.OnSelecionaTurnoChoice.GetSelection()  == 0:
+        if self.selecionaTurno.GetSelection()  == 0:
             self.tebelaManha.Show(True)
             self.tebelaNoite.Show(False)
             self.tebelaTarde.Show(False)
-        elif self.OnSelecionaTurnoChoice.GetSelection()  == 1:
-            self.tebelaManha.Show(False)               
+
+        elif self.selecionaTurno.GetSelection()  == 1:
             self.tebelaTarde.Show(True)
+            self.tebelaManha.Show(False)               
             self.tebelaNoite.Show(False)
-        elif self.OnSelecionaTurnoChoice.GetSelection()  == 2:
+
+        elif self.selecionaTurno.GetSelection()  == 2:
+            self.tebelaNoite.Show(True)
             self.tebelaManha.Show(False)
             self.tebelaTarde.Show(False)
-            self.tebelaNoite.Show(True)
+            
+        else:
+            self.tebelaManha.Show(False)
+            self.tebelaTarde.Show(False)
+            self.tebelaNoite.Show(False)
+            
                     
         event.Skip()
