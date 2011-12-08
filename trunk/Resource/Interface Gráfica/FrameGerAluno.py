@@ -362,8 +362,17 @@ class FrameGerAlunos(wx.Frame):
                     else:
                         sexo = 2
                     num = int(self.campoNumero.GetValue())
-                    tel = str(int(self.campoTelefone.GetValue()))
-                    cel = str(int(self.campoCelular.GetValue()))
+                    if self.campoTelefone.GetValue() != '':
+                        str(int(self.campoTelefone.GetValue()))
+                        tel = self.campoTelefone.GetValue()
+                    else:
+                        tel = ''
+                    if self.campoCelular.GetValue() != '':
+                        str(int(self.campoCelular.GetValue()))
+                        cel = self.campoCelular.GetValue()
+                    else:
+                        cel = ''
+                    teste = str(int(self.campoCPFA.GetValue()))
                     if self.getSerie() != 'false':
                         aluno.add(self.campoCPFA.GetValue(), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
                                   self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
@@ -380,8 +389,17 @@ class FrameGerAlunos(wx.Frame):
                     else:
                         sexo = 2
                     num = int(self.campoNumero.GetValue())
-                    tel = str(int(self.campoTelefone.GetValue()))
-                    cel = str(int(self.campoCelular.GetValue()))
+                    if self.campoTelefone.GetValue() != '':
+                        str(int(self.campoTelefone.GetValue()))
+                        tel = self.campoTelefone.GetValue()
+                    else:
+                        tel = ''
+                    if self.campoCelular.GetValue() != '':
+                        cel = str(int(self.campoCelular.GetValue()))
+                        cel = self.campoCelular.GetValue()
+                    else:
+                        cel = ''
+                    teste = str(int(self.campoCPFA.GetValue()))
                     if self.getSerie() != 'false':
                         aluno.salvarEdit(self.campoCPFA.GetValue(), self.campoNomeA.GetValue(), self.invertData(self.campoNascimentoA.GetValue()), sexo, self.campoCEP.GetValue(),
                                          self.campoUF.GetValue(), self.campoCidade.GetValue(), self.campoBairro.GetValue(), self.campoEndereco.GetValue(), num, self.campoComplemento.GetValue(),
