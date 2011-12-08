@@ -166,13 +166,13 @@ class Frame1(wx.Frame):
         self.listaDisciplinasTodas.Bind(wx.EVT_LISTBOX,
               self.OnProfListBoxListbox, id=wxID_FRAME1LISTADISCIPLINASTODAS)
 
-        self.botaoAddDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/add_p.png',
+        self.botaoAddDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/add_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOADDDISCIPLINA,
               name=u'botaoAddDisciplina', parent=self.panel1, pos=wx.Point(635,
               481), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
         self.botaoAddDisciplina.Center(wx.HORIZONTAL)
 
-        self.botaoDelDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/del_p.png',
+        self.botaoDelDisciplina = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/del_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAODELDISCIPLINA,
               name=u'botaoDelDisciplina', parent=self.panel1, pos=wx.Point(635,
               559), size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
@@ -187,7 +187,7 @@ class Frame1(wx.Frame):
               parent=self.panel1, pos=wx.Point(275, 440), size=wx.Size(775,
               184), style=0)
 
-        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAME1BOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.panel1, pos=wx.Point(304, 32),
               size=wx.Size(40, 40), style=wx.BU_AUTODRAW)
