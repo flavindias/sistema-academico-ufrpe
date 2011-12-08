@@ -171,7 +171,7 @@ class frameGerDisciplina(wx.Frame):
         
     def delDisc(self):
         if self.discListBox.GetSelections() == ():
-            self.erroTextCtrl.SetValue('Selecione uma Disciplina para deletar!')
+            self.erroTextCtrl.SetValue('Selecione uma disciplina para deletar!')
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
@@ -183,12 +183,12 @@ class frameGerDisciplina(wx.Frame):
     
     def addDisc(self):
         if (self.nomeTextCtrl.GetValue() == '') or (self.profChoice.GetSelection() == -1):
-            self.erroTextCtrl.SetValue('Insira um Nome e um Professor para adicionar uma nova Disciplina!')
+            self.erroTextCtrl.SetValue('Insira o nome e o professor para adicionar uma nova disciplina!')
         else:
             self.erroTextCtrl.SetValue('')
             disc = Disciplina()
             if disc.carregar(self.nomeTextCtrl.GetValue()):
-                self.erroTextCtrl.SetValue('Disciplina ja existe!')
+                self.erroTextCtrl.SetValue('disciplina ja existe!')
             else:
                 disc.setDisciplina(self.nomeTextCtrl.GetValue())
                 select = self.profChoice.GetSelection()
