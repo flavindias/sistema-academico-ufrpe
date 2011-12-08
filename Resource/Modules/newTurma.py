@@ -11,7 +11,6 @@
 #!/usr/bin/env python
 
 import DataBase
-import Turma_Aluno
 
 class Turma:
     """Classe Turma"""
