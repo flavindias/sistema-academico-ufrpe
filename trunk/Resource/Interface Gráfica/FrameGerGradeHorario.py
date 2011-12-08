@@ -24,7 +24,6 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOCAMPOSEX5, wxID_FRAMEGERENCIARHORARIOCAMPOTER1, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER2, wxID_FRAMEGERENCIARHORARIOCAMPOTER3, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER4, wxID_FRAMEGERENCIARHORARIOCAMPOTER5, 
- wxID_FRAMEGERENCIARHORARIOGRADENOITE, 
  wxID_FRAMEGERENCIARHORARIOLISTAPROFESSORES, 
  wxID_FRAMEGERENCIARHORARIOLOGOGERENCIAR, 
  wxID_FRAMEGERENCIARHORARIONOMESELECINEDIA, 
@@ -38,8 +37,8 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONASERIE, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
- wxID_FRAMEGERENCIARHORARIOSTATICLINE1, wxID_FRAMEGERENCIARHORARIOTABELATARDE, 
- wxID_FRAMEGERENCIARHORARIOTEBELAMANHA, 
+ wxID_FRAMEGERENCIARHORARIOSTATICLINE1, wxID_FRAMEGERENCIARHORARIOTABELANOITE, 
+ wxID_FRAMEGERENCIARHORARIOTABELATARDE, wxID_FRAMEGERENCIARHORARIOTEBELAMANHA, 
 ] = [wx.NewId() for _init_ctrls in range(50)]
 
 class FrameGerenciarHorario(wx.Frame):
@@ -50,14 +49,19 @@ class FrameGerenciarHorario(wx.Frame):
               190), size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',
+              wx.BITMAP_TYPE_ICO))
 
         self.panelGerenciarGradeHorario = wx.Panel(id=wxID_FRAMEGERENCIARHORARIOPANELGERENCIARGRADEHORARIO,
               name=u'panelGerenciarGradeHorario', parent=self, pos=wx.Point(0,
               0), size=wx.Size(1310, 688), style=wx.TAB_TRAVERSAL)
         self.panelGerenciarGradeHorario.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL,
               wx.NORMAL, False, u'Tahoma'))
+        self.panelGerenciarGradeHorario.SetBackgroundStyle(wx.BG_STYLE_COLOUR)
+        self.panelGerenciarGradeHorario.SetBackgroundColour(wx.Colour(255, 255,
+              255))
 
-        self.logoGerenciar = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/logoTurmas.png',
+        self.logoGerenciar = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logoTurmas.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOLOGOGERENCIAR,
               name=u'logoGerenciar', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(419, 15), size=wx.Size(472, 110), style=0)
@@ -68,7 +72,7 @@ class FrameGerenciarHorario(wx.Frame):
               pos=wx.Point(295, 147), size=wx.Size(720, 2), style=0)
         self.staticLine1.Center(wx.HORIZONTAL)
 
-        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(312, 32), size=wx.Size(48, 48),
@@ -145,22 +149,22 @@ class FrameGerenciarHorario(wx.Frame):
 
         self.nomeSelecioneAula = wx.StaticText(id=wxID_FRAMEGERENCIARHORARIONOMESELECIONEAULA,
               label=u'Selecione a Aula:', name=u'nomeSelecioneAula',
-              parent=self.panelGerenciarGradeHorario, pos=wx.Point(305, 408),
+              parent=self.panelGerenciarGradeHorario, pos=wx.Point(298, 408),
               size=wx.Size(122, 19), style=0)
 
-        self.botaoAplicar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/bot\xe3o adicionar_p.png',
+        self.botaoAplicar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR,
               label=u' Aplicar ', name=u'botaoAplicar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(414, 519),
               size=wx.Size(88, 30), style=0)
 
-        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/bot\xe3o adicionar_p.png',
+        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR,
               label=u'   Salvar   ', name=u'botaoSalvar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(1168, 632),
               size=wx.Size(112, 30), style=0)
 
-        self.botaoCancelar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botao excluir_p.png',
+        self.botaoCancelar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR,
               label=u' Cancelar ', name=u'botaoCancelar',
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(304, 520),
@@ -301,20 +305,23 @@ class FrameGerenciarHorario(wx.Frame):
               pos=wx.Point(701, 313), size=wx.Size(100, 27), style=wx.NO_BORDER,
               value=u'')
 
-        self.tebelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/gradeManha.png',
+        self.tebelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTEBELAMANHA,
               name=u'tebelaManha', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(568, 240), size=wx.Size(722, 332), style=0)
+        self.tebelaManha.Show(False)
 
-        self.tabelaTarde = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/gradeTarde.png',
+        self.tabelaTarde = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeTarde.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTABELATARDE,
               name=u'tabelaTarde', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(570, 240), size=wx.Size(719, 336), style=0)
+        self.tabelaTarde.Show(False)
 
-        self.gradeNoite = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/gradeNoite.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOGRADENOITE,
-              name=u'gradeNoite', parent=self.panelGerenciarGradeHorario,
+        self.tabelaNoite = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeNoite.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTABELANOITE,
+              name=u'tabelaNoite', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(570, 240), size=wx.Size(719, 336), style=0)
+        self.tabelaNoite.Show(False)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
@@ -326,4 +333,17 @@ class FrameGerenciarHorario(wx.Frame):
         event.Skip()
 
     def OnSelecionaTurnoChoice(self, event):
+        if self.OnSelecionaTurnoChoice.GetSelection()  == 0:
+            self.tebelaManha.Show(True)
+            self.tebelaNoite.Show(False)
+            self.tebelaTarde.Show(False)
+        elif self.OnSelecionaTurnoChoice.GetSelection()  == 1:
+            self.tebelaManha.Show(False)               
+            self.tebelaTarde.Show(True)
+            self.tebelaNoite.Show(False)
+        elif self.OnSelecionaTurnoChoice.GetSelection()  == 2:
+            self.tebelaManha.Show(False)
+            self.tebelaTarde.Show(False)
+            self.tebelaNoite.Show(True)
+                    
         event.Skip()
