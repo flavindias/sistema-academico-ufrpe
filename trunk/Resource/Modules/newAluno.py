@@ -122,7 +122,7 @@ class Aluno:
             self.setTelefone(None) #str len 10 (sem caracteres especiais)
             self.setCelular(None) #str len 10 (sem caracteres especiais)
             self.setSexo(None) #int (1=Masculino / 2=Femenino)
-            self.setSerie(None) #int len 1
+            self.setSerie(None) #str len 2
             self.setTurno(None) #str len 1 (M=Manha / T=Tarde / N=Noite
         else:
             ##Carregando do BD
