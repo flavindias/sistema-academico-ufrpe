@@ -20,7 +20,7 @@ class FrameGerTurma(wx.Frame):
               style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Turma - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
-        self.SetIcon(wx.Icon(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/Icone.ico',
+        self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',
               wx.BITMAP_TYPE_ICO))
 
         self.painelGerTurma = wx.Panel(id=wxID_FRAMEGERTURMAPAINELGERTURMA,
@@ -28,7 +28,7 @@ class FrameGerTurma(wx.Frame):
               size=wx.Size(1310, 688), style=wx.TAB_TRAVERSAL)
         self.painelGerTurma.Center(wx.BOTH)
 
-        self.staticBitmap1 = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/logoTurmas.png',
+        self.staticBitmap1 = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logoTurmas.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERTURMASTATICBITMAP1,
               name='staticBitmap1', parent=self.painelGerTurma,
               pos=wx.Point(428, 16), size=wx.Size(472, 110), style=0)
@@ -39,7 +39,7 @@ class FrameGerTurma(wx.Frame):
               152), size=wx.Size(791, 2), style=0)
         self.staticLine1.Center(wx.HORIZONTAL)
 
-        self.bitmapButton1 = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/User-group-128.png',
+        self.bitmapButton1 = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/User-group-128.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERTURMABITMAPBUTTON1,
               name='bitmapButton1', parent=self.painelGerTurma,
               pos=wx.Point(359, 224), size=wx.Size(184, 176),
@@ -50,7 +50,7 @@ class FrameGerTurma(wx.Frame):
               parent=self.painelGerTurma, pos=wx.Point(412, 412),
               size=wx.Size(80, 13), style=0)
 
-        self.notaoGerenciarGrid = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/imgHorario.png',
+        self.notaoGerenciarGrid = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/imgHorario.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERTURMANOTAOGERENCIARGRID,
               name=u'notaoGerenciarGrid', parent=self.painelGerTurma,
               pos=wx.Point(787, 224), size=wx.Size(184, 176),
@@ -61,7 +61,7 @@ class FrameGerTurma(wx.Frame):
               parent=self.painelGerTurma, pos=wx.Point(840, 414),
               size=wx.Size(85, 13), style=0)
 
-        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Laboratorio de Programa\xe7\xe3o/sistema-academico-ufrpe/Resource/Interface Gr\xe1fica/Imagens/botaoVoltar.png',
+        self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Imagens/botaoVoltar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERTURMABOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.painelGerTurma, pos=wx.Point(296,
               48), size=wx.Size(48, 48), style=wx.BU_AUTODRAW)
