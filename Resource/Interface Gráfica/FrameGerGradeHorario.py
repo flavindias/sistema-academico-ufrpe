@@ -66,8 +66,8 @@ class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERENCIARHORARIO,
-              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(48, 16),
-              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(40, 2),
+              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
@@ -130,6 +130,8 @@ class FrameGerenciarHorario(wx.Frame):
               pos=wx.Point(33, 229), size=wx.Size(140, 27), style=0)
         self.selecionaSerie.SetStringSelection(u'Selecione a serie')
         self.selecionaSerie.SetToolTipString(u'selecionaSerie')
+        self.selecionaSerie.Bind(wx.EVT_CHOICE, self.OnSelecionaSerieChoice,
+              id=wxID_FRAMEGERENCIARHORARIOSELECIONASERIE)
 
         self.selecionaTurno = wx.Choice(choices=["Selecione o Turno", "Manha",
               "Tarde", "Noite"], id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO,
@@ -425,11 +427,17 @@ class FrameGerenciarHorario(wx.Frame):
 
     def OnGrid1GridRowSize(self, event):
         event.Skip()
+        
+    def OnSelecionaSerieChoice(self, event):
+        self.menuEsquerda()
+        event.Skip()
 
     def OnSelecionaTurmaChoice(self, event):
+        self.menuEsquerda()
         event.Skip()
 
     def OnSelecionaTurnoChoice(self, event):
+        self.menuEsquerda()
         if self.selecionaTurno.GetSelection()  == 1:
             self.horarioManha.Show(True)
             self.horarioNoite.Show(False)
@@ -449,9 +457,6 @@ class FrameGerenciarHorario(wx.Frame):
             self.horarioManha.Show(False)
             self.horarioTarde.Show(False)
             self.horarioNoite.Show(False)
-            
-            
-                    
         event.Skip()
 
     def OnBotaoAplicarButton(self, event):
@@ -462,3 +467,45 @@ class FrameGerenciarHorario(wx.Frame):
 
     def OnBotaoCancelarButton(self, event):
         event.Skip()
+
+    def menuEsquerda(self):
+        turma = Turma()
+        disciplina = Disciplina()
+        professor = Professor()
+        self.__turma = ['A','B','C','D','E']
+        self.__turma = self.__turma[self.selecionaTurma.GetSelection()]
+        self.__serie = [None,None,'F1','F2','F3','F4','F5',None,'F6','F7','F8','F9',None,'M1','M2','M3']
+        self.__serie = self.__serie[self.selecionaSerie.GetSelection()]
+        self.__turno = ['M','T','N']
+        if self.__turma != None:
+            if turma.carregar(self.__serie+self.__turma):
+                self.__turno = self.__turno.index(turma.getTurno())
+                if self.selecionaTurno.GetSelection() == self.__turno+1:
+                    self.__lista=[]
+                    if turma.getDisciplina1() != 'None':
+                        self.__lista.append(turma.getDisciplina1())
+                    if turma.getDisciplina2() != 'None':
+                        self.__lista.append(turma.getDisciplina2())
+                    if turma.getDisciplina3() != 'None':
+                        self.__lista.append(turma.getDisciplina3())
+                    if turma.getDisciplina4() != 'None':
+                        self.__lista.append(turma.getDisciplina4())
+                    if turma.getDisciplina5() != 'None':
+                        self.__lista.append(turma.getDisciplina5())
+                    if turma.getDisciplina6() != 'None':
+                        self.__lista.append(turma.getDisciplina6())
+                    for self.__i in range(len(self.__lista)):
+                        disciplina.carregar(self.__lista[self.__i])
+                        professor.carregar(disciplina.getProfessor())
+                        self.__lista[self.__i] += ' - '+professor.getNome()
+                    self.listaProfessores.Set(self.__lista)
+                    self.erroText.SetLabel('Carregado com sucesso')
+                else:
+                    self.erroText.SetLabel('Selecione o turno correto')
+                    self.listaProfessores.Set([])
+            else:
+                self.erroText.SetLabel('Turma nao encontrada')
+                self.listaProfessores.Set([])
+        else:
+            self.erroText.SetLabel('Insira turma Valida')
+            self.listaProfessores.Set([])
