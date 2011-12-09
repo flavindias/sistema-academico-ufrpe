@@ -24,6 +24,9 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOCAMPOSEX5, wxID_FRAMEGERENCIARHORARIOCAMPOTER1, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER2, wxID_FRAMEGERENCIARHORARIOCAMPOTER3, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER4, wxID_FRAMEGERENCIARHORARIOCAMPOTER5, 
+ wxID_FRAMEGERENCIARHORARIOHORARIOMANHA, 
+ wxID_FRAMEGERENCIARHORARIOHORARIONOITE, 
+ wxID_FRAMEGERENCIARHORARIOHORARIOTARDE, 
  wxID_FRAMEGERENCIARHORARIOLISTAPROFESSORES, 
  wxID_FRAMEGERENCIARHORARIOLOGOGERENCIAR, 
  wxID_FRAMEGERENCIARHORARIONOMESELECINEDIA, 
@@ -37,8 +40,7 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONASERIE, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
- wxID_FRAMEGERENCIARHORARIOSTATICLINE1, wxID_FRAMEGERENCIARHORARIOTABELAMANHA, 
- wxID_FRAMEGERENCIARHORARIOTABELANOITE, wxID_FRAMEGERENCIARHORARIOTABELATARDE, 
+ wxID_FRAMEGERENCIARHORARIOSTATICLINE1, 
 ] = [wx.NewId() for _init_ctrls in range(50)]
 
 class FrameGerenciarHorario(wx.Frame):
@@ -366,23 +368,23 @@ class FrameGerenciarHorario(wx.Frame):
         self.campoSeg1.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
               u'Tahoma'))
 
-        self.tabelaManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTEBELAMANHA,
-              name=u'tebelaManha', parent=self.panelGerenciarGradeHorario,
+        self.horarioManha = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeManha.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOHORARIOMANHA,
+              name=u'horarioManha', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(568, 240), size=wx.Size(722, 332), style=0)
-        self.tabelaManha.Show(False)
+        self.horarioManha.Show(False)
 
-        self.tabelaTarde = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeTarde.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTABELATARDE,
-              name=u'tabelaTarde', parent=self.panelGerenciarGradeHorario,
+        self.horarioTarde = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeTarde.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOHORARIOTARDE,
+              name=u'horarioTarde', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(570, 240), size=wx.Size(719, 336), style=0)
-        self.tabelaTarde.Show(False)
+        self.horarioTarde.Show(False)
 
-        self.tabelaNoite = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeNoite.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOTABELANOITE,
-              name=u'tabelaNoite', parent=self.panelGerenciarGradeHorario,
+        self.horarioNoite = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/gradeNoite.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOHORARIONOITE,
+              name=u'horarioNoite', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(570, 240), size=wx.Size(719, 336), style=0)
-        self.tabelaNoite.Show(False)
+        self.horarioNoite.Show(False)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
@@ -395,19 +397,19 @@ class FrameGerenciarHorario(wx.Frame):
 
     def OnSelecionaTurnoChoice(self, event):
         if self.selecionaTurno.GetSelection()  == 0:
-            self.tabelaManha.Show(True)
-            self.tabelaNoite.Show(False)
-            self.tabelaTarde.Show(False)
+            self.horarioManha.Show(True)
+            self.horarioNoite.Show(False)
+            self.horarioTarde.Show(False)
 
         elif self.selecionaTurno.GetSelection()  == 1:
-            self.tabelaManha.Show(False)
-            self.tabelaNoite.Show(False)
-            self.tabelaTarde.Show(True)
+            self.horarioManha.Show(False)
+            self.horarioNoite.Show(False)
+            self.horarioTarde.Show(True)
 
         elif self.selecionaTurno.GetSelection()  == 2:
-            self.tabelaManha.Show(False)
-            self.tabelaNoite.Show(True)
-            self.tabelaTarde.Show(False)
+            self.horarioManha.Show(False)
+            self.horarioNoite.Show(True)
+            self.horarioTarde.Show(False)
                     
         event.Skip()
 
