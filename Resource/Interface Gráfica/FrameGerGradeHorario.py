@@ -162,6 +162,18 @@ class FrameGerenciarHorario(wx.Frame):
               parent=self.panelGerenciarGradeHorario, pos=wx.Point(298, 408),
               size=wx.Size(122, 19), style=0)
 
+        self.selecionadorDia = wx.Choice(choices=["Segunda", "Terca", "Quarta",
+              "Quinta", "Sexta"], id=wxID_FRAMEGERENCIARHORARIOSELECIONADORDIA,
+              name=u'selecionadorDia', parent=self.panelGerenciarGradeHorario,
+              pos=wx.Point(303, 359), size=wx.Size(140, 27), style=0)
+        self.selecionadorDia.SetStringSelection(u'Segunda')
+
+        self.selecionarAula = wx.Choice(choices=["1", "2", "3", "4", "5"],
+              id=wxID_FRAMEGERENCIARHORARIOSELECIONARAULA,
+              name=u'selecionarAula', parent=self.panelGerenciarGradeHorario,
+              pos=wx.Point(306, 432), size=wx.Size(140, 27), style=0)
+        self.selecionarAula.SetStringSelection(u'1')
+
         self.botaoAplicar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR,
               label=u' Aplicar ', name=u'botaoAplicar',
@@ -169,14 +181,6 @@ class FrameGerenciarHorario(wx.Frame):
               size=wx.Size(88, 30), style=0)
         self.botaoAplicar.Bind(wx.EVT_BUTTON, self.OnBotaoAplicarButton,
               id=wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR)
-
-        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR,
-              label=u'   Salvar   ', name=u'botaoSalvar',
-              parent=self.panelGerenciarGradeHorario, pos=wx.Point(1168, 632),
-              size=wx.Size(112, 30), style=0)
-        self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
-              id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR)
 
         self.botaoCancelar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR,
@@ -186,17 +190,13 @@ class FrameGerenciarHorario(wx.Frame):
         self.botaoCancelar.Bind(wx.EVT_BUTTON, self.OnBotaoCancelarButton,
               id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR)
 
-        self.selecionarAula = wx.Choice(choices=["1", "2", "3", "4", "5"],
-              id=wxID_FRAMEGERENCIARHORARIOSELECIONARAULA,
-              name=u'selecionarAula', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(306, 432), size=wx.Size(140, 27), style=0)
-        self.selecionarAula.SetStringSelection(u'1')
-
-        self.selecionadorDia = wx.Choice(choices=["Segunda", "Terca", "Quarta",
-              "Quinta", "Sexta"], id=wxID_FRAMEGERENCIARHORARIOSELECIONADORDIA,
-              name=u'selecionadorDia', parent=self.panelGerenciarGradeHorario,
-              pos=wx.Point(303, 359), size=wx.Size(140, 27), style=0)
-        self.selecionadorDia.SetStringSelection(u'Segunda')
+        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR,
+              label=u'   Salvar   ', name=u'botaoSalvar',
+              parent=self.panelGerenciarGradeHorario, pos=wx.Point(1168, 632),
+              size=wx.Size(112, 30), style=0)
+        self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
+              id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR)
 
         self.campoSex5 = wx.TextCtrl(id=wxID_FRAMEGERENCIARHORARIOCAMPOSEX5,
               name=u'campoSex5', parent=self.panelGerenciarGradeHorario,
