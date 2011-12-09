@@ -24,6 +24,7 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOCAMPOSEX5, wxID_FRAMEGERENCIARHORARIOCAMPOTER1, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER2, wxID_FRAMEGERENCIARHORARIOCAMPOTER3, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER4, wxID_FRAMEGERENCIARHORARIOCAMPOTER5, 
+ wxID_FRAMEGERENCIARHORARIOHORARIOCOBRIR, 
  wxID_FRAMEGERENCIARHORARIOHORARIOMANHA, 
  wxID_FRAMEGERENCIARHORARIOHORARIONOITE, 
  wxID_FRAMEGERENCIARHORARIOHORARIOTARDE, 
@@ -41,7 +42,7 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
  wxID_FRAMEGERENCIARHORARIOSTATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(50)]
+] = [wx.NewId() for _init_ctrls in range(51)]
 
 class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -61,6 +62,11 @@ class FrameGerenciarHorario(wx.Frame):
         self.panelGerenciarGradeHorario.SetBackgroundStyle(wx.BG_STYLE_COLOUR)
         self.panelGerenciarGradeHorario.SetBackgroundColour(wx.Colour(255, 255,
               255))
+
+        self.horarioCobrir = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/horarioCobrir.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOHORARIOCOBRIR,
+              name=u'horarioCobrir', parent=self.panelGerenciarGradeHorario,
+              pos=wx.Point(566, 235), size=wx.Size(719, 336), style=0)
 
         self.logoGerenciar = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Imagens/logoTurmas.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOLOGOGERENCIAR,
@@ -106,11 +112,11 @@ class FrameGerenciarHorario(wx.Frame):
         self.selecionaSerie.SetStringSelection(u'Selecione a serie')
         self.selecionaSerie.SetToolTipString(u'selecionaSerie')
 
-        self.selecionaTurno = wx.Choice(choices=["Manha", "Tarde", "Noite"],
-              id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO,
+        self.selecionaTurno = wx.Choice(choices=["Selecione o Turno", "Manha",
+              "Tarde", "Noite"], id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO,
               name=u'selecionaTurno', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(202, 228), size=wx.Size(140, 27), style=0)
-        self.selecionaTurno.SetStringSelection(u'Manha')
+        self.selecionaTurno.SetStringSelection(u'Selecione o Turno')
         self.selecionaTurno.Bind(wx.EVT_CHOICE, self.OnSelecionaTurnoChoice,
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO)
 
@@ -396,20 +402,27 @@ class FrameGerenciarHorario(wx.Frame):
         event.Skip()
 
     def OnSelecionaTurnoChoice(self, event):
-        if self.selecionaTurno.GetSelection()  == 0:
+        if self.selecionaTurno.GetSelection()  == 1:
             self.horarioManha.Show(True)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(False)
 
-        elif self.selecionaTurno.GetSelection()  == 1:
+        elif self.selecionaTurno.GetSelection()  == 2:
             self.horarioManha.Show(False)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(True)
 
-        elif self.selecionaTurno.GetSelection()  == 2:
+        elif self.selecionaTurno.GetSelection()  == 3:
             self.horarioManha.Show(False)
             self.horarioNoite.Show(True)
             self.horarioTarde.Show(False)
+        else:
+            self.horarioCobrir.Show(True)
+            self.horarioManha.Show(False)
+            self.horarioTarde.Show(False)
+            self.horarioNoite.Show(False)
+            
+            
                     
         event.Skip()
 
