@@ -403,16 +403,19 @@ class FrameGerenciarHorario(wx.Frame):
 
     def OnSelecionaTurnoChoice(self, event):
         if self.selecionaTurno.GetSelection()  == 1:
+            self.horarioCobrir.Show(False)
             self.horarioManha.Show(True)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(False)
 
         elif self.selecionaTurno.GetSelection()  == 2:
+            self.horarioCobrir.Show(False)
             self.horarioManha.Show(False)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(True)
 
         elif self.selecionaTurno.GetSelection()  == 3:
+            self.horarioCobrir.Show(False)
             self.horarioManha.Show(False)
             self.horarioNoite.Show(True)
             self.horarioTarde.Show(False)
