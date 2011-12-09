@@ -109,7 +109,7 @@ class Turma:
             self.setHorario(self.carregarHorario(turma))
             return True
 
-    def salvarEdit(self, turma, turno=None, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None):
+    def salvarEdit(self, turma, turno='None', disciplina1='None', disciplina2='None', disciplina3='None', disciplina4='None', disciplina5='None', disciplina6='None'):
         """Edita uma turma no BD"""
         return DataBase.editarTurma([turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6])
 
