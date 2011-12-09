@@ -139,7 +139,7 @@ class FrameGerenciarHorario(wx.Frame):
         self.selecionaTurno.Bind(wx.EVT_CHOICE, self.OnSelecionaTurnoChoice,
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURNO)
 
-        self.selecionaTurma = wx.Choice(choices=["A", "B", "C", "D"],
+        self.selecionaTurma = wx.Choice(choices=["A", "B", "C", "D", "E"],
               id=wxID_FRAMEGERENCIARHORARIOSELECIONATURMA,
               name=u'selecionaTurma', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(373, 229), size=wx.Size(140, 27), style=0)
