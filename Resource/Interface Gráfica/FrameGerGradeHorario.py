@@ -83,8 +83,8 @@ class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERENCIARHORARIO,
-              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(40, 2),
-              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(48, 16),
+              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
@@ -115,6 +115,8 @@ class FrameGerenciarHorario(wx.Frame):
               name=u'botaoVoltar', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(312, 32), size=wx.Size(48, 48),
               style=wx.BU_AUTODRAW)
+        self.botaoVoltar.Bind(wx.EVT_BUTTON, self.OnBotaoVoltarButton,
+              id=wxID_FRAMEGERENCIARHORARIOBOTAOVOLTAR)
 
         self.nomeSerie = wx.StaticText(id=wxID_FRAMEGERENCIARHORARIONOMESERIE,
               label=u'Serie:', name=u'nomeSerie',
@@ -648,3 +650,9 @@ class FrameGerenciarHorario(wx.Frame):
         else:
             for self.__i in range(len(self.listaGrid)):
                 self.listaGrid[self.__i].SetLabel('')
+
+    def OnBotaoVoltarButton(self, event):
+        self.Close(True)
+        ponte.mainFrameGerTurmaApp()
+        exit()
+        event.Skip()

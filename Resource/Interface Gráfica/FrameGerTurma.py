@@ -85,6 +85,9 @@ class FrameGerTurma(wx.Frame):
         event.Skip()
 
     def OnBotaoGerenciarGridButton(self, event):
+        self.Close(True)
+        ponte.mainFrameGerGradeHorarioApp()
+        exit()
         event.Skip()
 
     def OnBotaoVoltarButton(self, event):
