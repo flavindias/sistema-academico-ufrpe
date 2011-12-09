@@ -371,7 +371,7 @@ def deleteTurma_Alunos(aluno):
 def addTurma_Horario(turma, disciplina):
     """Add uma turma a uma posicao na tabela do banco"""
     try:
-        if turma != None and aluno != None and posicao != None:
+        if turma != None:
             cursor.execute("insert into Turma_Horario(turma) values ('%s');" %(turma))
             for i in range(25):
                 if disciplina[i] != None:
@@ -425,3 +425,11 @@ def getListTurma_HorarioFromDb():
         return saida
     except:
         return None
+
+def alterTurma_Horario(turma, pos, valor):
+    """Ajusta um horario de uma turma no BD"""
+    try:
+        cursor.execute("update from Turma_Horario set disciplina%s = '%s' where turma = '%s';" %(pos+1, valor, turma)):
+        return True
+    except:
+        return False
