@@ -429,7 +429,7 @@ def getListTurma_HorarioFromDb():
 def alterTurma_Horario(turma, pos, valor):
     """Ajusta um horario de uma turma no BD"""
     try:
-        cursor.execute("update from Turma_Horario set disciplina%s = '%s' where turma = '%s';" %(pos+1, valor, turma)):
+        cursor.execute("update from Turma_Horario set disciplina%s = '%s' where turma = '%s';" %(pos+1, valor, turma))
         return True
     except:
         return False
