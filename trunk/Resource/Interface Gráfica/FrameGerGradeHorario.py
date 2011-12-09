@@ -22,12 +22,16 @@ from newProfessor import Professor
 from newDisciplina import Disciplina
 sys.path[0] = original
 
+turma = Turma()
+disciplina = Disciplina()
+professor = Professor()
+
 def create(parent):
     return FrameGerenciarHorario(parent)
 
 [wxID_FRAMEGERENCIARHORARIO, wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR, 
  wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR, 
- wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR, wxID_FRAMEGERENCIARHORARIOBOTAOVOLTAR, 
+ wxID_FRAMEGERENCIARHORARIOBOTAOVOLTAR, 
  wxID_FRAMEGERENCIARHORARIOCAIXAPROFESSOR, 
  wxID_FRAMEGERENCIARHORARIOCAIXASERIE, wxID_FRAMEGERENCIARHORARIOCAMPOQUA1, 
  wxID_FRAMEGERENCIARHORARIOCAMPOQUA2, wxID_FRAMEGERENCIARHORARIOCAMPOQUA3, 
@@ -60,7 +64,7 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
  wxID_FRAMEGERENCIARHORARIOSTATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(52)]
+] = [wx.NewId() for _init_ctrls in range(51)]
 
 class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -190,14 +194,6 @@ class FrameGerenciarHorario(wx.Frame):
               size=wx.Size(88, 30), style=0)
         self.botaoAplicar.Bind(wx.EVT_BUTTON, self.OnBotaoAplicarButton,
               id=wxID_FRAMEGERENCIARHORARIOBOTAOAPLICAR)
-
-        self.botaoSalvar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/bot\xe3o adicionar_p.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR,
-              label=u'   Salvar   ', name=u'botaoSalvar',
-              parent=self.panelGerenciarGradeHorario, pos=wx.Point(1168, 632),
-              size=wx.Size(112, 30), style=0)
-        self.botaoSalvar.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarButton,
-              id=wxID_FRAMEGERENCIARHORARIOBOTAOSALVAR)
 
         self.botaoCancelar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERENCIARHORARIOBOTAOCANCELAR,
@@ -437,21 +433,23 @@ class FrameGerenciarHorario(wx.Frame):
         event.Skip()
 
     def OnSelecionaTurnoChoice(self, event):
-        self.menuEsquerda()
         if self.selecionaTurno.GetSelection()  == 1:
             self.horarioManha.Show(True)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(False)
+            self.menuEsquerda()
 
         elif self.selecionaTurno.GetSelection()  == 2:
             self.horarioManha.Show(False)
             self.horarioNoite.Show(False)
             self.horarioTarde.Show(True)
+            self.menuEsquerda()
 
         elif self.selecionaTurno.GetSelection()  == 3:
             self.horarioManha.Show(False)
             self.horarioNoite.Show(True)
             self.horarioTarde.Show(False)
+            self.menuEsquerda()
         else:
             self.horarioCobrir.Show(True)
             self.horarioManha.Show(False)
@@ -464,72 +462,86 @@ class FrameGerenciarHorario(wx.Frame):
             self.__aula = [[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24]]
             self.__aula = self.__aula[self.selecionadorDia.GetSelection()]
             self.__aula = self.__aula[self.selecionarAula.GetSelection()]
-            self.__valor = lista[self.listaProfessores.GetSelection()].split('-')
-            if turma.editarHorario(turma.getTurma(), self.__aula, valor[0]):
+            self.__valor = self.lista[self.listaProfessores.GetSelection()].split('-')
+            if turma.editarHorario(turma.getTurma(), self.__aula, self.__valor[0]):
                 turma.carregar(turma.getTurma())
-                for self.__i in range(len(listaGrid)):
-                    listaGrid[self.__i].SetLabel('')
+                self.carregarGrid(turma.getHorario())
+                self.erroText.SetLabel('Adicionado com sucesso')
+            else:
+               self.erroText.SetLabel('Erro! Favor contate a equipe tecnica') 
         event.Skip()
 
     def OnBotaoSalvarButton(self, event):
         event.Skip()
 
     def OnBotaoCancelarButton(self, event):
+        self.__aula = [[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24]]
+        self.__aula = self.__aula[self.selecionadorDia.GetSelection()]
+        self.__aula = self.__aula[self.selecionarAula.GetSelection()]
+        self.__valor = self.lista[self.listaProfessores.GetSelection()].split('-')[0]
+        if turma.editarHorario(turma.getTurma(), self.__aula, ''):
+            turma.carregar(turma.getTurma())
+            self.carregarGrid(turma.getHorario())
+            self.erroText.SetLabel('excluido com sucesso')
+        else:
+            self.erroText.SetLabel('Erro! Favor contate a equipe tecnica')
         event.Skip()
 
     def menuEsquerda(self):
-        turma = Turma()
-        disciplina = Disciplina()
-        professor = Professor()
         self.__turma = ['A','B','C','D','E']
         self.__turma = self.__turma[self.selecionaTurma.GetSelection()]
         self.__serie = [None,None,'F1','F2','F3','F4','F5',None,'F6','F7','F8','F9',None,'M1','M2','M3']
         self.__serie = self.__serie[self.selecionaSerie.GetSelection()]
         self.__turno = ['M','T','N']
-        listaGrid = [self.campoSeg1, self.campoSeg2, self.campoSeg3, self.campoSeg4, self.campoSeg5, self.campoTer1, self.campoTer2, self.campoTer3, self.campoTer4, self.campoTer5, self.campoQua1, self.campoQua2, self.campoQua3, self.campoQua4, self.campoQua5, self.campoQui1, self.campoQui2, self.campoQui3, self.campoQui4, self.campoQui5, self.campoSex1, self.campoSex2, self.campoSex3, self.campoSex4, self.campoSex5]
+        self.listaGrid = [self.campoSeg1, self.campoSeg2, self.campoSeg3, self.campoSeg4, self.campoSeg5, self.campoTer1, self.campoTer2, self.campoTer3, self.campoTer4, self.campoTer5, self.campoQua1, self.campoQua2, self.campoQua3, self.campoQua4, self.campoQua5, self.campoQui1, self.campoQui2, self.campoQui3, self.campoQui4, self.campoQui5, self.campoSex1, self.campoSex2, self.campoSex3, self.campoSex4, self.campoSex5]
         if self.__serie != None:
             if turma.carregar(self.__serie+self.__turma):
                 self.__turno = self.__turno.index(turma.getTurno())
                 if self.selecionaTurno.GetSelection() == self.__turno+1:
-                    lista=[]
+                    self.lista=[]
                     if turma.getDisciplina1() != 'None':
-                        lista.append(turma.getDisciplina1())
+                        self.lista.append(turma.getDisciplina1())
                     if turma.getDisciplina2() != 'None':
-                        lista.append(turma.getDisciplina2())
+                        self.lista.append(turma.getDisciplina2())
                     if turma.getDisciplina3() != 'None':
-                        lista.append(turma.getDisciplina3())
+                        self.lista.append(turma.getDisciplina3())
                     if turma.getDisciplina4() != 'None':
-                        lista.append(turma.getDisciplina4())
+                        self.lista.append(turma.getDisciplina4())
                     if turma.getDisciplina5() != 'None':
-                        lista.append(turma.getDisciplina5())
+                        self.lista.append(turma.getDisciplina5())
                     if turma.getDisciplina6() != 'None':
-                        lista.append(turma.getDisciplina6())
-                    for self.__i in range(len(lista)):
-                        disciplina.carregar(lista[self.__i])
+                        self.lista.append(turma.getDisciplina6())
+                    for self.__i in range(len(self.lista)):
+                        disciplina.carregar(self.lista[self.__i])
                         professor.carregar(disciplina.getProfessor())
-                        lista[self.__i] += '-'+professor.getNome()
-                    self.listaProfessores.Set(lista)
+                        self.lista[self.__i] += '-'+professor.getNome()
+                    self.listaProfessores.Set(self.lista)
                     self.__a = turma.addHorario(turma.getTurma())
                     if self.__a:
                         self.erroText.SetLabel('Carregado com sucesso. Sem horario definido.')
                     else:
-                        self.__result = turma.getHorario()
-                        for self.__i in range(len(self.__result)-1):
-                            if self.__result[self.__i+1] != None:
-                                listaGrid[self.__i].SetLabel(self.__result[self.__i+1])                                
+                        self.carregarGrid(turma.getHorario())
                         self.erroText.SetLabel('Carregado com sucesso')
                 else:
                     self.erroText.SetLabel('Selecione o turno correto')
                     self.listaProfessores.Set([])
-                    for self.__i in range(len(listaGrid)):
-                        listaGrid[self.__i].SetLabel('')
+                    self.carregarGrid()
             else:
                 self.erroText.SetLabel('Turma nao encontrada')
                 self.listaProfessores.Set([])
-                for self.__i in range(len(listaGrid)):
-                    listaGrid[self.__i].SetLabel('')
+                self.carregarGrid()
         else:
             self.erroText.SetLabel('')
             self.listaProfessores.Set([])
-            for self.__i in range(len(listaGrid)):
-                listaGrid[self.__i].SetLabel('')
+            self.carregarGrid()
+
+    def carregarGrid(self, value = None):
+        if value!=None:
+            for self.__i in range(len(value)-1):
+                if value[self.__i+1] == None:
+                    self.listaGrid[self.__i].SetLabel('')
+                else:
+                    self.listaGrid[self.__i].SetLabel(value[self.__i+1])
+        else:
+            for self.__i in range(len(self.listaGrid)):
+                self.listaGrid[self.__i].SetLabel('')
