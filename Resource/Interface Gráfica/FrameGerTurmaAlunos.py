@@ -586,7 +586,7 @@ class FrameGerTurmaAlunos(wx.Frame):
                 self.listaDisciplinasSelecionadas.Set([])
                 self.erroText.SetLabel('Turma excluida com Sucesso!')
             else:
-                self.erroText.SetLabel('erro ao tentar excluir a Turma!')
+                self.erroText.SetLabel('Erro ao tentar excluir a Turma!')
         else:
             self.erroText.SetLabel('Escolha uma turma valida para excluir!')
         event.Skip()
