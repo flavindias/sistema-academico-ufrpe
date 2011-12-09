@@ -9,7 +9,6 @@ A notação utilizada para ilustrar atores em um diagrama de caso de uso é a fi
 
 Para representar casos de uso, utilizamos uma elipse, com o nome do caso de uso dentro da elipse, ou abaixo dela.
 
-Um relacionamento de comunicação é representado por um segmento de reta ligando ator e caso de uso, sendo que um ator pode estar relacionado à vários casos de uso em um mesmo diagrama.
+Um relacionamento de comunicação é representado por um segmento de reta ligando ator e caso de uso, sendo que um ator pode estar relacionado à vários casos de uso em um mesmo diagrama.<br>
 
-Imagem do Diagrama de Casos de Uso disponível no link abaixo:
-http://code.google.com/p/sistema-academico-ufrpe/downloads/list
+<img src="http://img856.imageshack.us/img856/8693/diagramadecasodeusosist.jpg" alt="Image Hosted by ImageShack.us"/><br/></br>
