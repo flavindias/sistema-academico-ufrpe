@@ -52,7 +52,7 @@ class FrameGerTurmaAlunos(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERTURMAALUNOS,
-              name=u'FrameGerTurmaAlunos', parent=prnt, pos=wx.Point(138, 7),
+              name=u'FrameGerTurmaAlunos', parent=prnt, pos=wx.Point(36, 3),
               size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gereciamento de Turmas - Alunos')
         self.SetClientSize(wx.Size(1310, 688))
@@ -148,12 +148,17 @@ class FrameGerTurmaAlunos(wx.Frame):
               label=u'    Salvar   ', name=u'botaoSalvarTurma',
               parent=self.panel1, pos=wx.Point(1204, 643), size=wx.Size(76, 30),
               style=0)
+        self.botaoSalvarTurma.Bind(wx.EVT_BUTTON, self.OnBotaoSalvarTurmaButton,
+              id=wxID_FRAMEGERTURMAALUNOSBOTAOSALVARTURMA)
 
         self.botaoExcluirTurma = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap(u'./Imagens/botao excluir_p.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEGERTURMAALUNOSBOTAOEXCLUIRTURMA,
               label=u'   Excluir    ', name=u'botaoExcluirTurma',
               parent=self.panel1, pos=wx.Point(1112, 644), size=wx.Size(76, 30),
               style=0)
+        self.botaoExcluirTurma.Bind(wx.EVT_BUTTON,
+              self.OnBotaoExcluirTurmaButton,
+              id=wxID_FRAMEGERTURMAALUNOSBOTAOEXCLUIRTURMA)
 
         self.staticLine1 = wx.StaticLine(id=wxID_FRAMEGERTURMAALUNOSSTATICLINE1,
               name='staticLine1', parent=self.panel1, pos=wx.Point(251, 144),
@@ -239,8 +244,8 @@ class FrameGerTurmaAlunos(wx.Frame):
 
         self.erroText = wx.StaticText(id=wxID_FRAMEGERTURMAALUNOSERROTEXT,
               label=u'                                                                                                             ',
-              name=u'erroText', parent=self.panel1, pos=wx.Point(483, 640),
-              size=wx.Size(436, 24), style=wx.ALIGN_CENTRE)
+              name=u'erroText', parent=self.panel1, pos=wx.Point(437, 640),
+              size=wx.Size(436, 16), style=wx.ALIGN_CENTRE)
         self.erroText.Center(wx.HORIZONTAL)
         self.erroText.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD, False,
               u'Tahoma'))
@@ -261,6 +266,22 @@ class FrameGerTurmaAlunos(wx.Frame):
         event.Skip()
 
     def OnBotaoAdicionarAlunoButton(self, event):
+        if self.verificador == 2:
+            turma = Turma()
+            turma.add(self.getSerie() + self.getTurma(), self.getTurno())
+            turma.addAluno(self.getSerie() + self.getTurma(), self.listaAlunos[self.listaAlunosTodos.GetSelections()[-1]])
+            self.carregarAlunosTurma(self.getSerie() + self.getTurma())
+            self.carregarAlunosPorSerie()
+            self.verificador = 1
+            self.erroText.SetLabel('Adicionado com Sucesso!')
+        elif self.verificador == 1:
+            turma = Turma()
+            turma.addAluno(self.getSerie() + self.getTurma(), self.listaAlunos[self.listaAlunosTodos.GetSelections()[-1]])
+            self.carregarAlunosTurma(self.getSerie() + self.getTurma())
+            self.carregarAlunosPorSerie()
+            self.erroText.SetLabel('Adicionado com Sucesso!')
+        else:
+            self.erroText.SetLabel('Nao pode ser Adicionado!')
         event.Skip()
 
     def OnChoiceSerie(self, event):
@@ -275,16 +296,16 @@ class FrameGerTurmaAlunos(wx.Frame):
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
                 self.carregarAlunosPorSerie()
-                self.verificador = 2
+                self.verificador = 3
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
                 self.carregarAlunosPorSerie()
-                self.verificador = 0
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
-            self.verificador = 2
+            self.verificador = 3
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
                 
@@ -302,16 +323,16 @@ class FrameGerTurmaAlunos(wx.Frame):
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
                 self.carregarAlunosPorSerie()
-                self.verificador = 2
+                self.verificador = 3
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
                 self.carregarAlunosPorSerie()
-                self.verificador = 0
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
-            self.verificador = 2
+            self.verificador = 3
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
             
@@ -335,16 +356,16 @@ class FrameGerTurmaAlunos(wx.Frame):
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
                 self.carregarAlunosPorSerie()
-                self.verificador = 2
+                self.verificador = 3
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
                 self.carregarAlunosPorSerie()
-                self.verificador = 0
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
-            self.verificador = 2
+            self.verificador = 3
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
                 
@@ -357,18 +378,48 @@ class FrameGerTurmaAlunos(wx.Frame):
         event.Skip()
 
     def OnBotaoAddDisciplinaButton(self, event):
+        if self.verificador == 2:
+            turma = Turma()
+            turma.add(self.getSerie() + self.getTurma(), self.getTurno())
+            disciplina = self.listDisc[self.listaDisciplinasTodas.GetSelections()[-1]][0]
+            turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), disciplina)
+            self.carregarDisciplinasTurma(self.getSerie() + self.getTurma())
+            self.carregarDisciplinas()
+            self.verificador = 1
+            self.erroText.SetLabel('Adicionado com Sucesso!')
+        elif self.verificador == 1:
+            turma = Turma()
+            disciplina = self.listDisc[self.listaDisciplinasTodas.GetSelections()[-1]][0]
+            if disciplina in self.listaDiscTurma:None
+            else:
+                if len(self.listaDiscTurma) == 0:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), disciplina)
+                elif len(self.listaDiscTurma) == 1:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), self.listaDiscTurma[0], disciplina)
+                elif len(self.listaDiscTurma) == 2:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), self.listaDiscTurma[0],
+                                     self.listaDiscTurma[1], disciplina)
+                elif len(self.listaDiscTurma) == 3:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), self.listaDiscTurma[0],
+                                     self.listaDiscTurma[1], self.listaDiscTurma[2], disciplina)
+                elif len(self.listaDiscTurma) == 4:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), self.listaDiscTurma[0],
+                                     self.listaDiscTurma[1], self.listaDiscTurma[2], self.listaDiscTurma[3], disciplina)
+                elif len(self.listaDiscTurma) == 5:
+                    turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), self.listaDiscTurma[0],
+                                     self.listaDiscTurma[1], self.listaDiscTurma[2], self.listaDiscTurma[3],
+                                     self.listaDiscTurma[4], disciplina)
+                elif len(self.listaDiscTurma) == 6:
+                    self.erroText.SetLabel('Turma ja tem 6 Disciplinas')
+                if len(self.listaDiscTurma) != 6:
+                    self.carregarDisciplinasTurma(self.getSerie() + self.getTurma())
+                    self.carregarDisciplinas()
+                    self.erroText.SetLabel('Adicionado com Sucesso!')
+        else:
+            self.erroText.SetLabel('Nao pode ser Adicionado!')
         event.Skip()
 
     def OnBotaoDelDisciplinaButton(self, event):
-        turma = Turma()
-        if self.verificador == 1:
-            turmaId = self.getSerie() + self.getTurma()
-            if turma.delete(turmaId):
-                self.erroText.SetLabel('Turma excluida com Sucesso!')
-            else:
-                self.erroText.SetLabel('erro ao tentar excluir a Turma!')
-        else:
-            self.erroText.SetLabel('Escolha uma turma valida para excluir!')
         event.Skip()
 
     def OnBotaoVoltarButton(self, event):
@@ -521,3 +572,20 @@ class FrameGerTurmaAlunos(wx.Frame):
     def zerar(self):
         self.listaDisciplinasSelecionadas.Set([])
         self.listaAlunosSelecionados.Set([])
+
+    def OnBotaoSalvarTurmaButton(self, event):
+        event.Skip()
+
+    def OnBotaoExcluirTurmaButton(self, event):
+        turma = Turma()
+        if self.verificador == 1:
+            turmaId = self.getSerie() + self.getTurma()
+            if turma.delete(turmaId):
+                self.listaAlunosSelecionados.Set([])
+                self.listaDisciplinasSelecionadas.Set([])
+                self.erroText.SetLabel('Turma excluida com Sucesso!')
+            else:
+                self.erroText.SetLabel('erro ao tentar excluir a Turma!')
+        else:
+            self.erroText.SetLabel('Escolha uma turma valida para excluir!')
+        event.Skip()
