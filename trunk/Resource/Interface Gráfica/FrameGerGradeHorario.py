@@ -42,7 +42,7 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOCAMPOSEX5, wxID_FRAMEGERENCIARHORARIOCAMPOTER1, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER2, wxID_FRAMEGERENCIARHORARIOCAMPOTER3, 
  wxID_FRAMEGERENCIARHORARIOCAMPOTER4, wxID_FRAMEGERENCIARHORARIOCAMPOTER5, 
- wxID_FRAMEGERENCIARHORARIOHORARIOCOBRIR, 
+ wxID_FRAMEGERENCIARHORARIOERROTEXT, wxID_FRAMEGERENCIARHORARIOHORARIOCOBRIR, 
  wxID_FRAMEGERENCIARHORARIOHORARIOMANHA, 
  wxID_FRAMEGERENCIARHORARIOHORARIONOITE, 
  wxID_FRAMEGERENCIARHORARIOHORARIOTARDE, 
@@ -60,14 +60,14 @@ def create(parent):
  wxID_FRAMEGERENCIARHORARIOSELECIONATURMA, 
  wxID_FRAMEGERENCIARHORARIOSELECIONATURNO, 
  wxID_FRAMEGERENCIARHORARIOSTATICLINE1, 
-] = [wx.NewId() for _init_ctrls in range(51)]
+] = [wx.NewId() for _init_ctrls in range(52)]
 
 class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERENCIARHORARIO,
-              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(40, 2),
-              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(48, 16),
+              size=wx.Size(1318, 722), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
@@ -410,6 +410,15 @@ class FrameGerenciarHorario(wx.Frame):
               name=u'horarioNoite', parent=self.panelGerenciarGradeHorario,
               pos=wx.Point(570, 240), size=wx.Size(719, 336), style=0)
         self.horarioNoite.Show(False)
+
+        self.erroText = wx.StaticText(id=wxID_FRAMEGERENCIARHORARIOERROTEXT,
+              label=u'                                                                                                              ',
+              name=u'erroText', parent=self.panelGerenciarGradeHorario,
+              pos=wx.Point(435, 608), size=wx.Size(440, 18),
+              style=wx.ALIGN_CENTRE)
+        self.erroText.Center(wx.HORIZONTAL)
+        self.erroText.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.BOLD, False,
+              u'Tahoma'))
 
     def __init__(self, parent):
         self._init_ctrls(parent)
