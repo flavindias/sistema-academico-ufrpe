@@ -112,5 +112,5 @@ class FrameGerGradeHorarioApp(wx.App):
 def mainFrameGerGradeHorarioApp():
     global modules
     modules ={u'FrameGerGradeHorario': [1, 'Main frame of Application', u'FrameGerGradeHorario.py']}
-    application = BoaApp(0)
+    application = FrameGerGradeHorarioApp(0)
     application.MainLoop()
