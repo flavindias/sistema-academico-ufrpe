@@ -2,5 +2,9 @@ UC0001 - Gerenciamento de Alunos
 
 UC0002 - Gerenciamento de Professores
 
+UC0003 - Gerenciamento de Disciplina
+
+UC0004 - Gerenciamento de Turma
+
 Detalhamento dos casos de uso, disponíveis no link:
 http://code.google.com/p/sistema-academico-ufrpe/downloads/list
