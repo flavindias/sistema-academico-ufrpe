@@ -3,6 +3,24 @@
 import wx
 import wx.lib.buttons
 import wx.grid
+import sys
+import ponte
+
+original = sys.path[0]
+lista = sys.path[0].split('\\')
+temp = ''
+for i in range(len(lista)):
+    if i != len(lista)-1:
+        temp += lista[i]
+        temp += '\\'
+    else:
+        temp += 'Modules'
+sys.path[0] = temp
+
+from newTurma import Turma
+from newProfessor import Professor
+from newDisciplina import Disciplina
+sys.path[0] = original
 
 def create(parent):
     return FrameGerenciarHorario(parent)
@@ -48,11 +66,12 @@ class FrameGerenciarHorario(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAMEGERENCIARHORARIO,
-              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(527,
-              190), size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
+              name=u'FrameGerenciarHorario', parent=prnt, pos=wx.Point(40, 2),
+              size=wx.Size(1326, 726), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Gerenciar Grade de Horario - AcademicSys')
         self.SetClientSize(wx.Size(1310, 688))
         self.SetIcon(wx.Icon(u'./Imagens/Icone.ico',wx.BITMAP_TYPE_ICO))
+        self.Center(wx.BOTH)
 
         self.panelGerenciarGradeHorario = wx.Panel(id=wxID_FRAMEGERENCIARHORARIOPANELGERENCIARGRADEHORARIO,
               name=u'panelGerenciarGradeHorario', parent=self, pos=wx.Point(0,
