@@ -177,3 +177,7 @@ class Turma:
     def listaDbHorario(self):
         """Retorna uma lista com todas as tabelas do sistema de horarios"""
         return DataBase.getListTurma_HorarioFromDb()
+
+    def valProfHorario(self, professor, pos, turma):
+        """Retorna um valor Bool para insercao de prof no horario"""
+        return DataBase.verify(professor, pos, turma)
