@@ -12,6 +12,8 @@
 
 import base64
 import MySQLdb
+import newDisciplina
+import newTurma
 
 connection = MySQLdb.connect(host="db4free.net", db="academicsys", user="desenvolvedores", passwd="acesso")
 cursor = connection.cursor()
@@ -434,5 +436,24 @@ def alterTurma_Horario(turma, pos, valor):
         else:
             cursor.execute("update Turma_Horario set disciplina%s = '%s' where turma = '%s';" %(pos+1, valor, turma))
         return True
+    except:
+        return False
+
+def verify(professor, pos, turma):
+    """Verifica se existe algum professor dando aula"""
+    try:
+        val = True
+        disciplinas = newDisciplina.Disciplina().listaDb()
+        temp=[]
+        for i in range(len(disciplinas)):
+            if disciplinas[i][1] == professor:
+                temp.append(disciplinas[i][0])
+        cursor.execute("select * from Turma_Horario h join Turma t on t.turma=h.turma;")
+        result = cursor.fetchall()
+        for i in range(len(result)):
+            for j in range(len(temp)):
+                if result[i][pos+1] != None and result[i][pos+1] != 'None' and temp[j] in result[i][pos+1]:
+                    val = False
+        return val
     except:
         return False
