@@ -9,6 +9,7 @@ import FrameGerDisciplina
 import academicsFrame
 import FrameGerTurma
 import FrameGerTurmaAlunos
+import FrameGerGradeHorario
 
 class FrameGerAlunoApp(wx.App):
     def OnInit(self):
@@ -99,4 +100,17 @@ def mainFrameGerTurmaAlunosApp():
     global modules
     modules ={u'FrameGerTurmaAlunos': [1, 'Main frame of Application', u'FrameGerTurmaAlunos.py']}
     application = FrameGerTurmaAlunosApp(0)
+    application.MainLoop()
+
+class FrameGerGradeHorarioApp(wx.App):
+    def OnInit(self):
+        self.main = FrameGerGradeHorario.create(None)
+        self.main.Show()
+        self.SetTopWindow(self.main)
+        return True
+
+def mainFrameGerGradeHorarioApp():
+    global modules
+    modules ={u'FrameGerGradeHorario': [1, 'Main frame of Application', u'FrameGerGradeHorario.py']}
+    application = BoaApp(0)
     application.MainLoop()
