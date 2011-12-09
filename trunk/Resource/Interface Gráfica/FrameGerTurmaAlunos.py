@@ -250,6 +250,7 @@ class FrameGerTurmaAlunos(wx.Frame):
         self.listaAlTurmaId = []
         self.listaAlTurmaNome = []
         self.listaDiscTurma = []
+        self.verificador = 0
         self.carregarDisciplinas()
         self.carregarAlunos()
 
@@ -269,14 +270,21 @@ class FrameGerTurmaAlunos(wx.Frame):
             if turma.carregar(turmaId) and turma.getTurno() == self.getTurno():
                 self.carregarAlunosTurma(turmaId)
                 self.carregarDisciplinasTurma(turmaId)
+                self.carregarAlunosPorSerie()
+                self.verificador = 1
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
+                self.carregarAlunosPorSerie()
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
+                self.carregarAlunosPorSerie()
+                self.verificador = 0
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
+            self.verificador = 2
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
                 
@@ -289,14 +297,21 @@ class FrameGerTurmaAlunos(wx.Frame):
             if turma.carregar(turmaId) and turma.getTurno() == self.getTurno():
                 self.carregarAlunosTurma(turmaId)
                 self.carregarDisciplinasTurma(turmaId)
+                self.carregarAlunosPorSerie()
+                self.verificador = 1
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
+                self.carregarAlunosPorSerie()
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
+                self.carregarAlunosPorSerie()
+                self.verificador = 0
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
+            self.verificador = 2
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
             
@@ -315,14 +330,21 @@ class FrameGerTurmaAlunos(wx.Frame):
             if turma.carregar(turmaId) and turma.getTurno() == self.getTurno():
                 self.carregarAlunosTurma(turmaId)
                 self.carregarDisciplinasTurma(turmaId)
+                self.carregarAlunosPorSerie()
+                self.verificador = 1
                 self.erroText.SetLabel('Turma carregada com Sucesso!')
             elif turma.carregar(turmaId):
+                self.carregarAlunosPorSerie()
+                self.verificador = 2
                 self.zerar()
                 self.erroText.SetLabel('Turma ja existe em outro turno!')
             else:
+                self.carregarAlunosPorSerie()
+                self.verificador = 0
                 self.zerar()
                 self.erroText.SetLabel('Turma ainda nao existe!')
         else:
+            self.verificador = 2
             self.zerar()
             self.erroText.SetLabel('Opcao de serie Invalida!!')
                 
@@ -338,6 +360,15 @@ class FrameGerTurmaAlunos(wx.Frame):
         event.Skip()
 
     def OnBotaoDelDisciplinaButton(self, event):
+        turma = Turma()
+        if self.verificador == 1:
+            turmaId = self.getSerie() + self.getTurma()
+            if turma.delete(turmaId):
+                self.erroText.SetLabel('Turma excluida com Sucesso!')
+            else:
+                self.erroText.SetLabel('erro ao tentar excluir a Turma!')
+        else:
+            self.erroText.SetLabel('Escolha uma turma valida para excluir!')
         event.Skip()
 
     def OnBotaoVoltarButton(self, event):
@@ -423,6 +454,20 @@ class FrameGerTurmaAlunos(wx.Frame):
         for i in listaTurma:
             turma.carregarAluno(i[0])
             self.alunosComTurma += turma.getAlunos()
+
+    def carregarAlunosPorSerie(self):
+        aluno = Aluno()
+        self.carregarAlunoComTurma()
+        lista = aluno.listaDb()
+        self.listaAlunos = []
+        self.listaAlunosBox = []
+        for i in lista:
+            aluno.carregar(i[0])
+            if i[0] in self.alunosComTurma:continue
+            elif aluno.getTurno() == self.getTurno() and aluno.getSerie() == self.getSerie():
+                self.listaAlunosBox += [i[1]]
+                self.listaAlunos +=[i[0]]
+        self.listaAlunosTodos.Set(self.listaAlunosBox)
 
     def getTurno(self):
         if self.choiceTurno.GetSelection() == 0:
