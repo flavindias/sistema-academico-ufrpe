@@ -390,7 +390,8 @@ class FrameGerTurmaAlunos(wx.Frame):
         elif self.verificador == 1:
             turma = Turma()
             disciplina = self.listDisc[self.listaDisciplinasTodas.GetSelections()[-1]][0]
-            if disciplina in self.listaDiscTurma:None
+            if disciplina in self.listaDiscTurma:
+                self.erroText.SetLabel('Disciplina ja esta na Turma!')
             else:
                 if len(self.listaDiscTurma) == 0:
                     turma.salvarEdit(self.getSerie() + self.getTurma(), self.getTurno(), disciplina)
