@@ -175,4 +175,7 @@ class Sistema_Academico(wx.Frame):
         event.Skip()
 
     def OnGer_TurmaBitmapButton(self, event):
+        self.Close(True)
+        ponte.mainFrameGerTurmaApp()
+        exit()
         event.Skip()
