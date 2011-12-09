@@ -152,7 +152,7 @@ class Turma:
 
     def addHorario(self, turma, disciplina1=None, disciplina2=None, disciplina3=None, disciplina4=None, disciplina5=None, disciplina6=None, disciplina7=None, disciplina8=None, disciplina9=None, disciplina10=None, disciplina11=None, disciplina12=None, disciplina13=None, disciplina14=None, disciplina15=None, disciplina16=None, disciplina17=None, disciplina18=None, disciplina19=None, disciplina20=None, disciplina21=None, disciplina22=None, disciplina23=None, disciplina24=None, disciplina25=None):
         """Add horario relacionado a turma direto no bd"""
-        if DataBase.addTurma_Horario(turma, [disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6, disciplina7, disciplina8, disciplina9, disciplina10, disciplina11, disciplina13, disciplina14, disciplina15, disciplina16, disciplina17, disciplina18, disciplina19, disciplina20, disciplina21, disciplina22, disciplina23, disciplina24, disciplina25]):
+        if DataBase.addTurma_Horario(turma, [disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6, disciplina7, disciplina8, disciplina9, disciplina10, disciplina11, disciplina12, disciplina13, disciplina14, disciplina15, disciplina16, disciplina17, disciplina18, disciplina19, disciplina20, disciplina21, disciplina22, disciplina23, disciplina24, disciplina25]):
             self.setHorario(self.carregarHorario(turma))
             return True
         else:
@@ -169,6 +169,10 @@ class Turma:
             return True
         else:
             return False
+
+    def editarHorario(self, turma, pos, valor):
+        """Altera uma posicao do horario"""
+        return DataBase.alterTurma_Horario(turma, pos, valor)
 
     def listaDbHorario(self):
         """Retorna uma lista com todas as tabelas do sistema de horarios"""
