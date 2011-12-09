@@ -117,7 +117,7 @@ class Turma:
         """Retorna uma lista com todas as Turmas cadastradas no BD"""
         return DataBase.getListDbTurma()
 
-    def add(self, turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6):
+    def add(self, turma, turno, disciplina1='None', disciplina2='None', disciplina3='None', disciplina4='None', disciplina5='None', disciplina6='None'):
         """Adiciona uma Turma no BD"""
         return DataBase.addTurma(turma, turno, disciplina1, disciplina2, disciplina3, disciplina4, disciplina5, disciplina6)
 
