@@ -1,0 +1,4 @@
+Este projeto consiste em um sistema voltado para o âmbito escolar, visando automatizar o controle de alunos e professores, que fazem parte das funções escolares.
+O sistema permite a inclusão, consulta, alteração e exclusão de todos os atributos relacionados aos professores, alunos e disciplinas.
+Dentro do perfil do aluno, as tarefas de inclusão, alteração e exclusão, ficarão a cargo somente dos funcionários da escola(Coordenador e Professores). O direito do aluno no sistema será visualizar notas, dados pessoais, disciplinas, situação do aluno (aprovado, recuperação, recuperação final ou reprovado), assim como alterar senha para login.
+Para o perfil do coordenador, será possível a inclusão, alteração e exclusão dos dados relacionados aos alunos e aos professores. Assim como gerenciar contas de usuários, realização de matrículas, cadastramento de disciplinas e notas.
